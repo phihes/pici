@@ -9,9 +9,8 @@ import pandas as pd
 import networkx as nx
 from sklearn.preprocessing import MinMaxScaler
 
-from pici.community import Community, CommunityFactory
-from pici.communities.osm import OSMCommunity, OSMCommunityFactory, OSMSpider
-from pici.stats import CommunitiesReport
+from pici.communities.osm import OSMCommunityFactory
+from pici import CommunitiesReport
 
 def scale(values, min, max):
     df = pd.DataFrame(pd.Series(values))

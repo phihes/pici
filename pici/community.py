@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import os.path
 from pici.stats import CommunityStats
 import glob
 import datetime

@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "pici"
+version = "0.1.0"
+description = ""
+authors = ["Philipp Heß <phihes@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.4.2"
+numpy = "^1.22.3"
+nltk = "^3.7"
+seaborn = "^0.11.2"
+matplotlib = "^3.5.1"
+networkx = "^2.8"
+beautifulsoup4 = "^4.11.1"
+Scrapy = "^2.6.1"
+scikit-learn = "^1.0.2"
+scrapyscript = "^1.1.5"
+plotly = "^5.7.0"
+mkdocs-gen-files = "^0.3.4"
+mkdocstrings = {extras = ["python"], version = "^0.18.1"}
+mkdocs-section-index = "^0.3.4"
+mkdocs-literate-nav = "^0.4.1"
+mkdocs-material = "^8.2.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

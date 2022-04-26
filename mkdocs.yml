@@ -1,0 +1,43 @@
+site_name: Pici Documentation
+repo_url: https://github.com/phihes/pici
+nav:
+  - About Pici: index.md
+  - Getting started: getting-started.md
+  - Using the toolbox: usage.md
+  - Examples: examples.md
+  - Reference: reference/
+theme:
+  name: material
+  features:
+    - content.code.annotate
+    - content.tabs.link
+extra:
+  version:
+    provider: mike
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+plugins:
+- search
+- gen-files:
+    scripts:
+      - docs/gen_ref_pages.py
+- literate-nav:
+    nav_file: SUMMARY.md
+- section-index
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        rendering:
+          show_source: false
+    custom_templates: templates
+    watch:
+      - pici
