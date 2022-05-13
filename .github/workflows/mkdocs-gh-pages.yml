@@ -14,7 +14,7 @@ jobs:
           python-version: 3.x
       - uses: actions/cache@v2.1.6
         with:
-          path: deployer/.venv
+          path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/mkdocs-gh-pages.yml') }}
       - run: pip install cdlib
       - run: pip install poetry
