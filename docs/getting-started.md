@@ -4,15 +4,13 @@
 
 Pici is a Python package that requires Python >= 3.8 and has several dependencies. To install, clone the git repository, install [cdlib](https://pypi.org/project/cdlib/), then install the package with [poetry](https://python-poetry.org/):
 
-`git clone https://github.com/phihes/pici.git`
-
-`cd pici`
-
-`pip install cdlib`
-
-`pip install poetry`
-
-`poetry install`
+```
+git clone https://github.com/phihes/pici.git
+cd pici
+pip install cdlib
+pip install poetry
+poetry install
+```
 
 ## Test
 
