@@ -16,10 +16,7 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/mkdocs-gh-pages.yml') }}
-      - run: pip install cdlib
-      - run: pip install poetry
-      - run: |
-          cd deployer
-          poetry install
+      - run: pip install cdlib poetry
+      - run: poetry install
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       - run: mkdocs gh-deploy --force
