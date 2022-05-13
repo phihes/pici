@@ -12,8 +12,14 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
+      - uses: actions/cache@v2.1.6
+        with:
+          path: deployer/.venv
+          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/mkdocs-gh-pages.yml') }}
       - run: pip install cdlib
-      - run: pip install tqdm
       - run: pip install poetry
-      - run: poetry install
+      - run: |
+          cd deployer
+          poetry install
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       - run: mkdocs gh-deploy --force
