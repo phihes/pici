@@ -13,6 +13,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install cdlib
+      - run: pip install tqdm
       - run: pip install poetry
       - run: poetry install
       - run: mkdocs gh-deploy --force
