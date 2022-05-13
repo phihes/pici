@@ -30,8 +30,8 @@ class CommunityStats(
             raise AttributeError 
         else:
             attr_name = self._current_view + "_" + name
-            if not attr_name in dir(self):
-                logging.error('Something went wrong when looking for {} in view {}'.format(name, self_current_view))
+            if attr_name not in dir(self):
+                logging.error('Something went wrong when looking for {} in view {}'.format(name, self._current_view))
                 raise AttributeError
             else:
                 attr = getattr(self, attr_name)
@@ -57,7 +57,7 @@ class CommunitiesReport(
         
         attr_name = "_report_" + name
         
-        if not attr_name in dir(self):
+        if attr_name not in dir(self):
             raise AttributeError
         else:
             def wrapper(stack=True, **kw):
