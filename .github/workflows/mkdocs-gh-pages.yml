@@ -17,4 +17,4 @@ jobs:
       - run: pip install mkdocstrings
       - run: pip install mkdocs-section-index
       - run: pip install mkdocs-literate-nav
-      - run: pip install mkdocs gh-deploy --force
+      - run: mkdocs gh-deploy --force
