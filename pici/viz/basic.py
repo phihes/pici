@@ -22,8 +22,8 @@ class BasicVisualizations:
             trendline="ols"
         )
         fig.update_layout(
-            xaxis_title="number of contributors, interval={}".format(interval),
-            yaxis_title="number of posts, interval={}".format(interval),
+            xaxis_title=f"number of contributors, interval={interval}",
+            yaxis_title=f"number of posts, interval={interval}",
             legend=dict(
                 orientation="h",
                 yanchor="bottom",
@@ -133,7 +133,7 @@ class BasicVisualizations:
         fig = pivot(self.pici.report.per_interval(interval=interval))['number of posts'].plot()
         fig.update_layout(
             xaxis_title="",
-            yaxis_title="number of posts / {}".format(interval),
+            yaxis_title=f"number of posts / {interval}",
             legend=dict(
                 orientation="h",
                 yanchor="bottom",
@@ -149,7 +149,7 @@ class BasicVisualizations:
         fig = pivot(self.pici.report.per_interval(interval=interval))['number of contributors'].plot()
         fig.update_layout(
             xaxis_title="",
-            yaxis_title="number of posts / {}".format(interval),
+            yaxis_title=f"number of posts / {interval}",
             legend=dict(
                 orientation="h",
                 yanchor="bottom",

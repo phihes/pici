@@ -26,12 +26,12 @@ class CommunityMetrics(
         if name in self._views:
             return CommunityMetrics(self._community, name)
         elif self._current_view is None:
-            logging.error('Something went wrong when looking for {}'.format(name))
+            logging.error(f'Something went wrong when looking for {name}')
             raise AttributeError 
         else:
             attr_name = self._current_view + "_" + name
             if attr_name not in dir(self):
-                logging.error('Something went wrong when looking for {} in view {}'.format(name, self._current_view))
+                logging.error(f'Something went wrong when looking for {name} in view {self._current_view}')
                 raise AttributeError
             else:
                 attr = getattr(self, attr_name)

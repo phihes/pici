@@ -239,8 +239,7 @@ class DiscoursePostsSpider(scrapy.Spider):
         
         num_posts = len(j["post_stream"]["stream"])
         for i in range(26,num_posts+6,20):
-            url = "https://community.openenergymonitor.org/t/{}/{}.json".format(
-                j["id"], i)
+            url = f"https://community.openenergymonitor.org/t/{j['id']}/{i}.json"
             yield scrapy.Request(url, callback=self.parse_posts)
             
     def parse_posts(self, response):

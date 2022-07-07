@@ -132,18 +132,11 @@ class CommunityFactory(ABC):
         
     def _cache_exists(self):
         
-        files = ['{cache}/{community}_{data}_*.csv'.format(
-            cache=self.cache_dir,
-            community=self.name,
-            data=d)
-            for d in self.cache_data]
+        files = [f'{self.cache_dir}/{self.name}_{d}_*.csv'
+                 for d in self.cache_data]
         
         found = all([
-            any(glob.iglob('{cache}/{community}_{data}_*.csv'.format(
-                cache=self.cache_dir,
-                community=self.name,
-                data=d                
-            )))
+            any(glob.iglob(f'{self.cache_dir}/{self.name}_{f}_*.csv'))
             for d in self.cache_data
         ])
         
@@ -154,11 +147,8 @@ class CommunityFactory(ABC):
     
     def load_cache(self):
         cache = {
-            k: glob.glob('{cache_dir}/{community}_{data_type}_*.csv'.format(
-                    cache_dir=self.cache_dir,
-                    community=self.name,
-                    data_type=k                 
-                )) for k in self.cache_data
+            k: glob.glob(f'{self.cache_dir}/{self.name}_{k}_*.csv')
+            for k in self.cache_data
         }
         
         # get most recent date for which every cached file exists
@@ -177,12 +167,10 @@ class CommunityFactory(ABC):
         )[0]
             
         self._data = {
-            k: pd.read_csv('{cache_dir}/{community}_{data_type}_{date}.csv'.format(
-                cache_dir=self.cache_dir,
-                community=self.name,
-                data_type=k,
-                date=most_recent_date
-            ), nrows=self.cache_nrows)
+            k: pd.read_csv(
+                f'{self.cache_dir}/{self.name}_{k}_{most_recent_date}.csv',
+                nrows=self.cache_nrows
+            )
             for k in self.cache_data
         }
     
@@ -191,13 +179,8 @@ class CommunityFactory(ABC):
         
         date_now = datetime.date.today().strftime(self.cache_date_format)
         
-        for k,d in data.items():
-            d.to_csv('{cache_dir}/{community}_{data_type}_{date}.csv'.format(
-                cache_dir=self.cache_dir,
-                community=self.name,
-                data_type=k,
-                date=date_now
-            ))
+        for k, d in data.items():
+            d.to_csv(f'{self.cache_dir}/{self.name}_{k}_{date_now}.csv')
                 
     
     def create_community(self, name=None, use_cache=True, start=None, end=None):

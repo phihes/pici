@@ -21,9 +21,9 @@ class TextMetrics:
             text = bs.get_text()
             tok = nltk.word_tokenize(text) 
             counts =  nltk.FreqDist(tok)
-            return {'occurence of {}'.format(w): counts[w] or 0 for w in words}
+            return {f'occurence of {w}': counts[w] or 0 for w in words}
         else:
-            return {'occurence of {}'.format(w): np.nan for w in words}
+            return {f'occurence of {w}': np.nan for w in words}
         
     def _number_of_words(self, t):
         if isinstance(t, str):
