@@ -7,8 +7,7 @@ Pici is a Python package that requires Python >= 3.8 and has several dependencie
 ```
 git clone https://github.com/phihes/pici.git
 cd pici
-pip install cdlib
-pip install poetry
+pip install cdlib mkdocs poetry
 poetry install
 ```
 

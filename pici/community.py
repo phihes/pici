@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
-from pici.stats import CommunityStats
+from pici.metrics import CommunityMetrics
 import glob
 import datetime
 from collections import Counter
 import pandas as pd
+import numpy as np
 import networkx as nx
 from itertools import combinations
 import logging
@@ -14,7 +15,7 @@ class Community(ABC):
 
     _graph = None
     _posts = None
-    _stats = None
+    _metrics = None
     _data = None
     
     def __init__(self, name, data, start=None, end=None, attr=None):
@@ -81,11 +82,11 @@ class Community(ABC):
         return self._topics
     
     @property
-    def stats(self):
-        if self._stats is None:
-            self._stats = CommunityStats(self)
+    def metrics(self):
+        if self._metrics is None:
+            self._metrics = CommunityMetrics(self)
             
-        return self._stats
+        return self._metrics
     
     
     def contributor_by_id(self, c_id):

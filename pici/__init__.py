@@ -1,6 +1,6 @@
 __version__ = '0.1.0'
 
-from pici.stats import CommunitiesReport
+from pici.metrics import CommunitiesReport
 from pici.viz import CommunitiesVisualizations
 
 class Pici:

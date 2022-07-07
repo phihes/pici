@@ -5,7 +5,7 @@ from cdlib import algorithms as cd
 from cdlib import viz as cdviz
 
 
-class GraphStats:
+class NetworkMetrics:
     
     _report_contributors_graph_summary = {
         "contributors_degree": [],

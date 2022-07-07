@@ -5,7 +5,7 @@ import nltk
 import numpy as np
 
 
-class TextStats:
+class TextMetrics:
     
     _report_posts_text_stats = {
         "posts_word_occurence": ["words"]

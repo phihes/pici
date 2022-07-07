@@ -3,17 +3,17 @@ from pici.helpers import merge_dfs
 import logging
 logger = logging.getLogger(__name__)
 
-from .test import TestStats
-from .graph_stats import GraphStats
-from .basic_stats import BasicStats
-from .text_stats import TextStats
+from .test import TestMetrics
+from .network import NetworkMetrics
+from .basic import BasicMetrics
+from .text import TextMetrics
 
 
-class CommunityStats(
-    TestStats,
-    GraphStats,
-    BasicStats,
-    TextStats
+class CommunityMetrics(
+    TestMetrics,
+    NetworkMetrics,
+    BasicMetrics,
+    TextMetrics
 ):
     
     _views = ['contributors', 'posts', 'topics', 'community', 'graph', 'communities']
@@ -24,7 +24,7 @@ class CommunityStats(
         
     def __getattr__(self, name):
         if name in self._views:
-            return CommunityStats(self._community, name)
+            return CommunityMetrics(self._community, name)
         elif self._current_view is None:
             logging.error('Something went wrong when looking for {}'.format(name))
             raise AttributeError 
@@ -44,10 +44,10 @@ class CommunityStats(
                 
 
 class CommunitiesReport(
-    TestStats,
-    GraphStats,
-    BasicStats,
-    TextStats
+    TestMetrics,
+    NetworkMetrics,
+    BasicMetrics,
+    TextMetrics
 ):
 
     def __init__(self, communities):
@@ -67,7 +67,7 @@ class CommunitiesReport(
                 for c in self._communities:
                     c_res = {}
                     for func_name, func_attr_names in attr.items():
-                        func = getattr(c.stats, func_name)
+                        func = getattr(c.metrics, func_name)
                         c_res[func_name] = func(**{a: kw[a] for a in func_attr_names})
                     
                     if all([isinstance(r, pd.DataFrame) for r in c_res.values()]):
@@ -90,5 +90,5 @@ class CommunitiesReport(
                     
 # TODO create equivalent of "visualizers" for streamlit app
 # where each "stat" is a vis.
-# need class that exposes all relevant stats
+# need class that exposes all relevant metrics
 # relevant = solved using decorators?

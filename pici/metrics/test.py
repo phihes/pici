@@ -1,4 +1,4 @@
-class TestStats:
+class TestMetrics:
     
     @property
     def contributors_test(self):

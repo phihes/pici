@@ -9,7 +9,7 @@ def join_df(func):
     def wrapper(self, *args, **kwargs):
         df = None
         
-        # look for existing community dataframe to match stats to
+        # look for existing community dataframe to match metrics to
         # (e.g. contributors)
         try:
             df = getattr(self._community, func.__name__.split("_")[0])
@@ -18,11 +18,11 @@ def join_df(func):
         except AttributeError:
             pass
             
-        stats = func(self, *args, **kwargs)
-        stats_df = None
+        metrics = func(self, *args, **kwargs)
+        metrics_df = None
         
         try:
-            stats_df = pd.DataFrame(stats)
+            metrics_df = pd.DataFrame(metrics)
             
         # most likely the series' index is a mix of str and float...
         # cast indices to str, as we are dealing with names            
@@ -30,11 +30,11 @@ def join_df(func):
 
             _stats = {
                 s: {str(i): v for i, v in row.items() }
-                for s, row in stats.items()
+                for s, row in metrics.items()
             }
-            stats_df = pd.DataFrame(_stats)
+            metrics_df = pd.DataFrame(_stats)
             
-        return df.join(stats_df) if df is not None else stats_df
+        return df.join(metrics_df) if df is not None else metrics_df
 
     return wrapper
 
