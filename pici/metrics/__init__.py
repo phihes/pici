@@ -1,33 +1,56 @@
-import pandas as pd
-from pici.helpers import merge_dfs
-import logging
-logger = logging.getLogger(__name__)
+from pici.metrics.basic import *
+from pici.metrics.network import *
+from pici.metrics.text import *
 
+# import pandas as pd
+# from pici.helpers import merge_dfs
+# import logging
+
+# logger = logging.getLogger(__name__)
+
+"""
 from .test import TestMetrics
 from .network import NetworkMetrics
 from .basic import BasicMetrics
 from .text import TextMetrics
+"""
 
 
+class Metrics:
+    def __init__(self, community):
+        self._community = community
+
+    def __getattr__(self, funcname):
+        func = globals()[funcname]
+        if callable(func) and hasattr(func, 'is_metric') and func.is_metric is True:
+            def newfunc(*args, **kwargs):
+                return func(self._community, *args, **kwargs)
+            return newfunc
+        else:
+            if not callable(func):
+                raise NotImplementedError(func)
+            elif not hasattr(func, 'is_metric'):
+                raise Exception("This is not a metric. Add the @metric decorator to the method definition.")
+
+"""
 class CommunityMetrics(
     TestMetrics,
     NetworkMetrics,
     BasicMetrics,
     TextMetrics
 ):
-    
     _views = ['contributors', 'posts', 'topics', 'community', 'graph', 'communities']
-    
+
     def __init__(self, community, view=None):
         self._community = community
         self._current_view = view
-        
+
     def __getattr__(self, name):
         if name in self._views:
             return CommunityMetrics(self._community, name)
         elif self._current_view is None:
             logging.error(f'Something went wrong when looking for {name}')
-            raise AttributeError 
+            raise AttributeError
         else:
             attr_name = self._current_view + "_" + name
             if attr_name not in dir(self):
@@ -38,10 +61,11 @@ class CommunityMetrics(
                 if callable(attr):
                     def newfunc(*args, **kwargs):
                         return attr(*args, **kwargs)
+
                     return newfunc
                 else:
-                    return attr    
-                
+                    return attr
+
 
 class CommunitiesReport(
     TestMetrics,
@@ -54,9 +78,9 @@ class CommunitiesReport(
         self._communities = communities
 
     def __getattr__(self, name):
-        
+
         attr_name = "_report_" + name
-        
+
         if attr_name not in dir(self):
             raise AttributeError
         else:
@@ -69,7 +93,7 @@ class CommunitiesReport(
                     for func_name, func_attr_names in attr.items():
                         func = getattr(c.metrics, func_name)
                         c_res[func_name] = func(**{a: kw[a] for a in func_attr_names})
-                    
+
                     if all([isinstance(r, pd.DataFrame) for r in c_res.values()]):
                         merged_dfs = True
                         if stack:
@@ -80,14 +104,16 @@ class CommunitiesReport(
                             results[c.name] = merge_dfs(list(c_res.values()))
                     else:
                         results[c.name] = list(c_res.values())
-                
+
                 if merged_dfs and stack:
                     return pd.concat(list(results.values()))
                 else:
                     return results
-            
+
             return wrapper
-                    
+            
+"""
+
 # TODO create equivalent of "visualizers" for streamlit app
 # where each "stat" is a vis.
 # need class that exposes all relevant metrics

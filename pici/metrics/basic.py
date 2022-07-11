@@ -1,126 +1,200 @@
-from pici.decorators import join_df, as_table
-import plotly.graph_objects as go
-import plotly.io as pio
-import plotly.express as px
-import pandas as pd
+"""
+Basic metrics based on counts, dates etc. of posts, contributors.
+
+By level of observation:
+
+**community**
+
+- [number_of_posts][pici.metrics.basic.number_of_posts]
+- [agg_number_of_posts_per_interval][pici.metrics.basic.agg_number_of_posts_per_interval]
+- [agg_posts_per_topic][pici.metrics.basic.agg_posts_per_topic]
+
+**topics**
+
+- [number_of_contributors_per_topic][pici.metrics.basic.number_of_contributors_per_topic]
+- [post_delays_per_topic][pici.metrics.basic.post_delays_per_topic]
+- [post_dates_per_topic][pici.metrics.basic.post_dates_per_topic]
+"""
+
+from pici.decorators import metric
+from pici.datatypes import CommunityDataLevel, MetricReturnType
+from pici.helpers import aggregate
 
 
-class BasicMetrics:
-    
-    _report_contributors_summary = {
-        "contributors_post_stats": []
+@metric(
+    level=CommunityDataLevel.TOPICS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def post_delays_per_topic(community):
+    """
+    Delays (in days) between first and second post, and first and last post.
+
+    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community (pici.Community):
+
+    Returns:
+       results (dict of str:int):
+        - ``delay first last post``
+        - ``delay first second post``
+
+    """
+    posts = community.posts
+    t_col = community.topic_column
+    d_col = community.date_column
+
+    first_post = posts.groupby(by=t_col)[d_col].agg('min')
+    last_post = posts.groupby(by=t_col)[d_col].agg('max')
+    second_post = posts.groupby(by=t_col)[d_col].agg(lambda x: x.nsmallest(2).max())
+
+    return {
+        'delay first last post': (last_post - first_post).dt.days,
+        'delay first second post': (second_post - first_post).dt.days
     }
-    
-    _report_summary = {
-        "community_summary": [],
+
+
+@metric(
+    level=CommunityDataLevel.TOPICS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def post_dates_per_topic(community):
+    """
+    Date of first post, second post, and last post.
+
+    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community (pici.Community):
+
+    Returns:
+       results (dict of str:date):
+        - ``first post date``
+        - ``second post date``
+        - ``last post date``
+
+    """
+    posts = community.posts
+    t_col = community.topic_column
+    d_col = community.date_column
+
+    first_post = posts.groupby(by=t_col)[d_col].agg('min')
+    last_post = posts.groupby(by=t_col)[d_col].agg('max')
+    second_post = posts.groupby(by=t_col)[d_col].agg(lambda x: x.nsmallest(2).max())
+
+    return {
+        'first post date': first_post,
+        'second post date': second_post,
+        'last post date': last_post
     }
-    
-    _report_per_interval = {
-        "community_posts_per_interval": ['interval'],
-        "community_contributors_per_interval": ['interval'],
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.TABLE
+)
+def number_of_posts(community):
+    """
+    Total number of posts authored by community.
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
+
+    TODO:
+        document
+
+    Args:
+        community:
+
+    Returns:
+
+    """
+    return {
+        'number of posts': community.posts.groupby(
+            by=community.contributor_column).agg('count').iloc[:, 0]
     }
-    
-    _report_topics_summary = {
-        "topics_number_of_contributors": [],
-        "topics_post_stats": []
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.TABLE
+)
+def agg_posts_per_topic(community):
+    """
+    Min, max, and average number of posts authored per topic.
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community:
+
+    Returns:
+        results (dict of str:int):
+            - ``<agg> posts per topic``
+    """
+
+    p = community.posts.groupby(
+        by=community.topic_column)[community.date_column].count()
+
+    return aggregate(p, "posts per topic")
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.TABLE
+)
+def agg_number_of_posts_per_interval(community, interval):
+    """
+    Number of posts per ``interval``.
+
+    Total number of posts in community per ``interval`` (parameter).
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community (pici.Community):
+        interval (str): The interval over which to aggregate.
+            See ``pandas.Timedelta`` (<https://pandas.pydata.org/docs/user_guide/timedeltas.html>)
+
+    Returns:
+       results (dict of str:int):
+        - ``number of posts per <interval>``
+
+    """
+    iv_counts = community.posts.resample(
+            interval,
+            on=community.date_column
+    )[community.topic_column].count()
+
+    return aggregate(iv_counts, f"number of posts per {interval}")
+
+
+@metric(
+    level=CommunityDataLevel.TOPICS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def number_of_contributors_per_topic(community):
+    """
+    Number of different contributors that have authored at least one post in a thread.
+
+    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community (pici.Community):
+
+    Returns:
+        results (dict of str: int):
+            - ``number of contributors``
+
+    """
+
+    return {
+        'number of contributors': community.posts.groupby(
+            by=community.topic_column
+        )[community.contributor_column].unique().apply(len)
     }
-
-    
-    def _poststats(self):
-        posts = self._community.posts
-        c_col = self._community.contributor_column
-        t_col = self._community.topic_column
-        d_col = self._community.date_column
-        
-        posts_per_topic = posts.groupby(by=[c_col, t_col]).agg('count').iloc[:,0].groupby(by=c_col)
-        
-        df = {
-            'num_posts': posts.groupby(by=c_col).agg('count').iloc[:,0],
-            'max_posts_per_topic': posts_per_topic.agg('max'),
-            'avg_posts_per_topic': posts_per_topic.agg('mean'),
-            'first_post': posts.groupby(by=c_col)[d_col].agg('min'),
-            'last_post': posts.groupby(by=c_col)[d_col].agg('max'),
-        }
-        
-        df["days_active"] = (df['last_post'] - df['first_post']).dt.days
-                
-        return df
-
-    
-    def _topicstats(self):
-        posts = self._community.posts
-        t_col = self._community.topic_column
-        d_col = self._community.date_column
-                
-        df = {
-            'num_posts': posts.groupby(by=t_col)[d_col].agg('count'),
-            'first_post': posts.groupby(by=t_col)[d_col].agg('min'),
-            'second_post': posts.groupby(by=t_col)[d_col].agg(lambda x: x.nsmallest(2).max()),
-            'last_post': posts.groupby(by=t_col)[d_col].agg('max'),
-        }
-        
-        df["elapsed_days"] = (df['last_post'] - df['first_post']).dt.days
-        df["second_post_delay_days"] = (df['second_post'] - df['first_post']).dt.days
-                        
-        return df        
-        
-        
-    
-    @join_df
-    def contributors_post_stats(self):        
-        return self._poststats()
-    
-    @join_df
-    def topics_post_stats(self):
-        return self._topicstats()
-    
-    def contributors_plot_post_count_histogram(self):
-        return px.histogram(
-            self._poststats(),
-            x="num_posts", 
-            marginal="violin", # or violin, rug
-            log_y=True
-        )
-    
-    @as_table
-    def community_summary(self):
-        posts = self._community.posts
-        t_col = self._community.topic_column
-        c_col = self._community.contributor_column
-        d_col = self._community.date_column
-        
-        posts_per_topic = posts.groupby(by=[c_col, t_col]).agg('count').iloc[:,0].groupby(by=c_col)
-        
-        return {
-            'contributors': len(self._community.contributors.index),
-            'posts': len(posts.index),
-            'topics': len(posts.groupby(by=t_col).agg('count').index),
-            'first post': posts[d_col].agg('min'),
-            'last post': posts[d_col].agg('max')
-        }
-    
-
-    @join_df
-    def community_posts_per_interval(self, interval):
-        c = self._community
-        
-        return {
-            'number of posts': c.posts.resample(interval, on=c.date_column)[c.topic_column].count(),
-        }
-    
-    @join_df
-    def community_contributors_per_interval(self, interval):
-        c = self._community
-
-        return {
-            'number of contributors': c.posts.resample(interval, on=c.date_column)[c.contributor_column].unique().apply(len)
-        }
-    
-    
-    @join_df
-    def topics_number_of_contributors(self):
-        c = self._community
-        
-        return {
-            'number of contributors': c.posts.groupby(by=c.topic_column)[c.contributor_column].unique().apply(len)
-        }

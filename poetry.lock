@@ -417,6 +417,17 @@ Markdown = ">=3.3"
 mkdocs = ">=1.1"
 
 [[package]]
+name = "mkdocs-exclude"
+version = "1.0.2"
+description = "A mkdocs plugin that lets you exclude files or trees."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+mkdocs = "*"
+
+[[package]]
 name = "mkdocs-gen-files"
 version = "0.3.4"
 description = "MkDocs plugin to programmatically generate documentation pages during the build"
@@ -1142,7 +1153,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "0bda03163f9d17e21b2b5ec9889e6c522864dad47f9eca56e7d80affb8f2d1d4"
+content-hash = "e1aac7479a96f2c1e6c04bfc521d3cb1918604c5caaf367c854fe97c5638ae2c"
 
 [metadata.files]
 astunparse = [
@@ -1522,6 +1533,7 @@ mkdocs-autorefs = [
     {file = "mkdocs-autorefs-0.4.1.tar.gz", hash = "sha256:70748a7bd025f9ecd6d6feeba8ba63f8e891a1af55f48e366d6d6e78493aba84"},
     {file = "mkdocs_autorefs-0.4.1-py3-none-any.whl", hash = "sha256:a2248a9501b29dc0cc8ba4c09f4f47ff121945f6ce33d760f145d6f89d313f5b"},
 ]
+mkdocs-exclude = []
 mkdocs-gen-files = [
     {file = "mkdocs-gen-files-0.3.4.tar.gz", hash = "sha256:c69188486bdc1e74bd2b9b7ebbde9f9eb21052ae7762f1b35420cfbfc6d7122e"},
     {file = "mkdocs_gen_files-0.3.4-py3-none-any.whl", hash = "sha256:07f43245c87a03cfb03884e767655c2a61def24d07e47fb3a8d26b1581524d6a"},

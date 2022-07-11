@@ -6,7 +6,13 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 
-for path in sorted(Path("pici").rglob("*.py")):  #
+# excludes
+excl_depr = set(Path("pici").rglob("*_depr.py"))
+excl_tests = set(Path("pici").rglob("tests/*"))
+
+all_py = set(Path("pici").rglob("*.py"))
+
+for path in sorted(all_py - excl_depr - excl_tests):  #
     module_path = path.relative_to("").with_suffix("")  #
     doc_path = path.relative_to("").with_suffix(".md")  #
     full_doc_path = Path("reference", doc_path)  #

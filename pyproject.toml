@@ -24,6 +24,8 @@ mkdocstrings = {extras = ["python"], version = "^0.18.1"}
 mkdocs-section-index = "^0.3.4"
 mkdocs-literate-nav = "^0.4.1"
 mkdocs-material = "^8.2.11"
+mkdocs-autorefs = "^0.4.1"
+mkdocs-exclude = "^1.0.2"
 
 
 [build-system]

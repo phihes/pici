@@ -1,54 +1,104 @@
-from pici.decorators import join_df
+"""
+Metrics using the community's graph object (representation of contributor network).
+
+By level of observation:
+
+**contributors**
+
+- [contributor_degree][pici.metrics.network.contributor_degree]
+- [contributor_centralities][pici.metrics.network.contributor_centralities]
+- [contributor_communities][pici.metrics.network.contributor_communities]
+"""
+
+
+from pici.decorators import metric
+from pici.datatypes import CommunityDataLevel, MetricReturnType
 import networkx as nx
 from networkx.algorithms.centrality import *
 from cdlib import algorithms as cd
 from cdlib import viz as cdviz
 
+@metric(
+    level=CommunityDataLevel.CONTRIBUTORS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def contributor_degree(community):
+    """
+    Number of contributors each contributor has co-authored with in a thread.
 
-class NetworkMetrics:
-    
-    _report_contributors_graph_summary = {
-        "contributors_degree": [],
-        "contributors_centralities": [],
-        "contributors_communities": []
+    Using implementation of ``networkx.Graph.degree``.
+
+    - Data level: [``CONTRIBUTORS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    TODO:
+        document
+    Args:
+        community (pici.Community):
+
+    Returns:
+
+    """
+    return {
+        'degree': dict(community.graph.degree())
     }
-    
-    _report_community_viz = {
-        "graph_plot_leiden_communities": ["vizargs"]
+
+@metric(
+    level=CommunityDataLevel.CONTRIBUTORS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def contributor_centralities(community):
+    """
+    Contributor centralities.
+
+    Includes degree centrality, betweenness centrality, and eigenvector centrality.
+    Using ``networkx`` implementation.
+
+    - Data level: [``CONTRIBUTORS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community (pici.Community):
+
+    Returns:
+
+    """
+    G = community.graph
+
+    return {
+        'degree_centrality': degree_centrality(G),
+        'betweenness_centrality': betweenness_centrality(G),
+        'eigenvector_centrality': eigenvector_centrality(G)
     }
 
-    
-    @join_df
-    def contributors_degree(self):
-        return {
-            'degree': dict(self._community.graph.degree())
-        }
+@metric(
+    level=CommunityDataLevel.CONTRIBUTORS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def contributor_communities(community):
+    """
+    Find communities within the contributor network.
 
-    
-    @join_df
-    def contributors_centralities(self):
-        
-        G = self._community.graph
-        
-        return {
-            'degree_centrality': degree_centrality(G),
-            #'betweenness_centrality': betweenness_centrality(G),
-            #'eigenvector_centrality': eigenvector_centrality(G)
-        }
+    Uses weighted Leiden algorithm (Traag et al., 2018) implemented in
+    ``cdlib.algorithms.leiden``. Returns a ``node: list(communities)`` representation
+    using [``cdlib.NodeClustering.to_node_community_map``](https://cdlib.readthedocs.io/en/latest/reference/classes/node_clustering.html).
 
-    
-    @join_df
-    def contributors_communities(self):
-        
-        G = self._community.graph
-        
-        return {
-            'leiden': cd.leiden(G, None, weights='weight').to_node_community_map()
-        }
+    Traag, Vincent, Ludo Waltman, and Nees Jan van Eck.
+    [From Louvain to Leiden: guaranteeing well-connected communities.](https://arxiv.org/abs/1810.08473/)
+    arXiv preprint arXiv:1810.08473 (2018).
 
-    
-    def graph_plot_leiden_communities(self, vizargs):
-        coms = cd.louvain(self._community.graph)
-        pos = nx.spring_layout(self._community.graph)
-        #return cdviz.plot_network_clusters(self._community.graph, coms, pos)
-        return cdviz.plot_community_graph(self._community.graph, coms, **vizargs)
+    - Data level: [``CONTRIBUTORS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+    Args:
+        community:
+
+    Returns:
+        node_communities_map (dict of node:list(communities)): List of communities a contributor belongs to.
+            See [``cdlib.NodeClustering.to_node_community_map``](https://cdlib.readthedocs.io/en/latest/reference/classes/node_clustering.html).
+
+    """
+    G = community.graph
+
+    return {
+        'leiden': cd.leiden(G, None, weights='weight').to_node_community_map()
+    }

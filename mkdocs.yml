@@ -44,6 +44,11 @@ markdown_extensions:
   - md_in_html
 plugins:
 - search
+- autorefs
+- exclude:
+    glob:
+      - "*_depr.py"
+      - tests/*
 - gen-files:
     scripts:
       - docs/extra/gen_ref_pages.py

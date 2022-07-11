@@ -10,13 +10,12 @@ from pici import helpers
 
 
 class OSMCommunity(Community):
-    
     name = "OpenStreetMap"
     date_column = "date"
     contributor_column = "author_name"
     topic_column = "topic_id"
     text_column = "reply_content"
-    
+
     DEFAULT_ATTRIBUTES = {
         "yesterday": "2021-07-11",
         "today": "2021-07-12",
@@ -29,48 +28,46 @@ class OSMCommunity(Community):
         ],
         "original_date_column": "reply_date"
     }
-    
-    
+
     def _set_data(self, data, start, end):
-        
+
         d = {}
-        
+
         if 'posts' in data.keys():
             if isinstance(data['posts'], pd.DataFrame):
-                
+
                 p = data['posts']
-                
+
                 # prepare date column in post data
                 p["date"] = pd.to_datetime(
                     p[self._attr["original_date_column"]]
-                        .str.replace("Yesterday",self._attr["yesterday"])
-                        .str.replace("Today",self._attr["today"])
+                        .str.replace("Yesterday", self._attr["yesterday"])
+                        .str.replace("Today", self._attr["today"])
                 )
-                
+
                 # set time slice
                 d['posts'] = self.timeslice(p, self.date_column, start, end)
-                
+
                 # set node data (contributor-level)
                 d['contributors'] = d['posts'].groupby(
                     by=self.contributor_column)[
-                    self._attr["node_data"]].agg(helpers.series_most_common)#pd.Series.mode)
-                
-                d['topics'] = d['posts'][['topic_id','topic_title',
-                                          'topic_url','forum_title',
-                                          'forum_id','forum_url']].drop_duplicates().set_index('topic_id')
-                #.groupby(by=self.topic_column).agg('count')
-                
+                    self._attr["node_data"]].agg(helpers.series_most_common)  # pd.Series.mode)
+
+                d['topics'] = d['posts'][['topic_id', 'topic_title',
+                                          'topic_url', 'forum_title',
+                                          'forum_id', 'forum_url']].drop_duplicates().set_index('topic_id')
+                # .groupby(by=self.topic_column).agg('count')
+
             else:
                 raise TypeError("posts are not a pandas dataframe")
         else:
             raise ValueError("posts are missing in data")
-            
+
         self._data = d
         self._posts = d['posts']
         self._contributors = d['contributors']
         self._topics = d['topics']
-        
-    
+
     def _generate_graph(self):
         return create_graph(
             self.posts,
@@ -79,19 +76,15 @@ class OSMCommunity(Community):
             self.topic_column,
             self.contributors.columns
         )
-    
-    
-    
+
+
 class OSMCommunityFactory(CommunityFactory):
-    
     name = "osm"
     cache_data = ['posts']
-    
-    
+
     def _create_community(self, name, start, end):
         return OSMCommunity(name, self._data, start, end)
-    
-    
+
     def scrape_data(self):
         processor = Processor(settings=None)
         posts = pd.DataFrame(processor.run(Job(OSMSpider)))
@@ -101,31 +94,30 @@ class OSMCommunityFactory(CommunityFactory):
         self.add_data_to_cache({
             'posts': posts
         })
-        
-        
+
+
 class OSMSpider(scrapy.Spider):
-    
     custom_settings = {
         'AUTOTHROTTLE_ENABLED': True,
         'AUTOTHROTTLE_START_DELAY': 0.1,
         'AUTOTHROTTLE_MAX_DELAY': 0.5,
         'DOWNLOAD_DELAY': 0.1,
-        'CONCURRENT_REQUESTS_PER_DOMAIN': 5        
-    }       
+        'CONCURRENT_REQUESTS_PER_DOMAIN': 5
+    }
     name = 'OSMSpider'
     start_urls = ["https://forum.openstreetmap.org/"]
-    
+
     def parse(self, response):
         for f in response.css('h3>a'):
             forum = {
                 "forum_url": f.css('::attr(href)').get(),
                 "forum_title": f.css('::text').get(),
-                "forum_id": f.css('::attr(href)').get().split("=")[1]     
+                "forum_id": f.css('::attr(href)').get().split("=")[1]
             }
-            
+
             if forum['forum_url']:
                 yield response.follow(forum['forum_url'], callback=self.parse_forum, meta=forum)
-            
+
     def parse_forum(self, response):
         for t in response.css('td.tcl a'):
             topic = {
@@ -133,16 +125,15 @@ class OSMSpider(scrapy.Spider):
                 "topic_url": t.css('::attr(href)').get(),
                 "topic_id": t.css('::attr(href)').get().split("=")[1]
             }
-            
+
             if topic['topic_url']:
                 yield response.follow(topic['topic_url'], callback=self.parse_topic, meta={**response.meta, **topic})
-        
+
         # pagination
         next_page = response.css('a[rel="next"]::attr(href)').get()
         if next_page:
             yield response.follow(next_page, callback=self.parse_forum, meta=response.meta)
-            
-            
+
     def parse_topic(self, response):
         for r in response.css('div[class~=blockpost]'):
             auth = r.css('div[class~=postleft] dl dd *::text').getall()
@@ -157,23 +148,21 @@ class OSMSpider(scrapy.Spider):
                 "author_from": "",
                 "author_registered_date": ""
             }
-            
+
             attr_types = {
                 'author_registered_date': "Registered: ",
                 'author_from': "From: "
             }
-            
+
             for attr in auth:
                 for k, a_t in attr_types.items():
                     a = attr.strip()
                     if a.startswith(a_t):
                         reply[k] = a.replace(a_t, "")
-            
+
             yield {**reply, **response.meta}
-        
+
         # pagination
         next_page = response.css('a[rel="next"]::attr(href)').get()
         if next_page:
-            yield response.follow(next_page, callback=self.parse_topic, meta=response.meta)        
-        
-        
+            yield response.follow(next_page, callback=self.parse_topic, meta=response.meta)

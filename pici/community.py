@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from pici.metrics import CommunityMetrics
+from pici.metrics import Metrics # CommunityMetrics
 import glob
 import datetime
 from collections import Counter
@@ -12,6 +12,10 @@ LOGGER = logging.getLogger(__name__)
 
 
 class Community(ABC):
+    """
+    Abstract community class.
+
+    """
 
     _graph = None
     _posts = None
@@ -84,7 +88,8 @@ class Community(ABC):
     @property
     def metrics(self):
         if self._metrics is None:
-            self._metrics = CommunityMetrics(self)
+            #self._metrics = CommunityMetrics(self)
+            self._metrics = Metrics(self)
             
         return self._metrics
     
@@ -136,7 +141,7 @@ class CommunityFactory(ABC):
                  for d in self.cache_data]
         
         found = all([
-            any(glob.iglob(f'{self.cache_dir}/{self.name}_{f}_*.csv'))
+            any(glob.iglob(f'{self.cache_dir}/{self.name}_{d}_*.csv'))
             for d in self.cache_data
         ])
         
