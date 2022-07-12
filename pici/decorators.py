@@ -1,6 +1,66 @@
 import functools
 import pandas as pd
 from pici.datatypes import CommunityDataLevel, MetricReturnType
+from pici.helpers import merge_dfs
+from functools import wraps
+
+
+def report(level: CommunityDataLevel, returntype: MetricReturnType):
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            communities = kwargs['communities']
+            metric_list = func(*args, **kwargs)
+            results = {cname: {} for cname in communities.keys()}
+            merged_dfs = False
+            stacked = False
+
+            for cname, c in communities.items():
+                c_results = []
+
+                # get all listed metrics' results for current community
+                for current_metric, current_metric_kwargs in metric_list:
+                    # print(f"calling {current_metric.__name__} on {cname}...")
+                    m_func = getattr(c.metrics, current_metric.__name__)
+                    c_results.append(m_func(**current_metric_kwargs))
+
+                # How to combine results?
+                #
+                # case 1:
+                # all metrics applied to community result in dataframes
+                if all([isinstance(r, pd.DataFrame) for r in c_results]):
+                    merged_dfs = True
+
+                    # case 1a:
+                    # multiple rows per community (metrics returned as dfs)
+                    if returntype == MetricReturnType.DATAFRAME:
+                        df = merge_dfs(list(c_results), only_unique=True)
+                        df['community_name'] = c.name
+                        results[c.name] = df
+
+                    # case 1b:
+                    # one row per community (metrics returned as table)
+                    elif returntype == MetricReturnType.TABLE:
+                        if len(c_results) > 1:
+                            results[c.name] = merge_dfs(c_results)
+                        else:
+                            results[c.name] = c_results[0]
+
+                # case 2:
+                # not all metrics result in dataframes
+                # => put results in community: list(metrics) dictionary
+                else:
+                    results[c.name] = c_results
+
+            if merged_dfs:
+                results = pd.concat(list(results.values()))
+
+            return results
+
+        wrapper.is_report = True
+        return wrapper
+    return decorator
 
 
 def metric(level: CommunityDataLevel, returntype: MetricReturnType):
@@ -24,8 +84,11 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
             Type determined by ``returntype`` parameter.
     """
     def decorator(func):
+
+        @wraps(func)
         def wrapper(*args, **kwargs):
-            community = args[0]
+            # community = args[0]
+            community = kwargs['community']
             metrics = func(*args, **kwargs)
 
             if returntype == MetricReturnType.PLAIN:
@@ -60,6 +123,7 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
         wrapper.is_metric = True
         return wrapper
     return decorator
+
 
 def join_df(func):
     @functools.wraps(func)

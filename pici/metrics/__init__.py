@@ -1,26 +1,54 @@
+from pici.helpers import FuncExposer
 from pici.metrics.basic import *
 from pici.metrics.network import *
 from pici.metrics.text import *
-
-# import pandas as pd
-# from pici.helpers import merge_dfs
-# import logging
-
-# logger = logging.getLogger(__name__)
-
-"""
-from .test import TestMetrics
-from .network import NetworkMetrics
-from .basic import BasicMetrics
-from .text import TextMetrics
-"""
+from pici.metrics.reports import *
 
 
-class Metrics:
-    def __init__(self, community):
-        self._community = community
+class Reports(FuncExposer):
+    """
+    This class exposes all (externally defined) methods decorated with @report as
+    its own methods and passes the ``communities`` parameter to them.
+    """
+
+    def __init__(self, communities):
+        super().__init__(
+            required_func_arg='is_report',
+            func_kwargs={'communities': communities},
+            symbol_table=globals()
+        )
 
     def __getattr__(self, funcname):
+        return self._call(funcname)
+
+    def add_report(self, name, list_of_metrics,
+            level=CommunityDataLevel.COMMUNITY,
+            returntype=MetricReturnType.TABLE):
+
+        @report(level=level, returntype=returntype)
+        def func(communities):
+            return list_of_metrics
+
+        self._symbol_table[name] = func
+
+
+class Metrics(FuncExposer):
+    """
+    This class exposes all (externally defined) methods decorated with @metric as
+    its own methods and passes the ``community`` parameter to them.
+    """
+
+    def __init__(self, community):
+        super().__init__(
+            required_func_arg='is_metric',
+            func_kwargs={'community': community},
+            symbol_table=globals()
+        )
+
+    """
+    def __getattr__(self, funcname):
+
+        
         func = globals()[funcname]
         if callable(func) and hasattr(func, 'is_metric') and func.is_metric is True:
             def newfunc(*args, **kwargs):
@@ -31,6 +59,11 @@ class Metrics:
                 raise NotImplementedError(func)
             elif not hasattr(func, 'is_metric'):
                 raise Exception("This is not a metric. Add the @metric decorator to the method definition.")
+        
+
+        return call_if_has_attr(funcname, 'is_metric', [self._community])
+    """
+
 
 """
 class CommunityMetrics(
@@ -118,3 +151,4 @@ class CommunitiesReport(
 # where each "stat" is a vis.
 # need class that exposes all relevant metrics
 # relevant = solved using decorators?
+# https://discuss.streamlit.io/t/streamlit-deployment-guide-wiki/5099

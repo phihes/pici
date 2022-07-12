@@ -5,6 +5,39 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 
+class FuncExposer:
+
+    def __init__(self, required_func_arg=None, func_kwargs=None, symbol_table=None):
+        if symbol_table is None:
+            symbol_table = globals()
+        if func_kwargs is None:
+            func_kwargs = {}
+        self._kwargs = func_kwargs
+        self._required_func_arg = required_func_arg
+        self._symbol_table = symbol_table
+
+    def __getattr__(self, funcname):
+        return self._call(funcname)
+
+    def _call(self, funcname):
+        func = self._symbol_table[funcname]
+        if callable(func) and (
+                (self._required_func_arg is None) or hasattr(func, self._required_func_arg)
+        ):
+            def newfunc(*args, **kwargs):
+                return func(*args, **{**kwargs, **self._kwargs})
+            return newfunc
+        else:
+            if not callable(func):
+                raise NotImplementedError(func)
+            elif (self._required_func_arg is not None) and not hasattr(func, self._required_func_arg):
+                raise TypeError(f"Trying to call '{funcname}',"
+                                f" which does not have attribute {self._required_func_arg}.")
+
+    def add(self, func):
+        self._symbol_table[func.__name__] = func
+
+
 def aggregate(series, sname):
     aggs = ['mean', 'min', 'max', 'std', 'var', 'sum']
     return {

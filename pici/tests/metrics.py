@@ -2,7 +2,9 @@ from pici import Pici
 from pici.communities.oem import OEMCommunityFactory
 from pici.communities.osm import OSMCommunityFactory
 from pici.communities.preciousplastic import PPCommunityFactory
+import pandas as pd
 
+from pici.metrics import agg_number_of_posts_per_interval
 
 pici = Pici(
     communities={
@@ -46,7 +48,24 @@ def test_network_metrics():
     print(c2.head(5).degree_centrality)
 
 
+def test_reports():
+    s = pici.reports.summary()
+    assert 'mean number of posts per 1M' in s.columns
+    print(s)
+    pici.reports.add('testreport', [
+        (agg_number_of_posts_per_interval, {'interval': '1M'})
+    ])
+    s2 = pici.reports.testreport()
+    print(s2)
+    assert 'mean number of posts per 1M' in s2.columns
+
+
+
 if __name__ == "__main__":
+    pd.set_option('display.width', 80)
+    # pd.set_option('expand_frame_repr', False)
+    pd.set_option('display.max_columns', 999)
     test_basic_metrics()
     test_network_metrics()
+    test_reports()
     print("Everything passed")

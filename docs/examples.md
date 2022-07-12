@@ -2,4 +2,4 @@
 
 ## Custom community
 
-## Custom indicators
+## Custom metrics

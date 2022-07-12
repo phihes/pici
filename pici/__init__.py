@@ -1,6 +1,8 @@
 __version__ = '0.1.0'
 
 # from pici.metrics import CommunitiesReport
+from pici.datatypes import CommunityDataLevel, MetricReturnType
+from pici.metrics import Reports
 from pici.viz import CommunitiesVisualizations
 from pici.community import Community
 from pici.community import CommunityFactory
@@ -53,4 +55,17 @@ class Pici:
             for c, f in communities.items()
         }
         # self.report = CommunitiesReport(list(self.communities.values()))
+        self.reports = Reports(self.communities)
         self.viz = CommunitiesVisualizations(self)
+
+    def add_metric(self, metric):
+        for c in self.communities.values():
+            c.metric.add(metric)
+
+    def add_report(self, report):
+        self.reports.add(report)
+
+    def add_report(self, name, list_of_metrics,
+            level=CommunityDataLevel.COMMUNITY,
+            returntype=MetricReturnType.TABLE):
+        self.reports.add_report(name, list_of_metrics, level, returntype)
