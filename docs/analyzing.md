@@ -1,12 +1,11 @@
-# Using the toolbox
 
-## Analyzing communities
+# Analyzing communities
 
-### Loading community data
+## Loading community data
 
-### Calculating metrics
+## Calculating metrics
 
-### Building reports
+## Building reports
 
 Reports are groups of metrics. You can use reports if you would like to analyze a certain subset of metrics in one table, or if you would like to compare results for different metric parameters.
 
@@ -42,7 +41,7 @@ p.add_report(
 p.reports.posts()
 ```
 
-### Calculating custom metrics
+## Calculating custom metrics
 
 You can define custom metrics that can then be used just like the pre-defined metrics. A custom metric is implemented as a decorated function and needs to be added to the "metrics registry".
 
@@ -97,7 +96,7 @@ def number_of_posts_per_topic(community):
         - ``MetricReturnType.TABLE``
         _ ``MetricReturnType.DATAFRAME``
 
-#### return values
+### return values
 
 A metric can return one or multiple values (in a dictionary). If your ``returntype`` is ``TABLE`` or ``DATAFRAME``, the metric's return values must be named entries in a dictionary. The columns in the resulting dataframe will then correspond to these names.
 
@@ -163,7 +162,7 @@ A use case for returning multiple values as dictionary entries are, for example,
     |-----------|---------------------------------------------------------------|
     ```
 
-#### registering a new metric
+### registering a new metric
 
 Custom metrics need to be added to the "metrics registry", so that they can be used like pre-defined metrics through ``Community.metrics.my_metric()`` or in [reports][pici.metrics.Reports]. This can be done either via [``Pici.add_metric()``][pici.Pici] (adds metric for all communities), or via [``Community.metrics.add()``][pici.metrics.Metrics] for a single community:
 
@@ -195,17 +194,6 @@ p.add_metric(my_metric)
 p.communities['PreciousPlastic'].metrics.my_metric()
 ```
 
-### Visualizations
+## Visualizations
 
-### Dashboard
-
-## Extending the toolbox
-
-### Adding communities
-
-### Adding custom metrics
-
-
-
-### Adding visualizations
-
+## Dashboard

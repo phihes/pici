@@ -8,10 +8,12 @@ extra_css:
   - extra/peerinnovation.css
 nav:
   - About Pici: index.md
-  - Getting started: getting-started.md
-  - Using the toolbox: usage.md
-  - Examples: examples.md
-  - Reference: reference/
+  - Using the toolbox:
+    - using.md
+    - analyzing.md
+    - extending.md
+    - examples.md
+  - Code reference: reference/
 theme:
   name: material
   palette:
@@ -21,7 +23,6 @@ theme:
     - content.code.annotate
     - content.tabs.link
     - navigation.tabs
-    - toc.integrate
 extra:
   version:
     provider: mike

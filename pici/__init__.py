@@ -1,15 +1,16 @@
 __version__ = '0.1.0'
 
-# from pici.metrics import CommunitiesReport
+from typing import overload
+
 from pici.datatypes import CommunityDataLevel, MetricReturnType
-from pici.metrics import Reports
-from pici.viz import CommunitiesVisualizations
+from pici.metrics import Reports, report
 from pici.community import Community
 from pici.community import CommunityFactory
 
 __all__ = [
     'Pici', 'Community', 'CommunityFactory'
 ]
+
 
 class Pici:
     """
@@ -33,7 +34,7 @@ class Pici:
         )
         ```
     """
-    
+
     def __init__(self, communities, cache_dir="cache", cache_nrows=None, start=None, end=None):
         """
         Loads communities.
@@ -56,16 +57,27 @@ class Pici:
         }
         # self.report = CommunitiesReport(list(self.communities.values()))
         self.reports = Reports(self.communities)
-        self.viz = CommunitiesVisualizations(self)
 
     def add_metric(self, metric):
         for c in self.communities.values():
             c.metric.add(metric)
 
-    def add_report(self, report):
-        self.reports.add(report)
+    @overload
+    def add_report(self, new_report):
+        self.reports.add(new_report)
 
+    @overload
     def add_report(self, name, list_of_metrics,
-            level=CommunityDataLevel.COMMUNITY,
-            returntype=MetricReturnType.TABLE):
+                   level=CommunityDataLevel.COMMUNITY,
+                   returntype=MetricReturnType.TABLE):
         self.reports.add_report(name, list_of_metrics, level, returntype)
+
+    def generate_report(self, list_of_metrics,
+                   level=CommunityDataLevel.COMMUNITY,
+                   returntype=MetricReturnType.TABLE):
+
+        @report(level=level, returntype=returntype)
+        def func(communities):
+            return list_of_metrics
+
+        return func(self.communities)

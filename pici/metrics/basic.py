@@ -20,6 +20,8 @@ from pici.decorators import metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import aggregate
 
+import numpy as np
+
 
 @metric(
     level=CommunityDataLevel.TOPICS,
@@ -119,6 +121,62 @@ def number_of_posts(community):
 
 @metric(
     level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.DATAFRAME
+)
+def posts_per_interval(community, interval):
+    """
+    Number of posts authored by community per time interval.
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    TODO:
+        - document
+        - add to TOC
+
+    Args:
+        community:
+        interval:
+
+    Returns:
+
+    """
+    return {
+        f'number of posts per {interval}': community.posts.resample(
+            interval, on=community.date_column)[community.topic_column].count()
+    }
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.DATAFRAME
+)
+def contributors_per_interval(community, interval):
+    """
+    Number of users that have authored at least one post in time interval.
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    TODO:
+        - document
+        - add to TOC
+
+    Args:
+        community:
+        interval:
+
+    Returns:
+
+    """
+    return {
+        f'number of contributors per {interval}': community.posts.resample(
+            interval, on=community.date_column)[community.contributor_column].unique().apply(len)
+    }
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
     returntype=MetricReturnType.TABLE
 )
 def agg_posts_per_topic(community):
@@ -198,3 +256,66 @@ def number_of_contributors_per_topic(community):
             by=community.topic_column
         )[community.contributor_column].unique().apply(len)
     }
+
+
+@metric(
+    level=CommunityDataLevel.TOPICS,
+    returntype=MetricReturnType.DATAFRAME
+)
+def number_of_posts_per_topic(community):
+    """
+    Number of posts per topic.
+
+    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    TODO:
+        - add to toc
+
+    Args:
+        community:
+
+    Returns:
+        report:
+            - number of posts
+
+    """
+
+    return {
+        'number of posts': community.posts.groupby(
+            by=community.topic_column
+        ).apply(len)
+    }
+
+
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.DATAFRAME
+)
+def lorenz(community):
+    def lrz(posts):
+        y = np.cumsum(posts).astype("float32")
+
+        # normalize to a percentage
+        y /= y.max()
+        y *= 100
+
+        # prepend a 0 to y as zero stores have zero items
+        y = np.hstack((0, y))
+
+        # get cumulative percentage of stores
+        x = np.linspace(0, 100, y.size)
+
+        return x, y
+
+    posts_per_user = community.posts.groupby(
+        by=community.contributor_column
+    )[community.date_column].agg("count").sort_values(ascending=True)
+
+    x, y = lrz(posts_per_user.dropna())
+
+    return {
+        '% contributors': x,
+        '% posts': y
+    }
+

@@ -26,6 +26,7 @@ mkdocs-literate-nav = "^0.4.1"
 mkdocs-material = "^8.2.11"
 mkdocs-autorefs = "^0.4.1"
 mkdocs-exclude = "^1.0.2"
+statsmodels = "^0.13.2"
 
 
 [build-system]

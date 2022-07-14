@@ -9,7 +9,7 @@
 
 ## TODO
 
-- Adapt report system to new metric implementation
+- Adapt report system to new metric implementation          DONE
 - Build evaluation framework
 - What about visualizations?
 - Harvest all the Jupyter stuff

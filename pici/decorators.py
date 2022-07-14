@@ -6,6 +6,27 @@ from functools import wraps
 
 
 def report(level: CommunityDataLevel, returntype: MetricReturnType):
+    """
+    Decorator for methods that represent reports (collections of metrics).
+
+    A report method must have ``communities`` parameter and return a list
+    of (function, dict) tuples with @metric decorated functions and kwargs.
+
+    Args:
+        level (pici.datatypes.CommunityDataLevel): The reports's data level
+            determines to which 'view' on [pici.Community][pici.Community]
+            the results are appended. All metrics returned by the report
+            must measure on the same CommunityDataLevel.
+        returntype (pici.datatypes.MetricReturnType): Data type of values
+            returned by metrics in report.
+
+    Returns:
+        report (pandas.DataFrame or dict): DataFrame or dict populated with
+            all metrics' calculated values for each community in
+            ``communities``.
+
+
+    """
     def decorator(func):
 
         @wraps(func)
@@ -95,6 +116,7 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
                 return metrics
 
             elif returntype == MetricReturnType.DATAFRAME:
+                df = None
                 try:
                     df = getattr(community, level.value)
                 except AttributeError:

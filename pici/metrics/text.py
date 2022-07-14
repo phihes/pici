@@ -39,8 +39,6 @@ def number_of_words(community):
 
     """
 
-
-
     return {
         'number of words': community.posts[community.text_column].apply(
             num_words

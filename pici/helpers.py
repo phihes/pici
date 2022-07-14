@@ -117,5 +117,7 @@ def flat(df, columns="community_name"):
     return p
 
 
+"""
 def pivot(df, columns="community_name"):
     return df.pivot(columns=columns)
+"""

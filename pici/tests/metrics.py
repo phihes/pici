@@ -52,13 +52,17 @@ def test_reports():
     s = pici.reports.summary()
     assert 'mean number of posts per 1M' in s.columns
     print(s)
-    pici.reports.add('testreport', [
+
+    pici.reports.add_report('testreport', [
         (agg_number_of_posts_per_interval, {'interval': '1M'})
     ])
     s2 = pici.reports.testreport()
-    print(s2)
     assert 'mean number of posts per 1M' in s2.columns
+    print(s2)
 
+    s3 = pici.reports.posts_contributors_per_interval(interval='1W')
+    assert 'number of posts per 1W' in s3.columns
+    print(s3)
 
 
 if __name__ == "__main__":

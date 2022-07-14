@@ -1,4 +1,4 @@
-# Getting started
+# Using the toolbox
 
 ## Installation
 
