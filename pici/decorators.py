@@ -1,9 +1,75 @@
 import functools
 import pandas as pd
 from pici.datatypes import CommunityDataLevel, MetricReturnType
-from pici.helpers import merge_dfs
 from functools import wraps
 
+from pici.helpers import merge_dfs
+
+
+def metric(level: CommunityDataLevel, returntype: MetricReturnType):
+    """
+    A decorator for community metrics.
+
+    The parameters ``level`` and ``type`` determine how and using which level of
+    observation (topics, posts, etc.) the metrics' results are represented.
+
+    - Only methods using this decorator are available as metrics through
+    ``pici.Community.metrics``.
+
+    Args:
+        level (pici.datatypes.CommunityDataLevel): The metric's data level
+            Determines to which 'view' of pici.Community metric's results
+            are appended to.
+        returntype (pici.datatypes.MetricReturnType): Data type of metric's return value.
+
+    Returns:
+        Returns either plain metric value, or determined value(s) appended to community data.
+            Type determined by ``returntype`` parameter.
+    """
+
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            # community = args[0]
+            community = kwargs['community']
+            metrics = func(*args, **kwargs)
+
+            if returntype == MetricReturnType.PLAIN:
+                return metrics
+
+            elif returntype == MetricReturnType.DATAFRAME:
+                df = None
+                try:
+                    df = getattr(community, level.value)
+                except AttributeError:
+                    pass
+
+                try:
+                    metrics_df = pd.DataFrame(metrics)
+
+                # most likely the series' index is a mix of str and float...
+                # cast indices to str, as we are dealing with names
+                except TypeError:
+                    _metrics = {
+                        s: {str(i): v for i, v in row.items()}
+                        for s, row in metrics.items()
+                    }
+                    metrics_df = pd.DataFrame(_metrics)
+                return df.join(metrics_df) if df is not None else metrics_df
+
+            elif returntype == MetricReturnType.TABLE:
+                metrics_table = pd.DataFrame(
+                    metrics,
+                    index=pd.Index([community.name], name='community_name')
+                )
+
+                return metrics_table
+
+        wrapper.is_metric = True
+        return wrapper
+
+    return decorator
 
 def report(level: CommunityDataLevel, returntype: MetricReturnType):
     """
@@ -27,6 +93,7 @@ def report(level: CommunityDataLevel, returntype: MetricReturnType):
 
 
     """
+
     def decorator(func):
 
         @wraps(func)
@@ -81,69 +148,7 @@ def report(level: CommunityDataLevel, returntype: MetricReturnType):
 
         wrapper.is_report = True
         return wrapper
-    return decorator
 
-
-def metric(level: CommunityDataLevel, returntype: MetricReturnType):
-    """
-    A decorator for community metrics.
-
-    The parameters ``level`` and ``type`` determine how and using which level of
-    observation (topics, posts, etc.) the metrics' results are represented.
-
-    - Only methods using this decorator are available as metrics through
-    ``pici.Community.metrics``.
-
-    Args:
-        level (pici.datatypes.CommunityDataLevel): The metric's data level
-            Determines to which 'view' of pici.Community metric's results
-            are appended to.
-        returntype (pici.datatypes.MetricReturnType): Data type of metric's return value.
-
-    Returns:
-        Returns either plain metric value, or determined value(s) appended to community data.
-            Type determined by ``returntype`` parameter.
-    """
-    def decorator(func):
-
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            # community = args[0]
-            community = kwargs['community']
-            metrics = func(*args, **kwargs)
-
-            if returntype == MetricReturnType.PLAIN:
-                return metrics
-
-            elif returntype == MetricReturnType.DATAFRAME:
-                df = None
-                try:
-                    df = getattr(community, level.value)
-                except AttributeError:
-                    pass
-
-                try:
-                    metrics_df = pd.DataFrame(metrics)
-
-                # most likely the series' index is a mix of str and float...
-                # cast indices to str, as we are dealing with names
-                except TypeError:
-                    _metrics = {
-                        s: {str(i): v for i, v in row.items()}
-                        for s, row in metrics.items()
-                    }
-                    metrics_df = pd.DataFrame(_metrics)
-                return df.join(metrics_df) if df is not None else metrics_df
-
-            elif returntype == MetricReturnType.TABLE:
-                metrics_table = pd.DataFrame(
-                    metrics,
-                    index=pd.Index([community.name], name='community_name')
-                )
-
-                return metrics_table
-        wrapper.is_metric = True
-        return wrapper
     return decorator
 
 

@@ -1,4 +1,4 @@
-from pici.community import Community, CommunityFactory, create_graph
+from pici.helpers import create_graph
 import pandas as pd
 import scrapy
 from scrapyscript import Job, Processor
@@ -6,7 +6,7 @@ import logging
 import numpy as np
 import json
 from urllib.parse import urlparse
-from pici import helpers
+from pici import helpers, Community, CommunityFactory
 
 
 class OSMCommunity(Community):

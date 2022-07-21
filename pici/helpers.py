@@ -1,3 +1,6 @@
+from itertools import combinations
+
+import networkx as nx
 import nltk
 import numpy as np
 from functools import reduce
@@ -121,3 +124,31 @@ def flat(df, columns="community_name"):
 def pivot(df, columns="community_name"):
     return df.pivot(columns=columns)
 """
+
+
+def create_graph(link_data, node_data, node_col, group_col, node_attributes, connected=True):
+    G = nx.Graph()
+    for topic, group in link_data.groupby(group_col):
+        authors = group[node_col].tolist()
+        authors = set(authors)
+
+        # create weighted edges
+        for a,b in combinations(authors, 2):
+            if a and b: #and a in node_data.index and b in node_data.index and (connected or connected(a,b,topic)):
+                if not G.has_node(a):
+                    G.add_node(a)
+                if not G.has_node(b):
+                    G.add_node(b)
+                if not G.has_edge(a,b):
+                    G.add_edge(a,b, weight=1)
+                else:
+                    G[a][b]['weight'] += 1
+
+    # add attributes to nodes
+    for n, d in node_data.iterrows():
+        if G.has_node(n) and n!="" and n is not None:
+            for a in node_attributes:
+                value = d[a] if d[a] is not None else np.nan
+                G.nodes[n][a] = str(value)
+
+    return G

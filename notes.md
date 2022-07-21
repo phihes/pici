@@ -16,3 +16,10 @@
 - Harvest all the Jupyter stuff
 - Integrate into dashboard app --> Streamlit?
 - Implement all the indicators
+
+- make report/metrics registries abstract
+- put report/metrics decorators in "reporting" / Report obj
+- make decorator return "Report" obj with:
+  - df
+  - labelled option
+  - etc.

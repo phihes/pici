@@ -1,14 +1,92 @@
-from abc import ABC, abstractmethod
-from pici.metrics import Metrics # CommunityMetrics
-import glob
 import datetime
+import glob
+from abc import ABC, abstractmethod
 from collections import Counter
+from typing import overload
+
 import pandas as pd
-import numpy as np
-import networkx as nx
-from itertools import combinations
+
+from pici.datatypes import CommunityDataLevel, MetricReturnType
+from pici.reporting import MetricRegistry, ReportRegistry
+
 import logging
 LOGGER = logging.getLogger(__name__)
+
+
+class Pici:
+    """
+    TODO:
+        Add documentation.
+
+    Examples:
+        === "Python"
+        ``` py
+        from communities import OEMCommunityFactory, OSMCommunityFactory, PPCommunityFactory
+
+        p = Pici(
+            communities={
+                'OpenEnergyMonitor': OEMCommunityFactory,
+                'OpenStreetMap': OSMCommunityFactory,
+                'PreciousPlastic': PPCommunityFactory,
+            },
+            start='2017-01-01',
+            end='2017-12-01',
+            cache_nrows=5000
+        )
+        ```
+    """
+
+    def __init__(self, communities, cache_dir="cache", cache_nrows=None, start=None, end=None):
+        """
+        Loads communities.
+
+        Communities can be loaded from cache or scraped. Loaded data can be restricted either
+        by number of rows loaded from cache (``cache_nrows``), or by setting ``start`` and
+        ``end`` dates (filter on publication dates of posts).
+
+        Args:
+            communities (dict of str: pici.CommunityFactory): Dictionary of communities.
+                Communities are provided as ``name (str): CommunityFactory`` tuples.
+            cache_dir (str): Path to folder that contains cache files.
+            cache_nrows (int): Number of rows to load from cache (None (default): load all rows).
+            start (str): Start-date for filtering posts. String format must be valid input for ``pandas.Timestamp``.
+            end (str): End-date for filtering posts. String format must be valid input for ``pandas.Timestamp``.
+        """
+        self.communities = {
+            c: f(cache_dir, cache_nrows).create_community(name=c, start=start, end=end)
+            for c, f in communities.items()
+        }
+        self.reports = ReportRegistry(self.communities)
+
+    def set_labels(self, labeldata, level=CommunityDataLevel.TOPICS):
+
+        #for c in self.communities.values():
+        #    c.
+        pass
+
+    def add_metric(self, metric):
+        for c in self.communities.values():
+            c.metric.add(metric)
+
+    @overload
+    def add_report(self, new_report):
+        self.reports.add(new_report)
+
+    @overload
+    def add_report(self, name, list_of_metrics,
+                   level=CommunityDataLevel.COMMUNITY,
+                   returntype=MetricReturnType.TABLE):
+        self.reports.add_report(name, list_of_metrics, level, returntype)
+
+    def generate_report(self, list_of_metrics,
+                   level=CommunityDataLevel.COMMUNITY,
+                   returntype=MetricReturnType.TABLE):
+
+        @ReportRegistry.registered(level=level, returntype=returntype)
+        def func(communities):
+            return list_of_metrics
+
+        return func(self.communities)
 
 
 class Community(ABC):
@@ -21,7 +99,7 @@ class Community(ABC):
     _posts = None
     _metrics = None
     _data = None
-    
+
     def __init__(self, name, data, start=None, end=None, attr=None):
         if name is not None:
             self.name = name
@@ -30,12 +108,12 @@ class Community(ABC):
         else:
             self._attr = attr
         self._set_data(data, start, end)
-        
-        
+
+
     def date_range(self, start=None, end=None):
         return type(self).__name__(self._data, start, end)
-    
-    
+
+
     def timeslice(self, posts, col, start, end):
         if start is None and end is None:
             return posts
@@ -52,125 +130,125 @@ class Community(ABC):
     def DEFAULT_ATTRIBUTES(self):
         raise NotImplementedError("Property not set")
 
-        
+
     @property
     @abstractmethod
     def name(self):
         raise NotImplementedError("Property not set")
-        
+
     @property
     @abstractmethod
     def date_column(self):
         raise NotImplementedError("Property not set")
-    
+
     @property
     @abstractmethod
     def contributor_column(self):
         raise NotImplementedError("Property not set")
-    
+
     @property
     @abstractmethod
     def topic_column(self):
         raise NotImplementedError("Property not set")
-    
+
     @property
     def contributors(self):
         return self._contributors
-    
+
     @property
     def posts(self):
         return self._posts
-    
+
     @property
     def topics(self):
         return self._topics
-    
+
     @property
     def metrics(self):
         if self._metrics is None:
             #self._metrics = CommunityMetrics(self)
-            self._metrics = Metrics(self)
-            
+            self._metrics = MetricRegistry(self)
+
         return self._metrics
-    
-    
+
+
     def contributor_by_id(self, c_id):
         return self.contributors.loc[c_id]
-    
+
 
     def contributor_by_post_id(self, p_id):
         return self.contributors.loc[self.posts.loc[p_id].contributor_id]
-    
-    
+
+
     def contributors_by_topic_id(self, t_id):
         return self.topics.loc[t_id].c
-    
-        
+
+
 
     @property
     def graph(self):
         if self._graph is None:
             self._graph = self._generate_graph()
-            
+
         return self._graph
-    
-    
+
+
     @abstractmethod
     def _generate_graph(self):
         pass
-    
+
 
     @abstractmethod
     def _set_data(self, data, start=None, end=None):
         pass
 
-    
+
 class CommunityFactory(ABC):
-    
+
     cache_date_format = '%Y-%m-%d-%H-%M-%S'
 
-    
+
     def __init__(self, cache_dir='.', cache_nrows=None):
         self.cache_dir = cache_dir
         self.cache_nrows = cache_nrows
-        
-        
+
+
     def _cache_exists(self):
-        
+
         files = [f'{self.cache_dir}/{self.name}_{d}_*.csv'
                  for d in self.cache_data]
-        
+
         found = all([
             any(glob.iglob(f'{self.cache_dir}/{self.name}_{d}_*.csv'))
             for d in self.cache_data
         ])
-        
+
         if not found:
             LOGGER.warning("Cache does not exist. Did not find some files when looking for " + ", ".join(files))
-        
+
         return found
-    
+
     def load_cache(self):
         cache = {
             k: glob.glob(f'{self.cache_dir}/{self.name}_{k}_*.csv')
             for k in self.cache_data
         }
-        
+
         # get most recent date for which every cached file exists
         all_dates = [
             fn.split("_")[-1].split(".")[0]
-            for k in cache.keys()            
+            for k in cache.keys()
             for fn in cache[k]
         ]
         d_counts = Counter(all_dates)
         valid_dates = [d for d in d_counts if d_counts[d] == len(self.cache_data)]
-        
+
         most_recent_date = sorted(
             valid_dates,
             key=lambda x: datetime.datetime.strptime(x, self.cache_date_format),
             reverse=True
         )[0]
-            
+
         self._data = {
             k: pd.read_csv(
                 f'{self.cache_dir}/{self.name}_{k}_{most_recent_date}.csv',
@@ -178,68 +256,40 @@ class CommunityFactory(ABC):
             )
             for k in self.cache_data
         }
-    
-    
+
+
     def add_data_to_cache(self, data):
-        
+
         date_now = datetime.date.today().strftime(self.cache_date_format)
-        
+
         for k, d in data.items():
             d.to_csv(f'{self.cache_dir}/{self.name}_{k}_{date_now}.csv')
-                
-    
+
+
     def create_community(self, name=None, use_cache=True, start=None, end=None):
-                
+
         if use_cache and self._cache_exists():
             LOGGER.info("Loading community from cache...")
             self.load_cache()
         else:
             LOGGER.warning("No data in cache. Scraping community data...")
             self.scrape_data()
-            
+
         return self._create_community(name, start, end)
 
     def load_labels(self):
         pass
-    
+
     @property
     @abstractmethod
     def name(self):
         pass
-    
+
     @property
     @abstractmethod
     def cache_data(self):
         pass
-    
+
     @abstractmethod
     def scrape_data(self):
         pass
-    
-    
-def create_graph(link_data, node_data, node_col, group_col, node_attributes, connected=True):
-    G = nx.Graph()
-    for topic, group in link_data.groupby(group_col):
-        authors = group[node_col].tolist()
-        authors = set(authors)
-
-        # create weighted edges
-        for a,b in combinations(authors, 2):          
-            if a and b: #and a in node_data.index and b in node_data.index and (connected or connected(a,b,topic)):
-                if not G.has_node(a):
-                    G.add_node(a)
-                if not G.has_node(b):
-                    G.add_node(b)
-                if not G.has_edge(a,b):
-                    G.add_edge(a,b, weight=1)
-                else:
-                    G[a][b]['weight'] += 1
-
-    # add attributes to nodes
-    for n, d in node_data.iterrows():
-        if G.has_node(n) and n!="" and n is not None:
-            for a in node_attributes:
-                value = d[a] if d[a] is not None else np.nan
-                G.nodes[n][a] = str(value)
-
-    return G
