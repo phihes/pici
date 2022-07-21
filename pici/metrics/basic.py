@@ -293,6 +293,22 @@ def number_of_posts_per_topic(community):
     returntype=MetricReturnType.DATAFRAME
 )
 def lorenz(community):
+    """
+    Distribution of posts (in analogy to lorenz curve). Returns (x,y) where
+    x is the (least-contributing) bottom x% of users, and y the proportion
+    of posts made by them.
+
+    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
+    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
+
+    Args:
+        community:
+            report:
+                - % contributors
+                - % posts
+    Returns:
+
+    """
     def lrz(posts):
         y = np.cumsum(posts).astype("float32")
 

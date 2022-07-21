@@ -23,7 +23,7 @@ pio.templates["peerinnovation"] = go.layout.Template({
     },
 
 })
-pio.templates.default = "ggplot2+peerinnovation"
+# pio.templates.default = "ggplot2+peerinnovation"
 
 
 def scatter_contributors_vs_posts(pici, interval='1M'):
@@ -176,6 +176,7 @@ def timeseries_number_of_contributors(pici, interval='1W'):
         columns="community_name"
     )[f'number of contributors per {interval}'].plot()
     fig.update_layout(
+        yaxis_title=f"number of posts / {interval}",
         legend=dict(
             orientation="h",
             yanchor="bottom",
@@ -208,3 +209,41 @@ def boxplot_number_of_contributors_per_topic(pici):
         )
     )
     return fig
+
+
+def scatter_lorenz_curves(pici):
+    lor = pici.reports.lorenz_curve()
+    fig = px.scatter(lor, x="% contributors", y="% posts", color="community_name")
+    fig.update_layout(
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            title=""
+        )
+    )
+    return fig
+
+
+def plot_lorenz_curves(pici):
+    lor = pici.reports.lorenz_curve()
+    fig = px.line(lor, x="% contributors", y="% posts", color="community_name")
+    fig.add_shape(type='line',
+                  x0=0, y0=0, x1=100, y1=100,
+                  line=dict(color='Black'),
+                  xref='x', yref='y'
+    )
+    fig.update_layout(
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1,
+            title=""
+        )
+    )
+    return fig
+

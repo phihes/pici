@@ -31,3 +31,13 @@ class MetricReturnType(Enum):
     """
     Metric's return values as series in Pandas.Dataframe
     """
+
+
+class InnovationLabel(Enum):
+
+    IDEA = "presentation_of_idea"
+    EVAL = "evaluation"
+    IMPL = "implementation"
+    MOD = "modification"
+    IMPROV = "improvement"
+    POTENTIAL = "potential"

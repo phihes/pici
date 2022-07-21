@@ -198,11 +198,14 @@ class CommunityFactory(ABC):
             self.scrape_data()
             
         return self._create_community(name, start, end)
+
+    def load_labels(self):
+        pass
     
     @property
     @abstractmethod
     def name(self):
-        pass    
+        pass
     
     @property
     @abstractmethod

@@ -55,8 +55,13 @@ class Pici:
             c: f(cache_dir, cache_nrows).create_community(name=c, start=start, end=end)
             for c, f in communities.items()
         }
-        # self.report = CommunitiesReport(list(self.communities.values()))
         self.reports = Reports(self.communities)
+
+    def set_labels(self, labeldata, level=CommunityDataLevel.TOPICS):
+
+        #for c in self.communities.values():
+        #    c.
+        pass
 
     def add_metric(self, metric):
         for c in self.communities.values():
