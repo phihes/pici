@@ -10,8 +10,7 @@ By level of observation:
 - [contributor_communities][pici.metrics.network.contributor_communities]
 """
 
-
-from pici.decorators import metric
+from pici.reporting import metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 import networkx as nx
 from networkx.algorithms.centrality import *

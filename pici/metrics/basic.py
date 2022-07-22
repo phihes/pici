@@ -16,7 +16,7 @@ By level of observation:
 - [post_dates_per_topic][pici.metrics.basic.post_dates_per_topic]
 """
 
-from pici.decorators import metric
+from pici.reporting import metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import aggregate
 
@@ -121,7 +121,7 @@ def number_of_posts(community):
 
 @metric(
     level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.DATAFRAME
+    returntype=MetricReturnType.TABLE
 )
 def posts_per_interval(community, interval):
     """
@@ -149,7 +149,7 @@ def posts_per_interval(community, interval):
 
 @metric(
     level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.DATAFRAME
+    returntype=MetricReturnType.TABLE
 )
 def contributors_per_interval(community, interval):
     """

@@ -6,8 +6,9 @@ from typing import overload
 
 import pandas as pd
 
+import pici.reporting
 from pici.datatypes import CommunityDataLevel, MetricReturnType
-from pici.reporting import MetricRegistry, ReportRegistry
+from pici.registries import MetricRegistry, ReportRegistry
 
 import logging
 LOGGER = logging.getLogger(__name__)
@@ -66,7 +67,7 @@ class Pici:
 
     def add_metric(self, metric):
         for c in self.communities.values():
-            c.metric.add(metric)
+            pici.reporting.metric.add(metric)
 
     @overload
     def add_report(self, new_report):

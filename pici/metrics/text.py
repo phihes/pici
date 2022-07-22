@@ -10,7 +10,7 @@ By level of observation:
 
 """
 
-from pici.decorators import metric
+from pici.reporting import metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import num_words, word_occurrences
 import pandas as pd

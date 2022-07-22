@@ -21,48 +21,60 @@ c = pici.communities['OpenEnergyMonitor']
 
 
 def test_basic_metrics():
-    df = c.metrics.number_of_contributors_per_topic()
+    contrib = c.metrics.number_of_contributors_per_topic()
     # print(df)
-    assert 'number of contributors' in df.columns
+    assert 'number of contributors' in contrib.data.columns
 
     tab = c.metrics.agg_number_of_posts_per_interval(interval="1d")
     print(tab)
-    assert 'mean number of posts per 1d' in tab.columns
+    assert 'mean number of posts per 1d' in tab.data.columns
 
     tab2 = c.metrics.agg_posts_per_topic()
     print(tab2)
-    assert 'mean posts per topic' in tab2.columns
+    assert 'mean posts per topic' in tab2.data.columns
 
     tab3 = c.metrics.post_dates_per_topic()
     # print(tab3)
-    assert 'first post date' in tab3.columns
+    assert 'first post date' in tab3.data.columns
 
 
 def test_network_metrics():
     contributors = c.metrics.contributor_degree()
-    assert 'degree' in contributors.columns
-    print(contributors.head(5).degree)
+    assert 'degree' in contributors.data.columns
+    print(contributors.data.head(5).degree)
 
     c2 = c.metrics.contributor_centralities()
-    assert 'degree_centrality' in c2.columns
-    print(c2.head(5).degree_centrality)
+    assert 'degree_centrality' in c2.data.columns
+    print(c2.data.head(5).degree_centrality)
 
 
 def test_reports():
     s = pici.reports.summary()
-    assert 'mean number of posts per 1M' in s.columns
+    assert 'mean number of posts per 1M' in s.data.columns
     print(s)
 
     pici.reports.add_report('testreport', [
         (agg_number_of_posts_per_interval, {'interval': '1M'})
     ])
     s2 = pici.reports.testreport()
-    assert 'mean number of posts per 1M' in s2.columns
+    assert 'mean number of posts per 1M' in s2.data.columns
+    assert 'mean number of posts per 1M' in s2.fields
     print(s2)
 
     s3 = pici.reports.posts_contributors_per_interval(interval='1W')
-    assert 'number of posts per 1W' in s3.columns
+    assert 'number of posts per 1W' in s3.data.columns
     print(s3)
+    print(s3.fields)
+
+    s4 = pici.reports.post_length()
+    assert 'number of words' in s4.fields
+    assert 'number of words' in s4.data.columns
+    assert len(s4.fields) < 30
+    print(len(s4.data.columns))
+    print(s4.fields)
+    print(s4)
+    print(s4.results)
+    print(s4.results.groupby(by="community_name").mean())
 
 
 if __name__ == "__main__":

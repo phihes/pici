@@ -1,3 +1,4 @@
+import functools
 from itertools import combinations
 
 import networkx as nx
@@ -6,39 +7,6 @@ import numpy as np
 from functools import reduce
 import pandas as pd
 from bs4 import BeautifulSoup
-
-
-class FuncExposer:
-
-    def __init__(self, required_func_arg=None, func_kwargs=None, symbol_table=None):
-        if symbol_table is None:
-            symbol_table = globals()
-        if func_kwargs is None:
-            func_kwargs = {}
-        self._kwargs = func_kwargs
-        self._required_func_arg = required_func_arg
-        self._symbol_table = symbol_table
-
-    def __getattr__(self, funcname):
-        return self._call(funcname)
-
-    def _call(self, funcname):
-        func = self._symbol_table[funcname]
-        if callable(func) and (
-                (self._required_func_arg is None) or hasattr(func, self._required_func_arg)
-        ):
-            def newfunc(*args, **kwargs):
-                return func(*args, **{**kwargs, **self._kwargs})
-            return newfunc
-        else:
-            if not callable(func):
-                raise NotImplementedError(func)
-            elif (self._required_func_arg is not None) and not hasattr(func, self._required_func_arg):
-                raise TypeError(f"Trying to call '{funcname}',"
-                                f" which does not have attribute {self._required_func_arg}.")
-
-    def add(self, func):
-        self._symbol_table[func.__name__] = func
 
 
 def aggregate(series, sname):
@@ -152,3 +120,48 @@ def create_graph(link_data, node_data, node_col, group_col, node_attributes, con
                 G.nodes[n][a] = str(value)
 
     return G
+
+
+def join_df(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        df = None
+
+        # look for existing community dataframe to match metrics to
+        # (e.g. contributors)
+        try:
+            df = getattr(self._community, func.__name__.split("_")[0])
+
+        # 'view' does not have df to match to
+        except AttributeError:
+            pass
+
+        metrics = func(self, *args, **kwargs)
+        metrics_df = None
+
+        try:
+            metrics_df = pd.DataFrame(metrics)
+
+        # most likely the series' index is a mix of str and float...
+        # cast indices to str, as we are dealing with names
+        except TypeError:
+
+            _metrics = {
+                s: {str(i): v for i, v in row.items()}
+                for s, row in metrics.items()
+            }
+            metrics_df = pd.DataFrame(_metrics)
+
+        return df.join(metrics_df) if df is not None else metrics_df
+
+    return wrapper
+
+
+def as_table(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        stats = func(self, *args, **kwargs)
+
+        return pd.DataFrame(stats, index=pd.Index([self._community.name], name='community_name'))
+
+    return wrapper

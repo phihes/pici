@@ -9,16 +9,13 @@ Reports by level of observation:
 - [summary][pici.metrics.reports.summary]
 """
 
-from pici.decorators import report
+from pici.reporting import report
 from pici.metrics.basic import *
 from pici.metrics.network import *
 from pici.metrics.text import *
 
 
-@report(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@report
 def summary(communities):
     """
     Summarizes communities by posting behavior.
@@ -40,10 +37,7 @@ def summary(communities):
     ]
 
 
-@report(
-    level=CommunityDataLevel.TOPICS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@report
 def topics_summary(communities):
     return [
         (number_of_contributors_per_topic, {}),
@@ -52,10 +46,7 @@ def topics_summary(communities):
     ]
 
 
-@report(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.DATAFRAME
-)
+@report
 def posts_contributors_per_interval(communities, interval):
     """
     Number of contributors and posts for each time ``interval``.
@@ -79,20 +70,15 @@ def posts_contributors_per_interval(communities, interval):
         (contributors_per_interval, {'interval': interval})
     ]
 
-@report(
-    level=CommunityDataLevel.POSTS,
-    returntype=MetricReturnType.DATAFRAME
-)
+
+@report
 def post_length(communities):
     return [
         (number_of_words, {}),
     ]
 
 
-@report(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.DATAFRAME
-)
+@report
 def lorenz_curve(communities):
     return [
         (lorenz, {})
