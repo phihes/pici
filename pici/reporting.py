@@ -1,14 +1,15 @@
-from functools import wraps
-from typing import overload
-
 import pandas as pd
+from functools import wraps
+from collections.abc import Mapping
 
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import merge_dfs
-from collections.abc import Mapping
 
 
 class Metric:
+    """
+    TODO: add documentation
+    """
 
     def __init__(self, community, data, fields, level, returntype):
         self._community = community
@@ -165,9 +166,13 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
 
 
 class Report:
+    """
+    TODO: add documentation
+    """
 
-    def __init__(self, communities, data, level, returntype, metric_fields):
-        self._communities = communities
+    def __init__(self, pici, data, level, returntype, metric_fields):
+        self._pici = pici
+        self._communities = pici.communities
         self._data = data
         self._level = level
         self._returntype = returntype
@@ -176,15 +181,27 @@ class Report:
     def __str__(self):
         return self.data.__str__()
 
+    def _label(self, data):
+        labels = self._pici.labels.by_level(self.level)
+        data = data.rename_axis('id').reset_index()
+        results = data
+        if labels is not None:
+            results = pd.merge(
+                data,
+                labels,
+                how='left',
+                on=['id','community_name']
+            )
+
+        return results.set_index("id")
+
     @property
     def data(self):
         return self._data
 
     @property
     def labelled_data(self):
-        data = self.data
-        # TODO implement: add labels
-        return data
+        return self._label(self.data)
 
     @property
     def results(self):
@@ -198,9 +215,7 @@ class Report:
 
     @property
     def labelled_results(self):
-        results = self.results
-        # TODO implement: add labels
-        return results
+        return self._label(self.results)
 
     @property
     def level(self):
@@ -228,7 +243,8 @@ def report(func):
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        communities = kwargs['communities']
+        pici = kwargs['pici']
+        communities = pici.communities
         metric_list = func(*args, **kwargs)
         results = {cname: {} for cname in communities.keys()}
         fields = set()
@@ -243,15 +259,6 @@ def report(func):
             lvl = l
             rtype = r
 
-        """
-        if not (level == lvl and rtype == returntype):
-            print(level)
-            print(lvl)
-            print(returntype)
-            print(rtype)
-            raise Exception(f"Report '{func.__name__}': level or returntype do not match metrics")
-        """
-
         # if all results are dfs, merge down
         if rtype in [
             MetricReturnType.DATAFRAME,
@@ -259,7 +266,7 @@ def report(func):
         ]:
             results = pd.concat(list(results.values()))
 
-        return Report(communities, results, lvl, rtype, fields)
+        return Report(pici, results, lvl, rtype, fields)
 
     wrapper.is_report = True
     return wrapper

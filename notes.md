@@ -16,34 +16,12 @@
 - Harvest all the Jupyter stuff
 - Integrate into dashboard app --> Streamlit?
 - Implement all the indicators
-
-- make report/metrics registries abstract
-- put report/metrics decorators in "reporting" / Report obj
-- make decorator return "Report" obj with:
+- make report/metrics registries abstract                   DONE
+- put report/metrics decorators in "reporting" / Report obj DONE
+- make decorator return "Report" obj with:                  DONE
   - df
   - labelled option
   - etc.
+- deal with multiple labellers and conflicting labels..     
 
 
-
-"""
-    Decorator for methods that represent reports (collections of metrics).
-
-    A report method must have ``communities`` parameter and return a list
-    of (function, dict) tuples with @metric decorated functions and kwargs.
-
-    Args:
-        level (pici.datatypes.CommunityDataLevel): The reports's data level
-            determines to which 'view' on [pici.Community][pici.Community]
-            the results are appended. All metrics returned by the report
-            must measure on the same CommunityDataLevel.
-        returntype (pici.datatypes.MetricReturnType): Data type of values
-            returned by metrics in report.
-
-    Returns:
-        report (pandas.DataFrame or dict): DataFrame or dict populated with
-            all metrics' calculated values for each community in
-            ``communities``.
-
-
-    """

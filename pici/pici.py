@@ -7,8 +7,10 @@ from typing import overload
 import pandas as pd
 
 import pici.reporting
+from pici.reporting import report
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.registries import MetricRegistry, ReportRegistry
+from pici.labelling import LabelCollection
 
 import logging
 LOGGER = logging.getLogger(__name__)
@@ -37,7 +39,7 @@ class Pici:
         ```
     """
 
-    def __init__(self, communities, cache_dir="cache", cache_nrows=None, start=None, end=None):
+    def __init__(self, communities, labels=[], cache_dir="cache", cache_nrows=None, start=None, end=None):
         """
         Loads communities.
 
@@ -57,33 +59,28 @@ class Pici:
             c: f(cache_dir, cache_nrows).create_community(name=c, start=start, end=end)
             for c, f in communities.items()
         }
-        self.reports = ReportRegistry(self.communities)
+        self.reports = ReportRegistry(self)
+        self.labels = LabelCollection()
+        for l in labels:
+            self.labels.add(l)
 
-    def set_labels(self, labeldata, level=CommunityDataLevel.TOPICS):
-
-        #for c in self.communities.values():
-        #    c.
-        pass
-
+    """
     def add_metric(self, metric):
         for c in self.communities.values():
             pici.reporting.metric.add(metric)
+    """
 
     @overload
     def add_report(self, new_report):
         self.reports.add(new_report)
 
     @overload
-    def add_report(self, name, list_of_metrics,
-                   level=CommunityDataLevel.COMMUNITY,
-                   returntype=MetricReturnType.TABLE):
-        self.reports.add_report(name, list_of_metrics, level, returntype)
+    def add_report(self, name, list_of_metrics):
+        self.reports.add_report(name, list_of_metrics)
 
-    def generate_report(self, list_of_metrics,
-                   level=CommunityDataLevel.COMMUNITY,
-                   returntype=MetricReturnType.TABLE):
+    def generate_report(self, list_of_metrics):
 
-        @ReportRegistry.registered(level=level, returntype=returntype)
+        @report
         def func(communities):
             return list_of_metrics
 

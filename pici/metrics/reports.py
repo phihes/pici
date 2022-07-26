@@ -16,12 +16,12 @@ from pici.metrics.text import *
 
 
 @report
-def summary(communities):
+def summary(pici):
     """
     Summarizes communities by posting behavior.
 
     Args:
-        communities (pici.communities):
+        pici (pici.Pici):
 
     Returns:
         report:
@@ -38,7 +38,7 @@ def summary(communities):
 
 
 @report
-def topics_summary(communities):
+def topics_summary(pici):
     return [
         (number_of_contributors_per_topic, {}),
         (post_delays_per_topic, {}),
@@ -47,7 +47,7 @@ def topics_summary(communities):
 
 
 @report
-def posts_contributors_per_interval(communities, interval):
+def posts_contributors_per_interval(pici, interval):
     """
     Number of contributors and posts for each time ``interval``.
 
@@ -56,7 +56,7 @@ def posts_contributors_per_interval(communities, interval):
         - add to TOC
 
     Args:
-        communities:
+        pici:
         interval:
 
     Returns:
@@ -72,14 +72,14 @@ def posts_contributors_per_interval(communities, interval):
 
 
 @report
-def post_length(communities):
+def post_length(pici):
     return [
         (number_of_words, {}),
     ]
 
 
 @report
-def lorenz_curve(communities):
+def lorenz_curve(pici):
     return [
         (lorenz, {})
     ]

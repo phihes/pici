@@ -1,5 +1,6 @@
 # exposed methods
 from pici.metrics import *
+
 from pici.reporting import report
 
 
@@ -38,21 +39,21 @@ class FuncExposer:
 
 class ReportRegistry(FuncExposer):
     """
-    This class exposes all (externally defined) methods decorated with @report as
+    This class exposes all methods decorated with @report as
     its own methods and passes the ``communities`` parameter to them.
     """
 
-    def __init__(self, communities):
+    def __init__(self, pici):
         super().__init__(
             required_func_arg='is_report',
-            func_kwargs={'communities': communities},
+            func_kwargs={'pici': pici},
             symbol_table=globals()
         )
 
     def add_report(self, name, list_of_metrics):
 
         @report
-        def func(communities):
+        def func(pici):
             return list_of_metrics
 
         self._symbol_table[name] = func
@@ -60,7 +61,7 @@ class ReportRegistry(FuncExposer):
 
 class MetricRegistry(FuncExposer):
     """
-    This class exposes all (externally defined) methods decorated with @metric as
+    This class exposes all methods decorated with @metric as
     its own methods and passes the ``community`` parameter to them.
     """
 

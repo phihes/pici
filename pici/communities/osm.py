@@ -38,6 +38,9 @@ class OSMCommunity(Community):
 
                 p = data['posts']
 
+                # fix paging issue
+                p["topic_id"] = p["topic_id"].apply(lambda x: x.split("&")[0])
+
                 # prepare date column in post data
                 p["date"] = pd.to_datetime(
                     p[self._attr["original_date_column"]]
@@ -55,7 +58,8 @@ class OSMCommunity(Community):
 
                 d['topics'] = d['posts'][['topic_id', 'topic_title',
                                           'topic_url', 'forum_title',
-                                          'forum_id', 'forum_url']].drop_duplicates().set_index('topic_id')
+                                          'forum_id', 'forum_url']].drop_duplicates()
+                d['topics'] = d['topics'].set_index('topic_id')
                 # .groupby(by=self.topic_column).agg('count')
 
             else:
