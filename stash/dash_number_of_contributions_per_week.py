@@ -8,11 +8,12 @@ import pandas as pd
 
 pd.options.plotting.backend = "plotly"
 
-#df = pici.report.per_interval(interval='1M')
-df = pd.read_csv("static/df_all_communities_contributors_vs_posts.csv").set_index("date")
+df = pd.read_csv("../static/df_all_communities_num_posts_per_week.csv").set_index("date")
 
-fig = px.scatter(df, x="number of posts", y="number of contributors", color="community_name")
+fig = df.plot()
 fig.update_layout(
+    xaxis_title="",
+    yaxis_title="number of contributions / week",
     legend=dict(
         orientation="h",
         yanchor="bottom",

@@ -49,7 +49,7 @@ def networkxToCyto(G):
     return elements, deg
 
 
-osm = OSMCommunityFactory(cache_dir="cache", cache_nrows=10000).create_community(name="OSM (2017-2019)", start='2017-01-01', end='2020-01-01')
+osm = OSMCommunityFactory(cache_dir="../cache", cache_nrows=10000).create_community(name="OSM (2017-2019)", start='2017-01-01', end='2020-01-01')
 
 r = CommunitiesReport([osm])
 
