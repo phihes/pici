@@ -1,5 +1,5 @@
 <p align="center"><a href="https://www.peer-innovation.de" target="_blank">
-    <img src="./docs/images/pici_logo.png" width="200px" />
+    <img src="./docs/images/pici_logo.png" width="300px" />
 </a></p>
 
 # pici
