@@ -1,10 +1,106 @@
 import pandas as pd
 import janitor
+import numpy as np
 from abc import ABC, abstractmethod
 from typing import overload
 from pandas.api.types import CategoricalDtype
 from pici.datatypes import CommunityDataLevel
 import os
+import plotly.graph_objects as go
+import plotly.express as px
+from statsmodels.stats import inter_rater
+import krippendorff
+import simpledorff
+
+
+class LabelStats:
+
+    def __init__(self, labels):
+        self.labels = labels
+
+    def labellers(self):
+        return self.labels.data["labeller"].nunique()
+
+    def unique_cases(self):
+        return self.labels.data["url"].nunique()
+
+    def label_counts(self, normalize=False):
+        d = self.labels.data[self.labels.labels.keys()]
+        if not normalize:
+            return d.sum()
+        else:
+            return d.sum() / d.shape[0]
+
+    def label_counts_by_labeller(self, normalize=False):
+        d = self.labels.data[list(self.labels.labels.keys()) + ["labeller"]]
+        d = d.groupby(by="labeller")
+
+        if normalize:
+            return d.mean()
+        else:
+            return d.sum()
+
+    def label_correlation(self):
+        return self.labels.data[list(self.labels.labels.keys())].corr()
+
+    def plot_label_correlation(self):
+        corr = self.label_correlation()
+        fig = go.Figure()
+        fig.add_trace(
+            go.Heatmap(
+                x=corr.columns,
+                y=corr.index,
+                z=np.array(corr),
+                text=corr.values,
+                texttemplate='%{text:.2f}'
+            )
+        )
+        return fig
+
+
+    def total_agreement(self):
+        """
+        Get percentage of cases where all labellers agree (per label).
+
+        Returns:
+            agreement: Pandas.DataFrame with 'label', '% perfect agreement', 'n'
+
+        """
+        res = []
+        for label_name, label_type in self.labels.labels.items():
+            a = self.labels.data.drop_duplicates(subset=['url', 'labeller'], keep='last')
+            a = a.pivot(index="url", columns="labeller", values=label_name)#.dropna()
+
+            if not a.empty:
+                """
+                if str(label_type) == 'bool':
+                    a['all_agree'] = a.apply(np.std, axis=1) == 0
+                elif str(label_type) == 'category':
+                    def is_unique(s):
+                        x = s.to_numpy()
+                        return (x[0] == x).all()
+                    a['all_agree'] = a.apply(is_unique, axis=1)
+                """
+
+                # TODO: fix this... counting np.nan :(
+                a = a.reset_index().drop(columns="url")
+                b = a.copy()
+                b['unique_value'] = a.nunique(axis=1) == 1
+                b['num_labellers'] = a.count(axis=1)
+                b['valid'] = b.num_labellers >= 2
+                b['all_agree'] = b.unique_value.where(b.valid, np.nan)
+
+                if 'all_agree' in b.columns:
+                    n_all = b.all_agree.count()
+                    n_agree =  b.all_agree.sum()
+
+                    # if True in a.all_agree.value_counts(normalize=True):
+                    #    agr = a.all_agree.value_counts(normalize=True)[True]
+
+                    res.append((label_name, n_agree/n_all, n_all))
+        agreement = pd.DataFrame(res, columns=["label", "% perfect agreement", "n"])
+
+        return agreement
 
 
 class Labels(ABC):
@@ -31,11 +127,22 @@ class Labels(ABC):
         self._data = None
         if data is not None:
             self.append(data, cols)
+        self.stats = LabelStats(self)
 
-    def append(self, data: pd.DataFrame, cols: dict = DEFAULT_COLS):
+    def append(self, data: pd.DataFrame, cols: dict = DEFAULT_COLS, drop_labellers=None):
+        bool_cols = [
+            l for l, t in self.labels.items() if l in data.columns and t == "bool"
+        ]
+        data[bool_cols] = data[bool_cols].fillna(0)
+        data = data.astype(object)
+        data = data.astype({
+            l: t for l, t in self.labels.items() if l in data.columns
+        })
         data = self._generate_extra_labels(data)
         data = data.astype(self.labels)
         data = data.rename(columns=cols)
+        if drop_labellers is not None:
+            data = data[~data["labeller"].isin(drop_labellers)]
         if self._data is None:
             self._data = data
         elif isinstance(self._data, pd.DataFrame) and isinstance(data, pd.DataFrame):
@@ -82,6 +189,24 @@ class Labels(ABC):
             f"   Communities: {len(self.data['community_name'].unique())}\n"
         )
 
+    def rating_table(self, label_name, communities=None, custom_filter=None, allow_missing_data=False):
+        """
+        Get the rating table for one label to be used, e.g., with ``statsmodels.stats.inter_rater``.
+
+        Args:
+            communities: List of communities to include in table, if ``None``, include all communities
+            label_name: label to be returned in table
+            allow_missing_data: whether to drop columns with missing ratings
+
+        Returns:
+            rating table: labels as 2-dim table with raters (labellers) in rows and ratings in columns.
+        """
+        d = self.data
+        if communities is not None:
+            d = self.data[self.data['community_name'].isin(communities)]
+        if custom_filter is not None:
+            d = self.data[custom_filter]
+
 
 class LabelCollection:
     """
@@ -89,7 +214,9 @@ class LabelCollection:
     """
 
     def __init__(self, labels=[]):
-        self._labels = labels
+        self._labels = []
+        for l in labels:
+            self.append(l)
 
     @property
     def labels(self):
@@ -181,14 +308,14 @@ class InnovationLabels(Labels):
                 'label_idea', 'label_evaluation', 'label_implementation',
                 'label_modification', 'label_improvement'
             ]]
-            data["label_any_activity"] = activities.any()
+            data["label_any_activity"] = activities.any(axis=1)
             self.labels['label_any_activity'] = 'bool'
         except KeyError:
             pass
 
         try:
             data["label_has_potential"] = data["label_potential"] > 0
-            self.labels["label_has_potential"] = "bool"
+            self.labels["label_has_potential"] = 'bool'
         except KeyError:
             pass
 
@@ -220,7 +347,7 @@ class InnovationLabels(Labels):
         return ls_col_map
     """
 
-    def from_limesurvey(self, limesurvey_results):
+    def from_limesurvey(self, limesurvey_results, drop_labellers=None):
         """
         Adds label entries from Limesurvey results format. Limesurvey results can contain multiple
         labelled threads per response. For each thread i and associated url and labels, the data
@@ -261,7 +388,11 @@ class InnovationLabels(Labels):
 
         data = pd.concat(dfs)
 
-        return self.append(data, cols={c: c for c in id_cols.values()})
+        return self.append(
+            data,
+            cols={c: c for c in id_cols.values()},
+            drop_labellers=drop_labellers
+        )
 
 
 

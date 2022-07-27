@@ -46,11 +46,25 @@ def test_report():
 def test_limesurvey():
     try:
         pici.labels.append(InnovationLabels().from_limesurvey(
-            pd.read_excel("pici/tests/test_ls_labels.xlsx")
+            pd.read_excel("pici/tests/test_ls_labels.xlsx"),
+            drop_labellers=["Test","test"]
         ))
         assert True
     except:
         assert False
+
+
+def test_stats():
+    l0 = pici.labels.labels[0]
+    print(f"unique cases: {l0.stats.unique_cases()}")
+    print(f"total agreement:\n{l0.stats.total_agreement()}")
+    print(f"label counts:\n{l0.stats.label_counts()}")
+    print(f"label counts:\n{l0.stats.label_counts(normalize=True)}")
+    print(f"label counts:\n{l0.stats.label_counts_by_labeller(normalize=False)}")
+    print(f"label counts:\n{l0.stats.label_counts_by_labeller(normalize=True)}")
+    print(f"correlation: \n{l0.stats.label_correlation()}")
+    l0.stats.plot_label_correlation()
+    # l0.data.to_excel("pici/tests/test_result_labels.xlsx")
 
 
 if __name__ == "__main__":
@@ -61,4 +75,5 @@ if __name__ == "__main__":
     test_limesurvey()
     test_report()
     test_appending()
+    test_stats()
     print("Everything passed")

@@ -28,6 +28,9 @@ mkdocs-autorefs = "^0.4.1"
 mkdocs-exclude = "^1.0.2"
 statsmodels = "^0.13.2"
 Boruta = "^0.3"
+pyjanitor = "^0.23.1"
+krippendorff = "^0.5.1"
+simpledorff = "^0.0.2"
 
 
 [build-system]

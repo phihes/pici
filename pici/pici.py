@@ -60,9 +60,7 @@ class Pici:
             for c, f in communities.items()
         }
         self.reports = ReportRegistry(self)
-        self.labels = LabelCollection()
-        for l in labels:
-            self.labels.add(l)
+        self.labels = LabelCollection(labels)
 
     """
     def add_metric(self, metric):
