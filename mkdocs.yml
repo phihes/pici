@@ -1,4 +1,4 @@
-site_name: Pici Documentation
+site_name: PICI Peer Innovation Community Indicators
 repo_url: https://github.com/phihes/pici
 extra_javascript:
   - extra/mathjax.js
@@ -7,11 +7,12 @@ extra_javascript:
 extra_css:
   - extra/peerinnovation.css
 nav:
-  - About Pici: index.md
-  - Using the toolbox:
+  - About: index.md
+  - Usage:
     - using.md
     - analyzing.md
     - extending.md
+  - Examples:
     - examples.md
   - Code reference: reference/
 theme:

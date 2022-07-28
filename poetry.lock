@@ -487,19 +487,19 @@ mkdocs = ">=1.0.3,<2.0.0"
 
 [[package]]
 name = "mkdocs-material"
-version = "8.2.11"
+version = "8.3.9"
 description = "Documentation that simply works"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 
 [package.dependencies]
-jinja2 = ">=2.11.1"
+jinja2 = ">=3.0.2"
 markdown = ">=3.2"
 mkdocs = ">=1.3.0"
 mkdocs-material-extensions = ">=1.0.3"
-pygments = ">=2.10,<2.12"
-pymdown-extensions = ">=9.0,<9.4"
+pygments = ">=2.12"
+pymdown-extensions = ">=9.4"
 
 [[package]]
 name = "mkdocs-material-extensions"
@@ -781,11 +781,11 @@ python-versions = "*"
 
 [[package]]
 name = "pygments"
-version = "2.11.2"
+version = "2.12.0"
 description = "Pygments is a syntax highlighting package written in Python."
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [[package]]
 name = "pyjanitor"
@@ -813,14 +813,14 @@ test = ["pytest-cov", "pytest-xdist", "pytest (>=3.4.2)", "hypothesis (>=4.4.0)"
 
 [[package]]
 name = "pymdown-extensions"
-version = "9.3"
+version = "9.5"
 description = "Extension pack for Python Markdown."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-Markdown = ">=3.2"
+markdown = ">=3.2"
 
 [[package]]
 name = "pyopenssl"
@@ -1313,7 +1313,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ca2cef04890258af4c8740a38883329d26a8913227fc74b52bb804880bf5e11b"
+content-hash = "6a39c8ba5cb01efd3b0e7ad3fa0d40d25edca6a6def65d5a0d682daf9f969059"
 
 [metadata.files]
 astunparse = [
@@ -1705,10 +1705,7 @@ mkdocs-literate-nav = [
     {file = "mkdocs-literate-nav-0.4.1.tar.gz", hash = "sha256:9efe26b662f2f901cae5807bfd51446d30ea7e033c2bc43a15d6282c7dfac1ab"},
     {file = "mkdocs_literate_nav-0.4.1-py3-none-any.whl", hash = "sha256:a4b761792ba21defbe2dfd5e0de6ba451639e1ca0f0661c37eda83cc6261e4f9"},
 ]
-mkdocs-material = [
-    {file = "mkdocs-material-8.2.11.tar.gz", hash = "sha256:af6bbd608a54b8493cb5fa0d2f2cf29cde3bf348837ab718afb1be0a8bea6509"},
-    {file = "mkdocs_material-8.2.11-py2.py3-none-any.whl", hash = "sha256:4a3631ba22cff7ceca00c39465a8db5b2116fcd74f3abd82b801f7711cceb699"},
-]
+mkdocs-material = []
 mkdocs-material-extensions = [
     {file = "mkdocs-material-extensions-1.0.3.tar.gz", hash = "sha256:bfd24dfdef7b41c312ede42648f9eb83476ea168ec163b613f9abd12bbfddba2"},
     {file = "mkdocs_material_extensions-1.0.3-py3-none-any.whl", hash = "sha256:a82b70e533ce060b2a5d9eb2bc2e1be201cf61f901f93704b4acf6e3d5983a44"},
@@ -1880,15 +1877,9 @@ pydispatcher = [
     {file = "PyDispatcher-2.0.5.tar.gz", hash = "sha256:5570069e1b1769af1fe481de6dd1d3a388492acddd2cdad7a3bde145615d5caf"},
     {file = "PyDispatcher-2.0.5.zip", hash = "sha256:5be4a8be12805ef7d712dd9a93284fb8bc53f309867e573f653a72e5fd10e433"},
 ]
-pygments = [
-    {file = "Pygments-2.11.2-py3-none-any.whl", hash = "sha256:44238f1b60a76d78fc8ca0528ee429702aae011c265fe6a8dd8b63049ae41c65"},
-    {file = "Pygments-2.11.2.tar.gz", hash = "sha256:4e426f72023d88d03b2fa258de560726ce890ff3b630f88c21cbb8b2503b8c6a"},
-]
+pygments = []
 pyjanitor = []
-pymdown-extensions = [
-    {file = "pymdown-extensions-9.3.tar.gz", hash = "sha256:a80553b243d3ed2d6c27723bcd64ca9887e560e6f4808baa96f36e93061eaf90"},
-    {file = "pymdown_extensions-9.3-py3-none-any.whl", hash = "sha256:b37461a181c1c8103cfe1660081726a0361a8294cbfda88e5b02cefe976f0546"},
-]
+pymdown-extensions = []
 pyopenssl = [
     {file = "pyOpenSSL-22.0.0-py2.py3-none-any.whl", hash = "sha256:ea252b38c87425b64116f808355e8da644ef9b07e429398bfece610f893ee2e0"},
     {file = "pyOpenSSL-22.0.0.tar.gz", hash = "sha256:660b1b1425aac4a1bea1d94168a85d99f0b3144c869dd4390d27629d0087f1bf"},
