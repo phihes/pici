@@ -16,17 +16,14 @@ By level of observation:
 - [post_dates_per_topic][pici.metrics.basic.post_dates_per_topic]
 """
 
-from pici.reporting import metric
+from pici.reporting import metric, topics_metric, community_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import aggregate
 
 import numpy as np
 
 
-@metric(
-    level=CommunityDataLevel.TOPICS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@topics_metric
 def post_delays_per_topic(community):
     """
     Delays (in days) between first and second post, and first and last post.
@@ -57,10 +54,7 @@ def post_delays_per_topic(community):
     }
 
 
-@metric(
-    level=CommunityDataLevel.TOPICS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@topics_metric
 def post_dates_per_topic(community):
     """
     Date of first post, second post, and last post.
@@ -93,10 +87,7 @@ def post_dates_per_topic(community):
     }
 
 
-@metric(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@community_metric
 def number_of_posts(community):
     """
     Total number of posts authored by community.
@@ -119,10 +110,7 @@ def number_of_posts(community):
     }
 
 
-@metric(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@community_metric
 def posts_per_interval(community, interval):
     """
     Number of posts authored by community per time interval.
@@ -147,10 +135,7 @@ def posts_per_interval(community, interval):
     }
 
 
-@metric(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@community_metric
 def contributors_per_interval(community, interval):
     """
     Number of users that have authored at least one post in time interval.
@@ -175,10 +160,7 @@ def contributors_per_interval(community, interval):
     }
 
 
-@metric(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@community_metric
 def agg_posts_per_topic(community):
     """
     Min, max, and average number of posts authored per topic.
@@ -200,10 +182,7 @@ def agg_posts_per_topic(community):
     return aggregate(p, "posts per topic")
 
 
-@metric(
-    level=CommunityDataLevel.COMMUNITY,
-    returntype=MetricReturnType.TABLE
-)
+@community_metric
 def agg_number_of_posts_per_interval(community, interval):
     """
     Number of posts per ``interval``.
@@ -231,10 +210,7 @@ def agg_number_of_posts_per_interval(community, interval):
     return aggregate(iv_counts, f"number of posts per {interval}")
 
 
-@metric(
-    level=CommunityDataLevel.TOPICS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@topics_metric
 def number_of_contributors_per_topic(community):
     """
     Number of different contributors that have authored at least one post in a thread.
@@ -258,10 +234,7 @@ def number_of_contributors_per_topic(community):
     }
 
 
-@metric(
-    level=CommunityDataLevel.TOPICS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@topics_metric
 def number_of_posts_per_topic(community):
     """
     Number of posts per topic.

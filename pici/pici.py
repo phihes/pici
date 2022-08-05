@@ -3,10 +3,11 @@ import glob
 from abc import ABC, abstractmethod
 from collections import Counter
 from typing import overload
-
 import pandas as pd
+from collections import ChainMap
 
 import pici.reporting
+from pici.pipelines import Pipelines
 from pici.reporting import report
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.registries import MetricRegistry, ReportRegistry
@@ -61,6 +62,7 @@ class Pici:
         }
         self.reports = ReportRegistry(self)
         self.labels = LabelCollection(labels)
+        self.pipelines = Pipelines(self)
 
     """
     def add_metric(self, metric):
@@ -83,6 +85,42 @@ class Pici:
             return list_of_metrics
 
         return func(self.communities)
+
+    def get_metrics(self, level=None, returntype=None, unwrapped=False,
+                    select_func=set.intersection):
+        """
+        Get all available metrics that are defined for the communities. The
+        ``select_func`` parameter is set to ``set.intersection`` per
+        default, meaning that only those metrics are returned, that exist
+        for all communities. Metrics can be filtered by ``level`` and
+        ``returntype``.
+
+        Args:
+            level:
+            returntype:
+            unwrapped: 'Unwrap' the returned metric functions from their
+            decorator (e.g., when using as transformer in sklearn pipeline).
+            select_func:
+
+        Returns:
+            dict of str:func metricname:metric
+
+        """
+        metrics = [
+            c.metrics.get_all(unwrapped=unwrapped, level=level,
+                              returntype=returntype)
+            for cname, c in self.communities.items()
+        ]
+        metric_names = [
+            set(m.keys()) for m in metrics
+        ]
+        all_metrics = dict(ChainMap(*metrics))
+
+        return {
+            name: func
+            for name, func in all_metrics.items()
+            if name in select_func(*metric_names)
+        }
 
 
 class Community(ABC):

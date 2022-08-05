@@ -1,4 +1,6 @@
 # exposed methods
+import inspect
+
 from pici.metrics import *
 
 from pici.reporting import report
@@ -18,20 +20,55 @@ class FuncExposer:
     def __getattr__(self, funcname):
         return self._call(funcname)
 
+    def _exposed(self, funcname, level=None, returntype=None):
+        func = self._symbol_table[funcname]
+        return (
+            callable(func)
+            and (
+                self._required_func_arg is None
+                or hasattr(func, self._required_func_arg)
+            )
+            and (
+                level is None
+                or (
+                    hasattr(func, 'level') and
+                    getattr(func, 'level') == level
+                )
+            )
+            and (
+                returntype is None
+                or (
+                    hasattr(func, 'returntype') and
+                    getattr(func, 'returntype') == returntype
+                )
+            )
+        )
+
+    def get_all(self, unwrapped=False, level=None, returntype=None):
+        exposed = {}
+        for funcname, func in self._symbol_table.items():
+            if self._exposed(funcname, level, returntype):
+                f = inspect.unwrap(func) if unwrapped else func
+                exposed[funcname] = f
+
+        return exposed
+
     def _call(self, funcname):
         func = self._symbol_table[funcname]
-        if callable(func) and (
-                (self._required_func_arg is None) or hasattr(func, self._required_func_arg)
-        ):
+        if self._exposed(funcname):
             def newfunc(*args, **kwargs):
                 return func(*args, **{**kwargs, **self._kwargs})
             return newfunc
         else:
             if not callable(func):
                 raise NotImplementedError(func)
-            elif (self._required_func_arg is not None) and not hasattr(func, self._required_func_arg):
-                raise TypeError(f"Trying to call '{funcname}',"
-                                f" which does not have attribute {self._required_func_arg}.")
+            elif (
+                    (self._required_func_arg is not None)
+                    and not hasattr(func, self._required_func_arg)
+            ):
+                raise TypeError(
+                    f"Trying to call '{funcname}', which does not have "
+                    f"attribute {self._required_func_arg}.")
 
     def add(self, func):
         self._symbol_table[func.__name__] = func

@@ -160,9 +160,18 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
             return Metric(community, metric_data, fields, level, returntype)
 
         wrapper.is_metric = True
+        wrapper.level = level
         return wrapper
 
     return decorator
+
+
+topics_metric = metric(level=CommunityDataLevel.TOPICS,
+                       returntype=MetricReturnType.DATAFRAME)
+posts_metric = metric(level=CommunityDataLevel.POSTS,
+                      returntype=MetricReturnType.DATAFRAME)
+community_metric = metric(level=CommunityDataLevel.COMMUNITY,
+                          returntype=MetricReturnType.TABLE)
 
 
 class Report:
