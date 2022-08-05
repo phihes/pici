@@ -9,6 +9,7 @@
 
 ## TODO
 
+- Refactor: Turn metrics & reports into sklearn transformers & featureunions to be able to use pipelines, hyperparameter optimization etc.
 - Refactor: move label plot methods to visualizations.py
 - Add tests for label plot methods
 - Make it easier to visualize reports (one chart per metric?)
