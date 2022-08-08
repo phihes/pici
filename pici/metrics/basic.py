@@ -28,9 +28,6 @@ def post_delays_per_topic(community):
     """
     Delays (in days) between first and second post, and first and last post.
 
-    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
-
     Args:
         community (pici.Community):
 
@@ -58,9 +55,6 @@ def post_delays_per_topic(community):
 def post_dates_per_topic(community):
     """
     Date of first post, second post, and last post.
-
-    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     Args:
         community (pici.Community):
@@ -92,9 +86,6 @@ def number_of_posts(community):
     """
     Total number of posts authored by community.
 
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
-
     TODO:
         document
 
@@ -114,9 +105,6 @@ def number_of_posts(community):
 def posts_per_interval(community, interval):
     """
     Number of posts authored by community per time interval.
-
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     TODO:
         - document
@@ -140,9 +128,6 @@ def contributors_per_interval(community, interval):
     """
     Number of users that have authored at least one post in time interval.
 
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
-
     TODO:
         - document
         - add to TOC
@@ -165,9 +150,6 @@ def agg_posts_per_topic(community):
     """
     Min, max, and average number of posts authored per topic.
 
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
-
     Args:
         community:
 
@@ -188,9 +170,6 @@ def agg_number_of_posts_per_interval(community, interval):
     Number of posts per ``interval``.
 
     Total number of posts in community per ``interval`` (parameter).
-
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``TABLE``][pici.datatypes.MetricReturnType]
 
     Args:
         community (pici.Community):
@@ -215,9 +194,6 @@ def number_of_contributors_per_topic(community):
     """
     Number of different contributors that have authored at least one post in a thread.
 
-    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
-
     Args:
         community (pici.Community):
 
@@ -238,9 +214,6 @@ def number_of_contributors_per_topic(community):
 def number_of_posts_per_topic(community):
     """
     Number of posts per topic.
-
-    - Data level: [``TOPICS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     TODO:
         - add to toc
@@ -270,9 +243,6 @@ def lorenz(community):
     Distribution of posts (in analogy to lorenz curve). Returns (x,y) where
     x is the (least-contributing) bottom x% of users, and y the proportion
     of posts made by them.
-
-    - Data level: [``COMMUNITY``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     Args:
         community:

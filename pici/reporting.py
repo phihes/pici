@@ -172,6 +172,8 @@ posts_metric = metric(level=CommunityDataLevel.POSTS,
                       returntype=MetricReturnType.DATAFRAME)
 community_metric = metric(level=CommunityDataLevel.COMMUNITY,
                           returntype=MetricReturnType.TABLE)
+contributors_metric = metric(level=CommunityDataLevel.CONTRIBUTORS,
+                             returntype=MetricReturnType.DATAFRAME)
 
 
 class Report:

@@ -10,7 +10,7 @@ By level of observation:
 
 """
 
-from pici.reporting import metric
+from pici.reporting import metric, posts_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import num_words, word_occurrences
 import pandas as pd
@@ -19,16 +19,10 @@ import nltk
 import numpy as np
 
 
-@metric(
-    level=CommunityDataLevel.POSTS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@posts_metric
 def number_of_words(community):
     """
     The number of words in a post (removing html).
-
-    - Data level: [``POSTS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     Args:
         community (pici.Community):
@@ -36,7 +30,6 @@ def number_of_words(community):
     Returns:
         results (dict of str:int):
             - ``number of words``
-
     """
 
     return {
@@ -46,16 +39,10 @@ def number_of_words(community):
     }
 
 
-@metric(
-    level=CommunityDataLevel.POSTS,
-    returntype=MetricReturnType.DATAFRAME
-)
+@posts_metric
 def posts_word_occurrence(community, words, normalize=True):
     """
     Counts the occurrence of a set of words in each post.
-
-    - Data level: [``POSTS``][pici.datatypes.CommunityDataLevel]
-    - Return type: [``DATAFRAME``][pici.datatypes.MetricReturnType]
 
     Args:
         community (pici.Community):
@@ -65,7 +52,6 @@ def posts_word_occurrence(community, words, normalize=True):
     Returns:
         results (dict of str:int):
             - ``occurrence of <word>`` for each provided ``word``
-
     """
 
     def countw(t):
@@ -78,6 +64,7 @@ def posts_word_occurrence(community, words, normalize=True):
         else:
             return word_occurrences(t, words)
 
-    results = community.posts[community.text_column].apply(countw).apply(pd.Series)
+    results = community.posts[
+        community.text_column].apply(countw).apply(pd.Series)
 
     return {'occurrence of {c}': results[c] for c in results.columns}
