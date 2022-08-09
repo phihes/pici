@@ -14,6 +14,7 @@ nav:
     - extending.md
   - Examples:
     - examples.md
+  - Indicators: indicators.md
   - Code reference: reference/
 theme:
   name: material
@@ -24,6 +25,8 @@ theme:
     - content.code.annotate
     - content.tabs.link
     - navigation.tabs
+    - navigation.sections
+    - toc.integrate
 extra:
   version:
     provider: mike
@@ -43,7 +46,12 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - md_in_html
+  - toc:
+      toc_depth: 3
 plugins:
 - search
 - autorefs

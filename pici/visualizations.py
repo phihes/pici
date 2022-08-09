@@ -228,6 +228,15 @@ def scatter_lorenz_curves(pici):
 
 
 def plot_lorenz_curves(pici):
+    """
+    Plots the %posts vs %contributors Lorenz curves for all communities.
+
+    Args:
+        pici:
+
+    Returns:
+
+    """
     lor = pici.reports.lorenz_curve()
     fig = px.line(lor, x="% contributors", y="% posts", color="community_name")
     fig.add_shape(type='line',

@@ -38,10 +38,11 @@ class LabelStats:
 
     TODO refactor --> move visualizations to visualizations.py ?
 
-    See *Xinshu Zhao, Jun S. Liu & Ke Deng (2013) Assumptions behind Intercoder
-    Reliability Indices, Annals of the International Communication Association,
-    36:1, 419-480, DOI: 10.1080/23808985.2013.11679142* for a comparison of
-    inter-rater agreement metrics.
+    See [1] for a comparison of inter-rater agreement metrics.
+
+    [1] *Xinshu Zhao, Jun S. Liu & Ke Deng (2013) Assumptions behind
+    Intercoder Reliability Indices, Annals of the International Communication
+    Association, 36:1, 419-480, DOI: 10.1080/23808985.2013.11679142*
     """
 
     def __init__(self, labels):

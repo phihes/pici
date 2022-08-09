@@ -2,7 +2,7 @@
 
 <p align="center">
     <img src="./images/pici_logo.png" width="280px" />
-</a></p>
+</p>
 
 **PICI** (*Peer Innovation Community Indicators*) is a toolbox that simplifies creating and measuring innovation indicators in different online communities. It is implemented in Python and intended to use with [Jupyter Notebooks](https://jupyter.org/).
 

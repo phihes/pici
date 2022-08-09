@@ -4,3 +4,44 @@
   --md-primary-fg-color--dark:  #003646;
   --md-accent-fg-color:         #f17d32;
 }
+
+.label {
+  color: #000;
+  background-color: #bbe7f4;
+  padding-right: .6em;
+  padding-left: .6em;
+  border-radius: 10rem;
+  display: inline-block;
+  padding: .25em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.contributor {
+  color: #fff;
+  background-color: #f17d32;
+}
+.contribution {
+  color: #fff;
+  background-color: #d559e3;
+}
+.initial-contribution {
+  color: #fff;
+  background-color: #f788cb;
+}
+.thread {
+  color: #fff;
+  background-color: #c91e85;
+}
+.community {
+  color: #fff;
+  background-color: #d4c028;
+}
+.specialized {
+  color: #fff;
+  background-color: #595959;
+}
