@@ -675,6 +675,17 @@ python-versions = ">=3.7,<4.0"
 mkdocs = ">=1.0.3,<2.0.0"
 
 [[package]]
+name = "mkdocs-glightbox"
+version = "0.2.1"
+description = "MkDocs plugin supports image lightbox with GLightbox."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+beautifulsoup4 = ">=4.11.1"
+
+[[package]]
 name = "mkdocs-literate-nav"
 version = "0.4.1"
 description = "MkDocs plugin to specify the navigation in Markdown instead of YAML"
@@ -1632,7 +1643,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.12"
-content-hash = "41f0404ea3ef2cce78fdac345286620b968deced31551e88f6e769b013fd870a"
+content-hash = "66ebe315a32ae62edf313d707609de66da97178dc5fe20d24e62a643f2e6e491"
 
 [metadata.files]
 angel-cd = []
@@ -2035,6 +2046,7 @@ mkdocs-gen-files = [
     {file = "mkdocs-gen-files-0.3.4.tar.gz", hash = "sha256:c69188486bdc1e74bd2b9b7ebbde9f9eb21052ae7762f1b35420cfbfc6d7122e"},
     {file = "mkdocs_gen_files-0.3.4-py3-none-any.whl", hash = "sha256:07f43245c87a03cfb03884e767655c2a61def24d07e47fb3a8d26b1581524d6a"},
 ]
+mkdocs-glightbox = []
 mkdocs-literate-nav = [
     {file = "mkdocs-literate-nav-0.4.1.tar.gz", hash = "sha256:9efe26b662f2f901cae5807bfd51446d30ea7e033c2bc43a15d6282c7dfac1ab"},
     {file = "mkdocs_literate_nav-0.4.1-py3-none-any.whl", hash = "sha256:a4b761792ba21defbe2dfd5e0de6ba451639e1ca0f0661c37eda83cc6261e4f9"},
