@@ -39,11 +39,11 @@ def test_basic_metrics():
 
 
 def test_network_metrics():
-    contributors = c.metrics.contributor_degree()
+    contributors = c.metrics.co_contributor_degree()
     assert 'degree' in contributors.data.columns
     print(contributors.data.head(5).degree)
 
-    c2 = c.metrics.contributor_centralities()
+    c2 = c.metrics.co_contributor_centralities()
     assert 'degree_centrality' in c2.data.columns
     print(c2.data.head(5).degree_centrality)
 

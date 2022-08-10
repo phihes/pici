@@ -16,10 +16,12 @@ import networkx as nx
 from networkx.algorithms.centrality import *
 from cdlib import algorithms as cd
 from cdlib import viz as cdviz
+import igraph as ig
+import leidenalg
 
 
 @contributors_metric
-def contributor_degree(community):
+def co_contributor_degree(community):
     """
     Number of contributors each contributor has co-authored with in a thread.
 
@@ -34,12 +36,23 @@ def contributor_degree(community):
 
     """
     return {
-        'degree': dict(community.graph.degree())
+        'degree': dict(community.co_contributor_graph.degree())
     }
 
 
 @contributors_metric
-def contributor_centralities(community):
+def commenter_centralities(community):
+    G = community.commenter_graph
+
+    return {
+        'commenter in-degree centrality': in_degree_centrality(G),
+        'commenter out-degree centrality': out_degree_centrality(G),
+        'commenter betweenness centrality': betweenness_centrality(G)
+    }
+
+
+@contributors_metric
+def co_contributor_centralities(community):
     """
     Contributor centralities.
 
@@ -52,7 +65,7 @@ def contributor_centralities(community):
     Returns:
 
     """
-    G = community.graph
+    G = community.co_contributor_graph
 
     return {
         'degree_centrality': degree_centrality(G),
@@ -62,31 +75,54 @@ def contributor_centralities(community):
 
 
 @contributors_metric
-def contributor_communities(community):
+def commenter_communities(community):
+    G = community.commenter_graph
+
+    return {
+        'commenter communities: leiden': cd.leiden(G, None,
+                              weights='weight').to_node_community_map()
+    }
+
+
+@contributors_metric
+def co_contributor_communities(community, leiden_lib='cdlib'):
     """
     Find communities within the contributor network.
 
     Uses weighted Leiden algorithm (Traag et al., 2018) implemented in
-    ``cdlib.algorithms.leiden``. Returns a ``node: list(communities)``
-    representation using [``cdlib.NodeClustering.to_node_community_map``](
-    https://cdlib.readthedocs.io/en/latest/reference/classes/node_clustering.html).
+    ``cdlib.algorithms.leiden`` or ``leidgenalg``.
 
     Traag, Vincent, Ludo Waltman, and Nees Jan van Eck.
     [From Louvain to Leiden: guaranteeing well-connected communities.](
     https://arxiv.org/abs/1810.08473/) arXiv preprint arXiv:1810.08473 (2018).
 
     Args:
+        leiden_lib: Which Leiden alg. implementation to use, 'cdlib' or
+        'leidenalg'
         community:
 
     Returns:
         node_communities_map (dict of node:list(communities)): List of
         communities a contributor belongs to. See [
         ``cdlib.NodeClustering.to_node_community_map``]
-        (https://cdlib.readthedocs.io/en/latest/reference/classes/node_clustering.html).
+        (https://cdlib.readthedocs.io/en/latest/reference/classes
+        /node_clustering.html).
 
     """
-    G = community.graph
+    G = community.co_contributor_graph
+
+    if leiden_lib == 'cdlib':
+        leiden = cd.leiden(G, None, weights='weight').to_node_community_map()
+    elif leiden_lib == 'leidenalg':
+        G_igraph = ig.Graph(
+            len(G),
+            list(zip(*list(zip(*nx.to_edgelist(G)))[:2]))
+        )
+        leiden = leidenalg.find_partition(
+            G_igraph,
+            leidenalg.ModularityVertexPartition
+        )
 
     return {
-        'leiden': cd.leiden(G, None, weights='weight').to_node_community_map()
+        'co-contributor communities: leiden': leiden
     }

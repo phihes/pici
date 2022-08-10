@@ -1,4 +1,4 @@
-from pici.helpers import create_graph
+from pici.helpers import create_co_contributor_graph, create_commenter_graph
 import pandas as pd
 import scrapy
 from scrapyscript import Job, Processor
@@ -78,8 +78,17 @@ class DiscourseCommunity(Community):
         self._topics = d['topics']
         
     
-    def _generate_graph(self):
-        return create_graph(
+    def _generate_co_contributor_graph(self):
+        return create_co_contributor_graph(
+            self.posts,
+            self.contributors,
+            self.contributor_column,
+            self.topic_column,
+            self.contributors.columns
+        )
+
+    def _generate_commenter_graph(self):
+        return create_commenter_graph(
             self.posts,
             self.contributors,
             self.contributor_column,

@@ -40,7 +40,8 @@ class Pici:
         ```
     """
 
-    def __init__(self, communities, labels=[], cache_dir="cache", cache_nrows=None, start=None, end=None):
+    def __init__(self, communities, labels=[], cache_dir="cache",
+                 cache_nrows=None, start=None, end=None):
         """
         Loads communities.
 
@@ -129,7 +130,8 @@ class Community(ABC):
 
     """
 
-    _graph = None
+    _co_contributor_graph = None
+    _commenter_graph = None
     _posts = None
     _metrics = None
     _data = None
@@ -143,10 +145,8 @@ class Community(ABC):
             self._attr = attr
         self._set_data(data, start, end)
 
-
     def date_range(self, start=None, end=None):
         return type(self).__name__(self._data, start, end)
-
 
     def timeslice(self, posts, col, start, end):
         if start is None and end is None:
@@ -158,12 +158,10 @@ class Community(ABC):
         else:
             return posts[posts[col] >= start]
 
-
     @property
     @abstractmethod
     def DEFAULT_ATTRIBUTES(self):
         raise NotImplementedError("Property not set")
-
 
     @property
     @abstractmethod
@@ -200,37 +198,40 @@ class Community(ABC):
     @property
     def metrics(self):
         if self._metrics is None:
-            #self._metrics = CommunityMetrics(self)
             self._metrics = MetricRegistry(self)
 
         return self._metrics
 
-
     def contributor_by_id(self, c_id):
         return self.contributors.loc[c_id]
-
 
     def contributor_by_post_id(self, p_id):
         return self.contributors.loc[self.posts.loc[p_id].contributor_id]
 
-
     def contributors_by_topic_id(self, t_id):
         return self.topics.loc[t_id].c
 
+    @property
+    def co_contributor_graph(self):
+        if self._co_contributor_graph is None:
+            self._co_contributor_graph = self._generate_co_contributor_graph()
 
+        return self._co_contributor_graph
 
     @property
-    def graph(self):
-        if self._graph is None:
-            self._graph = self._generate_graph()
+    def commenter_graph(self):
+        if self._commenter_graph is None:
+            self._commenter_graph = self._generate_commenter_graph()
 
-        return self._graph
-
+        return self._commenter_graph
 
     @abstractmethod
-    def _generate_graph(self):
+    def _generate_co_contributor_graph(self):
         pass
 
+    @abstractmethod
+    def _generate_commenter_graph(self):
+        pass
 
     @abstractmethod
     def _set_data(self, data, start=None, end=None):
@@ -241,11 +242,10 @@ class CommunityFactory(ABC):
 
     cache_date_format = '%Y-%m-%d-%H-%M-%S'
 
-
     def __init__(self, cache_dir='.', cache_nrows=None):
         self.cache_dir = cache_dir
         self.cache_nrows = cache_nrows
-
+        self._data = None
 
     def _cache_exists(self):
 
@@ -258,7 +258,9 @@ class CommunityFactory(ABC):
         ])
 
         if not found:
-            LOGGER.warning("Cache does not exist. Did not find some files when looking for " + ", ".join(files))
+            LOGGER.warning("Cache does not exist."
+                           "Did not find some files when looking for "
+                           + ", ".join(files))
 
         return found
 
@@ -275,11 +277,14 @@ class CommunityFactory(ABC):
             for fn in cache[k]
         ]
         d_counts = Counter(all_dates)
-        valid_dates = [d for d in d_counts if d_counts[d] == len(self.cache_data)]
+        valid_dates = [
+            d for d in d_counts if d_counts[d] == len(self.cache_data)
+        ]
 
         most_recent_date = sorted(
             valid_dates,
-            key=lambda x: datetime.datetime.strptime(x, self.cache_date_format),
+            key=lambda x: datetime.datetime.strptime(
+                x, self.cache_date_format),
             reverse=True
         )[0]
 
@@ -291,17 +296,13 @@ class CommunityFactory(ABC):
             for k in self.cache_data
         }
 
-
     def add_data_to_cache(self, data):
-
         date_now = datetime.date.today().strftime(self.cache_date_format)
-
         for k, d in data.items():
             d.to_csv(f'{self.cache_dir}/{self.name}_{k}_{date_now}.csv')
 
-
-    def create_community(self, name=None, use_cache=True, start=None, end=None):
-
+    def create_community(self, name=None, use_cache=True,
+                         start=None, end=None):
         if use_cache and self._cache_exists():
             LOGGER.info("Loading community from cache...")
             self.load_cache()

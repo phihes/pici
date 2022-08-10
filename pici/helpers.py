@@ -1,12 +1,12 @@
 import functools
 from itertools import combinations
-
 import networkx as nx
 import nltk
 import numpy as np
 from functools import reduce
 import pandas as pd
 from bs4 import BeautifulSoup
+from collections import Counter
 
 
 def aggregate(series, sname):
@@ -47,7 +47,8 @@ def word_occurrences(text, words):
         words (list of str): Words.
 
     Returns:
-        occurrences (dict of str:int): A ``word (str), number of occurrences (int)`` dictionary
+        occurrences (dict of str:int):
+        A ``word (str), number of occurrences (int)`` dictionary
 
     """
     if isinstance(text, str):
@@ -78,7 +79,9 @@ def merge_dfs(dfs, only_unique=False):
     if only_unique:
         return unique_data
     else:
-        return pd.merge(dfs[0][duplicate_columns], unique_data, on=iname, how="left")
+        return pd.merge(
+            dfs[0][duplicate_columns], unique_data, on=iname, how="left"
+        )
 
 
 def flat(df, columns="community_name"):
@@ -88,13 +91,32 @@ def flat(df, columns="community_name"):
     return p
 
 
-"""
-def pivot(df, columns="community_name"):
-    return df.pivot(columns=columns)
-"""
+def create_commenter_graph(link_data, node_data, node_col, group_col,
+                           node_attributes, conntected=True):
+    G = nx.DiGraph()
+    edges = None
+    for topic, group in link_data.groupby(group_col):
+        authors = group[node_col].tolist()
+        initiator = authors[0]
+        _edges = Counter([(initiator, a) for a in authors])
+        edges = _edges if edges is None else edges + _edges
+
+    G.add_edges_from([
+        (n[0], n[1], {"weight": c}) for n, c in edges.items()
+    ])
+
+    # add attributes to nodes
+    for n, d in node_data.iterrows():
+        if G.has_node(n) and n != "" and n is not None:
+            for a in node_attributes:
+                value = d[a] if d[a] is not None else np.nan
+                G.nodes[n][a] = str(value)
+
+    return G
 
 
-def create_graph(link_data, node_data, node_col, group_col, node_attributes, connected=True):
+def create_co_contributor_graph(link_data, node_data, node_col, group_col,
+                                node_attributes, connected=True):
     G = nx.Graph()
     for topic, group in link_data.groupby(group_col):
         authors = group[node_col].tolist()
@@ -102,7 +124,8 @@ def create_graph(link_data, node_data, node_col, group_col, node_attributes, con
 
         # create weighted edges
         for a,b in combinations(authors, 2):
-            if a and b: #and a in node_data.index and b in node_data.index and (connected or connected(a,b,topic)):
+            if a and b:  # and a in node_data.index and b in node_data.index
+                         # and (connected or connected(a,b,topic)):
                 if not G.has_node(a):
                     G.add_node(a)
                 if not G.has_node(b):
