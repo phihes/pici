@@ -15,7 +15,7 @@ Additional levels of observation are the **networks** formed by contributors. Th
 : The commenter network is a *directed graph* where each node represents a contributor. A contributor *A* has an edge pointing to contributor *B* if *A* has contributed in at least one thread where contributor *B* has posted the initial contribution (*A* has "commented"). The weight of edge *A*→*B* is proportional to the total number of comments *A* made on initial contributions of *B*.
 
 <p align="center">
-    <img src="../images/structure_and_terminology.png" width="600px" style="width: 50%; max-width:600px; min-width:300px;" />
+    <img src="../images/structure_and_terminology.png" width="800px" style="width: 65%; max-width:800px; min-width:300px;" />
 </p>
 
 Each indicator is observed on either **contributor**, **contribution**, **thread**, or **community** level. Aggregations of indicators are provided for higher levels. For example, the *number of contributions made by a contributor* can be an indicator for their role in the community. This indicator would be provided on thread-level as, e.g., *average number of contributions per contributor*, measured for all contributors that have contributed to a specific thread. Common aggregations are mean, sum, standard-deviation, min and max. Other aggregations (or *transformations*) could also pick out a single of multiple values. On thread-level, an example would be the *total number of contributions made by the contributor of the initial contribution*.
