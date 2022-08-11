@@ -92,10 +92,10 @@ class Pici:
     def generate_report(self, list_of_metrics):
 
         @report
-        def func(communities):
+        def func(pici):
             return list_of_metrics
 
-        return func(self.communities)
+        return func(pici=self)
 
     def get_metrics(self, level=None, returntype=None, unwrapped=False,
                     select_func=set.intersection):
