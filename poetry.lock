@@ -437,14 +437,6 @@ python-versions = "*"
 scripts = ["click (>=6.0)", "twisted (>=16.4.0)"]
 
 [[package]]
-name = "infomap"
-version = "1.9.0"
-description = "Infomap network clustering algorithm"
-category = "main"
-optional = false
-python-versions = ">=3"
-
-[[package]]
 name = "itemadapter"
 version = "0.5.0"
 description = "Common interface for data container classes"
@@ -1587,14 +1579,6 @@ python-versions = ">=3.6"
 watchmedo = ["PyYAML (>=3.10)"]
 
 [[package]]
-name = "wurlitzer"
-version = "1.0.3"
-description = "Capture C-level output in context managers"
-category = "main"
-optional = false
-python-versions = ">=2.7"
-
-[[package]]
 name = "xarray"
 version = "2022.6.0"
 description = "N-D labeled arrays and datasets in Python"
@@ -1813,7 +1797,6 @@ incremental = [
     {file = "incremental-21.3.0-py2.py3-none-any.whl", hash = "sha256:92014aebc6a20b78a8084cdd5645eeaa7f74b8933f70fa3ada2cfbd1e3b54321"},
     {file = "incremental-21.3.0.tar.gz", hash = "sha256:02f5de5aff48f6b9f665d99d48bfc7ec03b6e3943210de7cfc88856d755d6f57"},
 ]
-infomap = []
 itemadapter = [
     {file = "itemadapter-0.5.0-py3-none-any.whl", hash = "sha256:cbe58de9fd64422132610e32e0f603a5a85b0cfc062bbee116782d0b4f90529a"},
     {file = "itemadapter-0.5.0.tar.gz", hash = "sha256:05b6a79dd31a7a993dfb2e8386a91c97e3b8c6cf28b72553e808e625e0b87c20"},
@@ -2523,7 +2506,6 @@ watchdog = [
     {file = "watchdog-2.1.7-py3-none-win_ia64.whl", hash = "sha256:351e09b6d9374d5bcb947e6ac47a608ec25b9d70583e9db00b2fcdb97b00b572"},
     {file = "watchdog-2.1.7.tar.gz", hash = "sha256:3fd47815353be9c44eebc94cc28fe26b2b0c5bd889dafc4a5a7cbdf924143480"},
 ]
-wurlitzer = []
 xarray = []
 zipp = [
     {file = "zipp-3.8.0-py3-none-any.whl", hash = "sha256:c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099"},
