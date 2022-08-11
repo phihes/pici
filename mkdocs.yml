@@ -14,6 +14,7 @@ nav:
     - extending.md
   - Examples:
     - examples.md
+    - examples/Loading the toolbox.ipynb
   - Indicators: indicators.md
   - Code reference: reference/
 theme:
@@ -64,6 +65,10 @@ plugins:
     height: auto
     zoomable: true
     draggable: true
+- mkdocs-jupyter:
+    ignore: ["*.py"]
+    include_source: True
+    theme: solarizedl
 - exclude:
     glob:
       - "*_depr.py"
