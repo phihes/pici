@@ -96,12 +96,14 @@ def number_of_posts(community):
 
     """
     return {
-        'number of posts': community.posts.groupby(
-            by=community.contributor_column).agg('count').iloc[:, 0]
+        'number of posts': community.posts.shape[0]
     }
 
 
-@community_metric
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.DATAFRAME
+)
 def posts_per_interval(community, interval):
     """
     Number of posts authored by community per time interval.
@@ -123,7 +125,10 @@ def posts_per_interval(community, interval):
     }
 
 
-@community_metric
+@metric(
+    level=CommunityDataLevel.COMMUNITY,
+    returntype=MetricReturnType.DATAFRAME
+)
 def contributors_per_interval(community, interval):
     """
     Number of users that have authored at least one post in time interval.

@@ -147,7 +147,8 @@ def metric(level: CommunityDataLevel, returntype: MetricReturnType):
                 # alt. var.: return whole df with original data...
                 # return df.join(metrics_df) if df is not None else metrics_df
                 # metric_data = metrics_df
-                metric_data = df.join(metrics_df) if df is not None else metrics_df
+                metric_data = df.join(metrics_df) if df is not None else \
+                    metrics_df
 
             elif returntype == MetricReturnType.TABLE:
                 metrics_table = pd.DataFrame(

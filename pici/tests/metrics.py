@@ -19,6 +19,9 @@ pici = Pici(
 
 c = pici.communities['OpenEnergyMonitor']
 
+def test_community_dataframe_metrics():
+    df = c.metrics.posts_per_interval(interval='1M')
+    print(df)
 
 def test_basic_metrics():
     contrib = c.metrics.number_of_contributors_per_topic()
@@ -81,6 +84,8 @@ if __name__ == "__main__":
     pd.set_option('display.width', 80)
     # pd.set_option('expand_frame_repr', False)
     pd.set_option('display.max_columns', 999)
+
+    test_community_dataframe_metrics()
     test_basic_metrics()
     test_network_metrics()
     test_reports()
