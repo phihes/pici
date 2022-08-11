@@ -216,7 +216,10 @@ class Report:
 
     @property
     def results(self):
-        filter = set(['community_name'] + list(self.fields))
+        ffields = list(self.fields)
+        if 'community_name' in self.data.columns:
+            ffields = ffields + ['community_name']
+        filter = set(ffields)
         if isinstance(self.data, pd.DataFrame):
             return self.data[filter]
         elif isinstance(self.data, Mapping):
