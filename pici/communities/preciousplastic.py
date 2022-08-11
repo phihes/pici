@@ -6,7 +6,7 @@ import logging
 import numpy as np
 import json
 from urllib.parse import urlparse
-from pici import helpers, Community, CommunityFactory
+from pici.community import Community, CommunityFactory
 
 
 class PPCommunity(Community):

@@ -1,4 +1,5 @@
-from pici.helpers import create_co_contributor_graph, create_commenter_graph
+from pici.helpers import create_co_contributor_graph, \
+    create_commenter_graph, series_most_common
 import pandas as pd
 import scrapy
 from scrapyscript import Job, Processor
@@ -6,7 +7,7 @@ import logging
 import numpy as np
 import json
 from urllib.parse import urlparse
-from pici import helpers, Community, CommunityFactory
+from pici.community import Community, CommunityFactory
 
 
 class OSMCommunity(Community):
@@ -54,7 +55,7 @@ class OSMCommunity(Community):
                 # set node data (contributor-level)
                 d['contributors'] = d['posts'].groupby(
                     by=self.contributor_column)[
-                    self._attr["node_data"]].agg(helpers.series_most_common)  # pd.Series.mode)
+                    self._attr["node_data"]].agg(series_most_common)  # pd.Series.mode)
 
                 d['topics'] = d['posts'][['topic_id', 'topic_title',
                                           'topic_url', 'forum_title',
