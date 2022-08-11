@@ -14,7 +14,7 @@
 - [ ] Make it easier to visualize reports (one chart per metric?)
 - [ ] Harvest all the Jupyter stuff
 - [ ] Integrate into dashboard app --> Streamlit?
-- [ ]Implement all the indicators
+- [ ] Implement all the indicators
 - [ ] deal with multiple labellers and conflicting labels.. (rule right now is: use first label...)
 - [x] Repair community metric (datalevel=table..)
 - [x] Add visualizations overview to documentation
