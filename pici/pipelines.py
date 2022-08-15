@@ -37,7 +37,7 @@ class Pipelines:
     def __init__(self, pici):
         self._pici = pici
 
-    def topics(self):
+    def topics(self, parameters=None, keep=[]):
         level = CommunityDataLevel.TOPICS
         metrics = self._pici.get_metrics(
             level=level,
@@ -51,6 +51,19 @@ class Pipelines:
             communities=self._pici.communities,
             feature_pipeline=feature_pipeline
         )
+        parameters['keep_features'] = {
+            'view': CommunityDataLevel.TOPICS,
+            'keep': keep
+        }
+        # make parameter-setting easier (auto-set for all communities)
+        if parameters is not None:
+            parms = {}
+            for c in self._pici.communities.keys():
+                for metric_name, metric_params in parameters.items():
+                    parms[f"community_features__" \
+                          f"{c}__features__topics_features__" \
+                          f"{metric_name}__kw_args"] = metric_params
+            pipe.set_params(**parms)
 
         return pipe
 
