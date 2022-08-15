@@ -75,11 +75,9 @@ class Pici:
         self.labels = LabelCollection(labels)
         self.pipelines = Pipelines(self)
 
-    """
     def add_metric(self, metric):
         for c in self.communities.values():
-            pici.reporting.metric.add(metric)
-    """
+            c.metrics.add(metric)
 
     @overload
     def add_report(self, new_report):
