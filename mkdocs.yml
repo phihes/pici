@@ -15,6 +15,7 @@ nav:
   - Examples:
     - examples.md
     - examples/Loading the toolbox.ipynb
+    - examples/Creating a custom indicator.ipynb
   - Indicators: indicators.md
   - Code reference: reference/
 theme:
