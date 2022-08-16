@@ -8,10 +8,6 @@ extra_css:
   - extra/peerinnovation.css
 nav:
   - About: index.md
-  - Usage:
-    - using.md
-    - analyzing.md
-    - extending.md
   - Examples:
     - examples.md
     - examples/Loading the toolbox.ipynb
