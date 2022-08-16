@@ -1,4 +1,4 @@
-# PICI (Peer Innovation Community Indicators)
+# PICI
 
 <p align="center"><a href="https://www.peer-innovation.de" target="_blank">
     <img src="./docs/images/pici_logo.png" width="200px" />
@@ -14,7 +14,11 @@ PICI (*Peer Innovation Community Indicators*) is an open source toolbox that sim
 
 ## Installation
 
-PICI is a Python package that requires Python >= 3.8. To install, clone the repository and then install the dependencies with [Poetry](https://python-poetry.org/):
+PICI is a Python package that requires Python >= 3.8.
+
+### From source
+
+To install PICI from source, clone the repository and then install the dependencies with [Poetry](https://python-poetry.org/):
 
 ```
 git clone https://github.com/phihes/pici.git
