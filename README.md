@@ -1,22 +1,37 @@
-<p align="left"><a href="https://www.peer-innovation.de" target="_blank">
-    <img src="./docs/images/pici_logo.png" width="280px" />
+# PICI
+
+<p align="center"><a href="https://www.peer-innovation.de" target="_blank">
+    <img src="./docs/images/pici_logo.png" width="200px" />
 </a></p>
 
-PICI (Peer Innovation Community Indicators) is a Python toolbox for exploring indicators of innovation in online communities. It is part of the [Peer Innovation](https://www.peer-innovation.de/) project.
+## About
 
-*currently under development*
+PICI (*Peer Innovation Community Indicators*) is an open source toolbox that simplifies creating and measuring indicators of innovation in online communities. It is intended for use in a research context and allows researchers to:
 
-# Installation
+- automate data collection and indicator generation steps 
+- simplify the implementation of new indicators
+- simplify the assessment of new communities with an arbitrary "digital footprint"
+- make the generation and evaluation of indicators reproducible
+- provide a repository of documented & evaluated indicators of innovation in online communities
 
-PICI requires Python >= 3.8. To install, clone the git repository, install [cdlib](https://pypi.org/project/cdlib/), then install the package with [poetry](https://python-poetry.org/):
+PICI is part of the [Peer Innovation research project](https://www.peer-innovation.de/).
+
+*Currently under development. A first release is planned for Q4 2022.*
+
+## Installation
+
+PICI is a Python package that requires Python >= 3.8.
+
+### From source
+
+To install PICI from source, clone the repository and then install the dependencies with [Poetry](https://python-poetry.org/):
 
 ```
 git clone https://github.com/phihes/pici.git
 cd pici
-pip install cdlib mkdocs poetry
 poetry install
 ```
 
-# Documentation
+## Documentation
 
-[View documentation](https://phihes.github.io/pici/)
+The documentation is available at **<https://phihes.github.io/pici/>**
