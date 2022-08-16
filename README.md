@@ -8,11 +8,11 @@
 
 PICI (*Peer Innovation Community Indicators*) is an open source toolbox that simplifies creating and measuring indicators of innovation in online communities. It is intended for use in a research context and allows researchers to:
 
-- automate data collection and generation of innovation indicators for online communities 
-- simplify the creation of new innovation indicators
+- automate data collection and indicator generation steps 
+- simplify the implementation of new indicators
 - simplify the assessment of new communities with an arbitrary "digital footprint"
-- make the generation and evaluation of innovation indicators reproducible
-- provide a repository of documented & evaluated indicators
+- make the generation and evaluation of indicators reproducible
+- provide a repository of documented & evaluated indicators of innovation in online communities
 
 PICI is part of the [Peer Innovation research project](https://www.peer-innovation.de/).
 
