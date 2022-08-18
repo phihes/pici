@@ -107,6 +107,17 @@ class Pipelines:
             metric_params: dict = {},
             pipe_params: dict = {}
     ):
+        def features_to_df(features):
+            try:
+                feat_dict = dict(ChainMap(*features))
+                df = pd.DataFrame(feat_dict)
+            except ValueError as e:
+                for k,v in feat_dict.items():
+                    print(f"{k}: {type(v)}, {v.shape}")
+                raise e
+
+            return df
+
         feature_transformers = [
             (f.__name__, FunctionTransformer(f)) for f in metrics
         ]
@@ -117,8 +128,7 @@ class Pipelines:
                         Pipelines.keep_features))
                 ]
             )),
-            ('feature_rows_to_df', FunctionTransformer(
-                lambda feats: pd.DataFrame(dict(ChainMap(*feats))))),
+            ('feature_rows_to_df', FunctionTransformer(features_to_df)),
         ])
 
         # TODO: set params for each community, in the right place...
