@@ -1,12 +1,15 @@
-import datetime
-import glob
-from abc import ABC, abstractmethod
-from collections import Counter
+#import datetime
+#import glob
+#from abc import ABC, abstractmethod
+#from collections import Counter
 from typing import overload
 import pandas as pd
 from collections import ChainMap
+from sklearn.ensemble import RandomForestClassifier
+from boruta import BorutaPy
+from sklearn.multiclass import OneVsRestClassifier
 
-import pici.reporting
+#import pici.reporting
 from pici.communities import OEMCommunityFactory, OSMCommunityFactory, \
     PPCommunityFactory
 from pici.pipelines import Pipelines
@@ -131,5 +134,54 @@ class Pici:
             if name in select_func(*metric_names)
         }
 
+    def get_topic_features(self, add_labels=True, communities=None,
+                           parameters={}, keep=[]):
+        pipe = self.pipelines.topics(
+            parameters=parameters, keep=keep
+        )
+        c = self.communities
+        if isinstance(communities, dict):
+            c = communities
+        features = pipe.transform(c).rename_axis(['id','community_name'])
+
+        if add_labels:
+            labels = self.labels.by_level(CommunityDataLevel.TOPICS)
+            label_names = labels.columns.tolist()
+            feature_names = features.columns.tolist()
+            labelled_features = pd.merge(
+                features,
+                labels,
+                how='inner',
+                on=['id', 'community_name']
+            )
+            return (labelled_features[feature_names],
+                    labelled_features[label_names])
+        else:
+            return features, None
+
+    @staticmethod
+    def select_features(self, X, y, method='boruta'):
+
+        if method == 'boruta':
+
+            # use numpy arrays
+            X_arr = X.values
+            y_arr = y.values
+
+            rf = OneVsRestClassifier(
+                RandomForestClassifier(n_jobs=-1,
+                                             class_weight='balanced',
+                                        max_depth=5)
+            )
+
+            feat_selector = BorutaPy(rf, n_estimators='auto', verbose=0,
+                                     random_state=1)
+
+            feat_selector.fit(X_arr, y_arr)
+
+            confirmed = set(X.columns[feat_selector.support_])
+            rejected = set(X.columns) - set(X.columns[feat_selector.support_])
+
+            return confirmed, rejected
 
 
