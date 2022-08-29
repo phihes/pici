@@ -9,6 +9,12 @@
 
 ## TODO
 
+- [ ] Labelling: drop duplicates (w/o labeller criterion) --> methods: keep first, "sum" heuristic, keep with highest IRA
+- [ ] Pre-processing for text-based indicators --> utils von anna + meine
+- [ ] Document "pre-processing-enriched" dataframes 
+- [ ] Utility functions for views "initial contibution", "feedback" (+ whole thread)
+- [ ] Create buttons for "feedback"
+- [ ] Add n_jobs parameter globally and to pipelines.py allow parallelization of FeatureUnion
 - [ ] Refactor: move label plot methods to visualizations.py
 - [ ] Add tests for label plot methods
 - [ ] Make it easier to visualize reports (one chart per metric?)
@@ -31,7 +37,8 @@
 
 - [x] Basic get started example: load toolbox, access tools     DONE
 - [ ] Reporting: Generate metrics, generate reports, add rep.
-- [ ] Adding new metrics
+- [x] Adding new metrics
+- [ ] Labelling
 - [ ] Using the machine learning pipeline
 - [ ] Tuning metrics' hyperparameters using the ML pipeline
 
