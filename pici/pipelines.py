@@ -5,8 +5,10 @@ from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import FunctionTransformer
 from collections import ChainMap
-
 from pici.datatypes import CommunityDataLevel
+
+import logging
+LOGGER = logging.getLogger(__name__)
 
 
 class CommunitySetter(BaseEstimator, TransformerMixin):
@@ -37,7 +39,7 @@ class Pipelines:
     def __init__(self, pici):
         self._pici = pici
 
-    def topics(self, parameters=None, keep=[]):
+    def topics(self, parameters={}, keep=[]):
         level = CommunityDataLevel.TOPICS
         metrics = self._pici.get_metrics(
             level=level,
@@ -52,7 +54,7 @@ class Pipelines:
             feature_pipeline=feature_pipeline
         )
         parameters['keep_features'] = {
-            'view': CommunityDataLevel.TOPICS,
+            'view': CommunityDataLevel.TOPICS.value,
             'keep': keep
         }
         # make parameter-setting easier (auto-set for all communities)
@@ -69,9 +71,14 @@ class Pipelines:
 
     @staticmethod
     def keep_features(X, view, keep):
-        return {
-            f: getattr(X, view)[f] for f in keep
-        }
+        feats = {}
+        for f in keep:
+            try:
+                feats[f] = getattr(X, view)[f]
+            except KeyError:
+                LOGGER.warning(f"Could not keep feature {f} (community: {X.name}).")
+
+        return feats
 
     @staticmethod
     def generate_community_pipeline(communities, feature_pipeline):
