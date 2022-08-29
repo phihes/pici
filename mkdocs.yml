@@ -8,11 +8,14 @@ extra_css:
   - extra/peerinnovation.css
 nav:
   - About: index.md
+  - User guide:
+      - analyzing.md
   - Examples:
     - examples.md
     - examples/Loading the toolbox.ipynb
     - examples/Creating a custom indicator.ipynb
-  - Indicators: indicators.md
+  - Indicators:
+    - indicators.md
   - Code reference: reference/
 theme:
   name: material

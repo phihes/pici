@@ -1,6 +1,7 @@
 !!! hint "under development"
     PICI is currently under development. A first release is planned for Q4 2022.
 
+
 ## The PICI toolbox
 
 **PICI** (*Peer Innovation Community Indicators*) is an open source toolbox that simplifies creating and measuring indicators of innovation in online communities. It is intended for use in a research context and allows researchers to:

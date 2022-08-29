@@ -1,8 +1,14 @@
 # Indicators
 
-Goal of the indicators: XYZ.
+## Overview
+
+The toolbox provides a repository of predefined indicators and simple tools to add new, custom indicators.
+
+### Structure
 
 By default, the central unit of observation is the forum **thread**, which can be part of one or multiple sub-forums. We propose that a thread is the *observable trace* of a sequence of interactions that can represent or display innovation activities. Each post in a thread is a **contribution** by a community member (the **contributor**). We single out the **initial contribution**, as we assume that XYZ. A **community** consists of a number of contributors and their contributions in threads, which are organized in sub-forums.
+
+### Networks
 
 Additional levels of observation are the **networks** formed by contributors. The two main representations are the *co-contribution network* and the *comment network*.
 
@@ -18,7 +24,15 @@ Additional levels of observation are the **networks** formed by contributors. Th
     <img src="../images/structure_and_terminology.png" width="700px" style="width: 55%; max-width:700px; min-width:300px;" />
 </p>
 
+### Levels of observation
+
 Each indicator is observed on either **contributor**, **contribution**, **thread**, or **community** level. Aggregations of indicators are provided for higher levels. For example, the *number of contributions made by a contributor* can be an indicator for their role in the community. This indicator would be provided on thread-level as, e.g., *average number of contributions per contributor*, measured for all contributors that have contributed to a specific thread. Common aggregations are mean, sum, standard-deviation, min and max. Other aggregations (or *transformations*) could also pick out a single of multiple values. On thread-level, an example would be the *total number of contributions made by the contributor of the initial contribution*.
+
+The thread observation level can be subdivided into three further subsets of posts: the whole thread, only the **initial contribution**, or only the **feedback** (all posts that were not authored by the initial contributor). This helps to implement indicators that rely on more detailed concepts, such as *ideas* in *idea communities*, or *questions* in *question communities*, which can potentially be operationalized by *inital contribution*.
+
+[TODO: Grafik]
+
+### Data
 
 In order to be able to apply indicators to a heterogeneous set of communities, most indicators rely on the following basic data that can be collected from most online forums:
 
@@ -28,6 +42,8 @@ In order to be able to apply indicators to a heterogeneous set of communities, m
 - thread: title
 
 Other data, such as likes/upvotes, friendship-relations, contributor location, thread views, etc., might be available in some communities and can be included in more specialized indicators.
+
+### List of indicators
 
 The following list conceptually groups all available indicators. Each indicator description links to all relevant metrics that are implemented in the toolbox. Each indicator is labelled with its level of observation: <span class="label contributor">contributor</span> <span class="label contribution">contribution</span> <span class="label initial-contribution">initial contribution</span>
  <span class="label thread">thread</span> <span class="label community">community</span>. Specialized indicators are marked with <span class="label specialized">specialized</span> and state which additional data is required.
