@@ -10,7 +10,7 @@ By level of observation:
 
 """
 
-from pici.reporting import metric, posts_metric
+from pici.reporting import metric, posts_metric, topics_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import num_words, word_occurrences
 import pandas as pd
@@ -68,3 +68,20 @@ def posts_word_occurrence(community, words, normalize=True):
         community.text_column].apply(countw).apply(pd.Series)
 
     return {'occurrence of {c}': results[c] for c in results.columns}
+
+
+@topics_metric
+def number_of_words_per_post(community):
+    words = community.posts.groupby(
+        by=community.topic_column)
+    first_words = words.first()['number_of_words']
+    words = words['number_of_words']
+
+    return {
+        'elaboration - number of words (first)': first_words,
+        'elaboration - number of words (total)': words.apply(np.sum),
+        'elaboration - number of words (mean)': words.apply(np.mean),
+        'elaboration - number of words (min)': words.apply(np.min),
+        'elaboration - number of words (max)': words.apply(np.max),
+        'elaboration - number of words (sd)': words.apply(np.std),
+    }

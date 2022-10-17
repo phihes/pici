@@ -15,12 +15,15 @@ By level of observation:
 - [post_delays_per_topic][pici.metrics.basic.post_delays_per_topic]
 - [post_dates_per_topic][pici.metrics.basic.post_dates_per_topic]
 """
+import inspect
 
-from pici.reporting import metric, topics_metric, community_metric
+from pici.reporting import metric, topics_metric, community_metric, contributors_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import aggregate
 
 import numpy as np
+import pandas as pd
+from numpy import mean, sum, max, min, std
 
 
 @topics_metric
@@ -282,4 +285,83 @@ def lorenz(community):
         '% contributors': x,
         '% posts': y
     }
+
+
+def _replies_to_own_topics(community, contributor,
+                           date_limit=None):
+    """
+    The average number of replies made to initial posts by specified
+    contributor in community.
+
+    Args:
+        community:
+        contributor:
+        date_limit: Date in string format, e.g. '2020-01-15'
+
+    Returns: The average number of replies made to initial posts made by
+    contributor. If date_limit is provided, only threads initiated before the
+    date limit are considered.
+
+    """
+
+    if not pd.isna(contributor):
+
+        # get threads initiated by contributor
+        tfilter = (
+            (community.posts[community.contributor_column] == contributor) &
+            (community.posts['post_position_in_thread'] == 1)
+        )
+        if date_limit is not None:
+            tfilter = (tfilter & community.posts[
+                community.date_column <= date_limit])
+        threads = community.posts[tfilter][community.topic_column].tolist()
+
+        replies = community.posts[
+            community.posts[community.topic_column].isin(threads)].groupby(
+                by=community.topic_column).apply(lambda g: len(g) - 1)
+
+        num_replies = replies.tolist()
+
+    # contributor is nan
+    else:
+        num_replies = [np.nan]
+
+    return num_replies
+
+
+@topics_metric
+def number_of_replies_to_topics_initiated_by_thread_initiator(
+        community):
+    """
+    Bla.
+
+    Args:
+        community:
+
+    Returns:
+
+    """
+
+    initial_posts = community.posts[
+        community.posts['post_position_in_thread'] == 1
+    ]
+    initial_posts['_avg_replies'] = initial_posts.apply(
+        lambda p: _replies_to_own_topics(
+            community=community,
+            contributor=p[community.contributor_column]
+        ),
+        axis=1
+    )
+
+    reply_counts = initial_posts.groupby(
+        by=community.topic_column).first()['_avg_replies']
+
+    return aggregate(
+        reply_counts,
+        'prestige: replies to topics by initial contributor'
+    )
+
+
+
+
 
