@@ -9,10 +9,10 @@ from bs4 import BeautifulSoup
 from collections import Counter
 
 
-def aggregate(series, sname):
-    aggs = ['mean', 'min', 'max', 'std', 'var', 'sum']
+def aggregate(values, sname):
+    aggs = [np.mean, np.min, np.max, np.std, np.sum]
     return {
-        f'{agg} {sname}': series.agg(agg)
+        f'{sname} ({agg.__name__})': values.apply(agg)
         for agg in aggs
     }
 
