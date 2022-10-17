@@ -7,8 +7,18 @@
 - Compile the documentation: ``mkdocs build``
 - Run a test: ``python -m pici.tests.<testname>``
 
+## notes on pipelines
+
+- non-final steps may be ignored by setting them to string 'passthrough' in params (https://stackoverflow.com/questions/19262621/is-it-possible-to-toggle-a-certain-step-in-sklearn-pipeline)
+- The steps to be performed can be selected by index, e.g.: ``_pipe[:-1].fit_transform(X)`` performs all but the last step (https://stackoverflow.com/questions/70173306/how-can-i-transform-with-scikit-learn-pipeline-when-the-last-estimator-is-not-a)
+
 ## TODO
 
+- [ ] Indicator views:
+  - initial post,
+  - only comments,
+  - all posts (incl. initial post)
+- [ ] Should all thread-indicators be calculated at the time of the last contribution to the thread??? --> yes --> this also means re-calculating the network for every unique date of initial post --> quantize time slots... e.g., calc network etc. per week
 - [ ] Labelling: drop duplicates (w/o labeller criterion) --> methods: keep first, "sum" heuristic, keep with highest IRA
 - [ ] Pre-processing for text-based indicators --> utils von anna + meine
 - [ ] Document "pre-processing-enriched" dataframes 
