@@ -285,3 +285,30 @@ def report(func):
 
     wrapper.is_report = True
     return wrapper
+
+
+def preprocessor(level: CommunityDataLevel):
+    """
+    A decorator for preprocessors.
+
+    Returns:
+
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            series = func(*args, **kwargs)
+            series.name = func.__name__
+
+            return level, series
+
+        wrapper.is_preprocessor = True
+        wrapper.level = level
+        return wrapper
+
+    return decorator
+
+
+posts_preprocessor = preprocessor(level=CommunityDataLevel.POSTS)
+topics_preprocessor = preprocessor(level=CommunityDataLevel.TOPICS)
+contributors_preprocessor = preprocessor(level=CommunityDataLevel.CONTRIBUTORS)

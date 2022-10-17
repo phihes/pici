@@ -82,6 +82,10 @@ class Pici:
         for c in self.communities.values():
             c.metrics.add(metric)
 
+    def add_preprocessor(self, preprocessor):
+        for c in self.communities.values():
+            c.preprocessors.add(preprocessor)
+
     @overload
     def add_report(self, new_report):
         self.reports.add(new_report)
@@ -132,6 +136,42 @@ class Pici:
             name: func
             for name, func in all_metrics.items()
             if name in select_func(*metric_names)
+        }
+
+    def get_preprocessors(self, level=None, returntype=None, unwrapped=False,
+                    select_func=set.intersection):
+        """
+        Get all available metrics that are defined for the communities. The
+        ``select_func`` parameter is set to ``set.intersection`` per
+        default, meaning that only those metrics are returned, that exist
+        for all communities. Metrics can be filtered by ``level`` and
+        ``returntype``.
+
+        Args:
+            level:
+            returntype:
+            unwrapped: 'Unwrap' the returned metric functions from their
+            decorator (e.g., when using as transformer in sklearn pipeline).
+            select_func:
+
+        Returns:
+            dict of str:func metricname:metric
+
+        """
+        preprocessors = [
+            c.preprocessors.get_all(unwrapped=unwrapped, level=level,
+                              returntype=returntype)
+            for cname, c in self.communities.items()
+        ]
+        preprocessor_names = [
+            set(m.keys()) for m in preprocessors
+        ]
+        all_preprocessors = dict(ChainMap(*preprocessors))
+
+        return {
+            name: func
+            for name, func in all_preprocessors.items()
+            if name in select_func(*preprocessor_names)
         }
 
     def get_topic_features(self, add_labels=True, communities=None,

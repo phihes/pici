@@ -6,8 +6,7 @@ import datetime
 
 import pandas as pd
 
-from pici.registries import MetricRegistry
-
+from pici.registries import MetricRegistry, PreprocessorRegistry
 
 LOGGER = logging.getLogger(__name__)
 
@@ -23,6 +22,7 @@ class Community(ABC):
     _posts = None
     _metrics = None
     _data = None
+    _preprocessors = None
 
     def __init__(self, name, data, start=None, end=None, attr=None):
         if name is not None:
@@ -89,6 +89,13 @@ class Community(ABC):
             self._metrics = MetricRegistry(self)
 
         return self._metrics
+
+    @property
+    def preprocessors(self):
+        if self._preprocessors is None:
+            self._preprocessors = PreprocessorRegistry(self)
+
+        return self._preprocessors
 
     def contributor_by_id(self, c_id):
         return self.contributors.loc[c_id]

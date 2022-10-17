@@ -2,6 +2,7 @@
 import inspect
 
 from pici.metrics import *
+from pici.preprocessors import *
 
 from pici.reporting import report
 
@@ -105,6 +106,20 @@ class MetricRegistry(FuncExposer):
     def __init__(self, community):
         super().__init__(
             required_func_arg='is_metric',
+            func_kwargs={'community': community},
+            symbol_table=globals()
+        )
+
+
+class PreprocessorRegistry(FuncExposer):
+    """
+    This class exposes all methods decorated with @community_preprocessor as
+    its own methods and passes the ``community`` parameter to them.
+    """
+
+    def __init__(self, community):
+        super().__init__(
+            required_func_arg='is_preprocessor',
             func_kwargs={'community': community},
             symbol_table=globals()
         )
