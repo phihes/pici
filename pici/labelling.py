@@ -19,6 +19,7 @@ import krippendorff
 import simpledorff
 import matplotlib.pyplot as plt
 import seaborn as sns
+from nltk.metrics.agreement import AnnotationTask
 
 
 class LabelStats:
@@ -394,15 +395,25 @@ class LabelStats:
         Returns: Figure
 
         """
+
+        def reindex_df(df, weight):
+            df = df.reindex(df.index.repeat(df[weight]))
+            df.reset_index(drop=True, inplace=True)
+            return df
+
         if data is None:
             agreement = self.pairwise_interrater_agreement(
                 goldstandard=goldstandard)
         else:
             agreement = data
 
+
+
         d = self._melt_goldstandard_agreement(agreement)
 
         g = None
+
+
 
         if kind=='label_boxplots':
             g = sns.catplot(x="variable", y="value", hue="index", data=d,
@@ -448,6 +459,20 @@ class LabelStats:
         agr['index'] = agr['index'].map(lambda x: x.split("_")[1][:4])
 
         return agr
+
+    def nltk_agreement(self):
+        agreements = {}
+        for l in self.labels.labels.keys():
+            d = self.labels.data[[
+                self.labels.DEFAULT_COLS['labeller'],
+                self.labels.DEFAULT_COLS['url'],
+                l
+            ]]
+            agreements[l] = AnnotationTask(
+                data=list(d.itertuples(index=False, name=None))
+            )
+
+        return agreements
 
 
 
@@ -759,6 +784,8 @@ class InnovationLabels(Labels):
         'labelling[t{}_inno]': 'label_potential'
     }
 
+    ERROR_COL = 'labelling[t{}_error]'
+
     LIMESURVEY_NUM_THREADS = 5
 
     POTENTIAL_DTYPE = CategoricalDtype(
@@ -848,6 +875,7 @@ class InnovationLabels(Labels):
         dfs = []
         # split df by thread number, rename cols, then re-concat parts
         for i in range(1, self.LIMESURVEY_NUM_THREADS + 1):
+            err = self.ERROR_COL.format(i)
             label_cols = {
                 k.format(i): v for k, v in self.LIMESURVEY_LABEL_COLS.items()
             }
@@ -857,9 +885,9 @@ class InnovationLabels(Labels):
                 self.LIMESURVEY_URL.format(i): 'url'
             }
             df_i = df.rename(columns=label_cols).rename(columns=id_cols)[
-                list(label_cols.values()) + list(id_cols.values())
-                ]
-            dfs.append(df_i)
+                list(label_cols.values()) + list(id_cols.values()) + [err]
+            ]
+            dfs.append(df_i[df_i[err] != 1].drop(columns=[err]))
 
         data = pd.concat(dfs)
 
