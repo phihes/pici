@@ -29,7 +29,6 @@ class DiscourseCommunity(Community):
         "original_date_column": "created_at"
     }
     
-    
     def _set_data(self, data, start, end):
         
         d = {}
@@ -76,26 +75,6 @@ class DiscourseCommunity(Community):
         self._posts = d['posts']
         self._contributors = d['contributors']
         self._topics = d['topics']
-        
-    
-    def _generate_co_contributor_graph(self):
-        return create_co_contributor_graph(
-            self.posts,
-            self.contributors,
-            self.contributor_column,
-            self.topic_column,
-            self.contributors.columns
-        )
-
-    def _generate_commenter_graph(self):
-        return create_commenter_graph(
-            self.posts,
-            self.contributors,
-            self.contributor_column,
-            self.topic_column,
-            self.contributors.columns
-        )
-    
     
     
 class DiscourseCommunityFactory(CommunityFactory):
@@ -118,7 +97,6 @@ class DiscourseCommunityFactory(CommunityFactory):
             raise Exception("No community data found, can not set up community.")
             
         return DiscourseCommunity(name, self._data, start, end)
-    
     
     def scrape_data(self):
         
@@ -237,9 +215,7 @@ class DiscoursePostsSpider(scrapy.Spider):
         'link_counts',
         'actions_summary'
     ]
-    
 
-    
     def parse(self, response):
         j = json.loads(response.text)
         
@@ -290,4 +266,4 @@ class DiscourseUsersSpider(scrapy.Spider):
             **{
                 'country': j["user"]["user_fields"]["1"]
             }
-        }            
+        }

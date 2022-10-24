@@ -5,7 +5,9 @@ from collections import Counter
 import datetime
 
 import pandas as pd
+import numpy as np
 
+from pici.helpers import create_co_contributor_graph, create_commenter_graph
 from pici.registries import MetricRegistry, PreprocessorRegistry
 
 LOGGER = logging.getLogger(__name__)
@@ -19,6 +21,10 @@ class Community(ABC):
 
     _co_contributor_graph = None
     _commenter_graph = None
+    _temporal_graphs = {
+        'co_contributor': {},
+        'commenter': {}
+    }
     _posts = None
     _metrics = None
     _data = None
@@ -113,6 +119,63 @@ class Community(ABC):
     def contributors_by_topic_id(self, t_id):
         return self.topics.loc[t_id].c
 
+    def _generate_temporal_graph(self, start=None, end=None,
+                                 kind='co_contributor'):
+        """
+        Generate a graph based only on posts created after start (>) and
+        before end (<).
+
+        Args:
+            start: datetime
+            end: datetime
+            kind: string (one of 'co_contributor', 'commenter')
+
+        Returns: networkx graph
+
+        """
+        post_criteria = []
+        if start is not None:
+            post_criteria.append((self.posts[self.date_column] > start))
+        if end is not None:
+            post_criteria.append((self.posts[self.date_column] < end))
+
+        if kind == 'co_contributor':
+            return create_co_contributor_graph(
+                self.posts[(np.logical_and(*post_criteria))],
+                self.contributors,
+                self.contributor_column,
+                self.topic_column,
+                self.contributors.columns
+            )
+        elif kind == 'commenter':
+            return create_commenter_graph(
+                self.posts[(np.logical_and(*post_criteria))],
+                self.contributors,
+                self.contributor_column,
+                self.topic_column,
+                self.contributors.columns
+            )
+        else:
+            return None
+
+    def _generate_co_contributor_graph(self):
+        return create_co_contributor_graph(
+            self.posts,
+            self.contributors,
+            self.contributor_column,
+            self.topic_column,
+            self.contributors.columns
+        )
+
+    def _generate_commenter_graph(self):
+        return create_commenter_graph(
+            self.posts,
+            self.contributors,
+            self.contributor_column,
+            self.topic_column,
+            self.contributors.columns
+        )
+
     @property
     def co_contributor_graph(self):
         if self._co_contributor_graph is None:
@@ -127,13 +190,24 @@ class Community(ABC):
 
         return self._commenter_graph
 
-    @abstractmethod
-    def _generate_co_contributor_graph(self):
-        pass
+    def temporal_graph(self, start=None, end=None, kind='co_contributor'):
+        """
+        Cached access to temporal graphs.
 
-    @abstractmethod
-    def _generate_commenter_graph(self):
-        pass
+        Args:
+            start: None or datetime start of graph snapshot
+            end: None or datetime end of graph snapshot
+            kind: string ('co_contributor' or 'commenter').
+
+        Returns: networkx Graph or DiGraph
+
+        """
+        k = (start, end)
+        if k not in self._temporal_graphs[kind].keys():
+            self._temporal_graphs[kind][k] = self._generate_temporal_graph(
+                start, end, kind)
+
+        return self._temporal_graphs[kind][k]
 
     @abstractmethod
     def _set_data(self, data, start=None, end=None):

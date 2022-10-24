@@ -73,24 +73,6 @@ class OSMCommunity(Community):
         self._contributors = d['contributors']
         self._topics = d['topics']
 
-    def _generate_co_contributor_graph(self):
-        return create_co_contributor_graph(
-            self.posts,
-            self.contributors,
-            self.contributor_column,
-            self.topic_column,
-            self.contributors.columns
-        )
-
-    def _generate_commenter_graph(self):
-        return create_commenter_graph(
-            self.posts,
-            self.contributors,
-            self.contributor_column,
-            self.topic_column,
-            self.contributors.columns
-        )
-
 
 class OSMCommunityFactory(CommunityFactory):
     name = "osm"
