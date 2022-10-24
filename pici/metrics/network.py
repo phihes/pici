@@ -9,10 +9,11 @@ By level of observation:
 - [contributor_centralities][pici.metrics.network.contributor_centralities]
 - [contributor_communities][pici.metrics.network.contributor_communities]
 """
-
-from pici.reporting import metric, contributors_metric
+from pici.helpers import apply_to_initial_posts
+from pici.reporting import metric, contributors_metric, topics_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 import networkx as nx
+import numpy as np
 from networkx.algorithms.centrality import *
 from cdlib import algorithms as cd
 from cdlib import viz as cdviz
@@ -125,4 +126,92 @@ def co_contributor_communities(community, leiden_lib='cdlib'):
 
     return {
         'co-contributor communities: leiden': leiden
+    }
+
+
+@topics_metric
+def initiator_prestige_by_commenter_network_in_deg_centrality(community):
+
+    degree_cache = {}
+
+    def _c_centrality(initial_post):
+        contributor = initial_post[community.contributor_column],
+        thread_date = initial_post['rounded_date']
+        centrality = np.nan
+        if thread_date not in degree_cache.keys():
+            graph = community.temporal_graph(
+                start=None, end=thread_date, kind='commenter'
+            )
+            if graph is not None:
+                in_deg_centr = nx.in_degree_centrality(graph)
+                degree_cache[thread_date] = in_deg_centr
+            else:
+                # no network could be formed (e.g., because no posts exist
+                # that match the given time-slice) ==> centrality undefined
+                centrality = np.nan
+        try:
+            centrality = degree_cache[thread_date][contributor]
+        except KeyError:
+            # contributor was not found in the network ==> centrality undefined
+            centrality = np.nan
+
+        return centrality
+
+    results = apply_to_initial_posts(community, ['_centrality'], _c_centrality)
+
+    return {
+        'initiator prestige: commenter network in-degree centrality':
+            results['_centrality']
+    }
+
+
+@topics_metric
+def initiator_centrality_in_co_contributor_network(community, k=None):
+
+    _cache = dict()
+
+    def centralities(initial_post):
+        contributor = initial_post[community.contributor_column],
+        thread_date = initial_post['rounded_date']
+        _centralities = dict()
+
+        if thread_date not in _cache.keys():
+            graph = community.temporal_graph(
+                start=None, end=thread_date, kind='co_contributor'
+            )
+            if graph is not None:
+                # betweenness centrality
+                betw = nx.betweenness_centrality(graph, k=k,
+                                                 normalized=True,
+                                                 weight='weight')
+                _cache[thread_date]['betweenness'] = betw
+
+                # closeness centrality
+                close = nx.closeness_centrality(graph)
+                _cache[thread_date]['closeness'] = close
+
+        try:
+            _centralities['betweenness'] = _cache[thread_date][
+                'betweenness'][contributor]
+        except KeyError:
+            _centralities['betweenness'] = np.nan
+        try:
+            _centralities['closeness'] = _cache[thread_date][
+                'closeness'][contributor]
+        except KeyError:
+            _centralities['closeness'] = np.nan
+
+        return (_centralities['betweenness'],
+                _centralities['closeness'])
+
+    results = apply_to_initial_posts(community,
+        new_cols=['betweenness','closeness'],
+        func=centralities
+    )
+
+    return {
+        'initiator position: betweenness centrality in co-contributor network':
+            results['betweenness'],
+        'initiator position: closeness centrality in co-contributor network':
+            results['closeness']
     }
