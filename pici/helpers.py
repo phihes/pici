@@ -9,12 +9,27 @@ from bs4 import BeautifulSoup
 from collections import Counter
 
 
-def aggregate(values, sname):
-    aggs = [np.mean, np.min, np.max, np.std, np.sum]
-    return {
-        f'{sname} ({agg.__name__})': values.apply(agg)
-        for agg in aggs
-    }
+def aggregate(dict_of_series,
+              aggregations=[np.mean, np.min, np.max, np.std, np.sum]):
+    """
+    Applies a number of aggregations to the series supplied as values in
+    ``dict_of_series``. Keys are names of series, the name of the
+    aggregation is appended to the series names as "(agg-name)".
+
+    Args:
+        aggregations: list of aggregation functions
+        dict_of_series: dict of indicator_name:Pandas.Series
+
+    Returns:
+        dict of formatted indicator_name: aggregated series
+
+    """
+    results = {}
+    for indicator_name, series in dict_of_series.items():
+        for a in aggregations:
+            results[f'{indicator_name} ({a.__name__})'] = series.apply(a)
+
+    return results
 
 
 def num_words(text):

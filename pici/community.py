@@ -33,6 +33,13 @@ class Community(ABC):
             self._attr = attr
         self._set_data(data, start, end)
 
+    def __eq__(self, other):
+        """
+        Two communities are the same if they have the same name. This is
+        used to simplify caching.
+        """
+        return self.name == other.name
+
     def date_range(self, start=None, end=None):
         return type(self).__name__(self._data, start, end)
 
