@@ -14,11 +14,12 @@
 
 ## TODO
 
+- [ ] Use pandas.query for filtering
 - [ ] Indicator views:
   - initial post,
   - only comments,
   - all posts (incl. initial post)
-- [ ] Should all thread-indicators be calculated at the time of the last contribution to the thread??? --> yes --> this also means re-calculating the network for every unique date of initial post --> quantize time slots... e.g., calc network etc. per week
+- [x] Should all thread-indicators be calculated at the time of the last contribution to the thread??? --> yes --> this also means re-calculating the network for every unique date of initial post --> quantize time slots... e.g., calc network etc. per week (implemented via 'rounded_dates' preprocessor --> provides 'quantization', resolution can be pipeline parameter)
 - [ ] Labelling: drop duplicates (w/o labeller criterion) --> methods: keep first, "sum" heuristic, keep with highest IRA
 - [ ] Pre-processing for text-based indicators --> utils von anna + meine
 - [ ] Document "pre-processing-enriched" dataframes 
