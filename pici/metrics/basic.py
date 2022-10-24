@@ -17,7 +17,7 @@ By level of observation / concept:
 """
 from pici.reporting import metric, topics_metric, community_metric, contributors_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
-from pici.helpers import aggregate
+from pici.helpers import aggregate, apply_to_initial_posts
 
 import numpy as np
 import pandas as pd
@@ -435,7 +435,8 @@ def number_of_replies_to_topics_initiated_by_thread_initiator(
     ).first()['_r']
 
     return aggregate({
-        'prestige: replies to topics by initial contributor': reply_counts
+        'initiator prestige: replies to topics by initial contributor':
+            reply_counts
     })
 
 
@@ -522,7 +523,6 @@ def initiator_experience_by_past_contributions(
     initial_posts['num_comments_per_day'] = initial_posts[
         'num_comments'].divide(initial_posts['days_since_first_post'])
 
-
     # group initial posts by thread to generate required index
     results = initial_posts.groupby(by=community.topic_column).first()
 
@@ -607,7 +607,7 @@ def initiator_helpfulness_by_contribution_regularity(community,
 
 @topics_metric
 def initiator_helpfulness_by_top_commenter_status(community, contributor,
-                                                  k=10):
+                                                  k=90):
     """
     Calculates whether a thread's initiator has top commenter status. A 'top
     commenter' has posted more comments than the ``k``-th percentile (default:
@@ -624,13 +624,12 @@ def initiator_helpfulness_by_top_commenter_status(community, contributor,
     # TODO
 
     return {
-        'initiator helpfulness: top commenter': None
+        f'initiator helpfulness: top commenter ({k} percentile)': None
     }
 
 
 @topics_metric
-def initiator_helpfulness_by_foreign_thread_comment_frequency(community,
-                                                              contributor):
+def initiator_helpfulness_by_foreign_thread_comment_frequency(community):
     """
     This indicator measures initiator helpfulness by the frequency of
     comments by the thread's initiator that were posted in threads with a
@@ -638,7 +637,6 @@ def initiator_helpfulness_by_foreign_thread_comment_frequency(community,
 
     Args:
         community:
-        contributor:
 
     Returns:
 
@@ -648,4 +646,34 @@ def initiator_helpfulness_by_foreign_thread_comment_frequency(community,
 
     return {
         'initiator helpfulness: comment frequency in foreign threads': None
+    }
+
+
+@topics_metric
+def idea_popularity_by_number_of_unique_users_commenting(community):
+    """
+
+    Args:
+        community:
+
+    Returns:
+
+    """
+    def _metric(initial_post):
+        tposts = community.posts[
+            community.posts[community.topic_column] ==
+            initial_post[community.topic_column]
+        ]
+        num_commenters = tposts[community.contributor_column].nunique() -1
+        num_comments = len(tposts.index) -1
+
+        return num_comments, num_commenters
+
+    results = apply_to_initial_posts(
+        community, ['num_comments', 'num_commenters'], _metric)
+
+    return {
+        'idea popularity: number of unique commenters': results[
+            'num_commenters'],
+        'idea popularity: number of comments': results['num_comments']
     }

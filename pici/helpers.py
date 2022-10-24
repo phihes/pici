@@ -203,3 +203,38 @@ def as_table(func):
         return pd.DataFrame(stats, index=pd.Index([self._community.name], name='community_name'))
 
     return wrapper
+
+
+def apply_to_initial_posts(community, new_cols, func):
+    """
+    Applies ``func`` to initial posts (``community.posts`` where
+    ``post_position_in_thread==1``). Returns DataFrame with ``topic_column``
+    field as index. Cols in retured df are named according to strings in
+    ``new_cols``, values in cols in order of values returned by ``func``.
+
+    Args:
+        community: pici.Community
+        new_cols: list of strings
+        func: function to apply to each initial post from community.posts
+
+    Returns: Pandas.DataFrame with columns named according to ``new_cols``
+    and indexed by thread-ids.
+
+    """
+
+    # select all posts at position 1 in thread (initial posts)
+    initial_posts = community.posts[
+        community.posts['post_position_in_thread'] == 1
+    ]
+
+    # calculate func on initial posts & concat results with topic_column
+    results = pd.concat((
+        initial_posts[[community.topic_column]],
+        initial_posts.apply(
+            lambda row: pd.Series(func(row), index=new_cols), axis=1
+        )
+    ), axis=1)
+
+    # return results with topic index
+    return results.groupby(by=community.topic_column).first()
+
