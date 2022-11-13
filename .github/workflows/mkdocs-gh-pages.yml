@@ -17,6 +17,4 @@ jobs:
           cache: 'poetry'
       - run: pip install cdlib
       - run: poetry install --no-interaction
-      - run: |
-          source .venv/bin/activate
-          mkdocs gh-deploy --force
+      - run: poetry run mkdocs gh-deploy --force
