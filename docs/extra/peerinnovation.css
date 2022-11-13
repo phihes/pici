@@ -5,6 +5,25 @@
   --md-accent-fg-color:         #f17d32;
 }
 
+h1, .md-typeset h1{
+  font-weight: 600;
+  color:rgba(0,0,0,1);
+  font-size:1.9em;
+}
+
+h2, .md-typeset h2{
+  color: rgba(0,0,0,0.8);
+  border-bottom: 2px solid rgba(0,0,0,0.8);
+  font-weight: 400;
+  font-size:1.5em;
+}
+
+h3, .md-typeset h3{
+  font-size: 1.15em;
+  font-weight: 600;
+  font-style: italic;
+}
+
 .label {
   color: #000;
   background-color: #bbe7f4;
@@ -44,4 +63,25 @@
 .specialized {
   color: #fff;
   background-color: #595959;
+}
+.feedback {
+  color: #fff;
+  background-color: #000;
+}
+
+.md-tabs__link svg{
+  fill: currentcolor;
+  flex-shrink:0;
+  height:1em;
+  margin-right:0.2em;
+}
+.md-nav__link svg, h1 svg, .md-typeset h1 svg, .md-ellipsis svg{
+  display:none;
+}
+
+.md-tabs__link--active span{
+  border: 1px solid #fff;
+  padding: 6px 6px 4px 6px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
 }

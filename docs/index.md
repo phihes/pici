@@ -1,14 +1,8 @@
-!!! hint "under development"
-    PICI is currently under development. A first release is planned for Q4 2022.
-
-
-## The PICI toolbox
+<p align="left" style="margin:15px; margin-left:0px;">
+    <img src="./images/pici_logo.png" style="width:30%; max-width:500px;" />
+</p>
 
 **PICI** (*Peer Innovation Community Indicators*) is an open source toolbox that simplifies creating and measuring indicators of innovation in online communities. It is intended for use in a research context and allows researchers to:
-
-<p align="right" style="float:right; margin:10px; background:#bbe7f4; padding:5px;">
-    <img src="./images/pici_logo.png" width="280px" />
-</p>
 
 - automate data collection and indicator generation steps 
 - simplify the implementation of new indicators
@@ -16,8 +10,7 @@
 - make the generation and evaluation of indicators reproducible
 - provide a repository of documented & evaluated indicators of innovation in online communities
 
-!!! info
-    The toolbox is a result of the [Peer Innovation research project](https://www.peer-innovation.de/english/) by the [Chair of Innovation Economics](https://www.inno.tu-berlin.de/menue/chair_of_innovation_economics/) at [Technical University Berlin](https://www.tu.berlin/en/)  in collaboration with the [Institute for Ecological Economy Research (IÖW)](https://www.ioew.de/en/). It was financed by the [German Federal Ministry of Education and Research](https://www.bmbf.de/bmbf/en/).
+The toolbox is a result of the [Peer Innovation research project](https://www.peer-innovation.de/english/) by the [Chair of Innovation Economics](https://www.inno.tu-berlin.de/menue/chair_of_innovation_economics/) at [Technical University Berlin](https://www.tu.berlin/en/)  in collaboration with the [Institute for Ecological Economy Research (IÖW)](https://www.ioew.de/en/). It was financed by the [German Federal Ministry of Education and Research](https://www.bmbf.de/bmbf/en/).
 
 
 ## Installation

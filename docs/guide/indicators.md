@@ -1,11 +1,49 @@
+# Indicators
 
-# Analyzing communities
+The toolbox provides a repository of [predefined indicators](../../indicators) and simple tools to add new, custom indicators.
 
-## Loading community data
+## Overview
+ 
+### Structure
+ 
+By default, the central unit of observation is the forum **thread**, which can be part of one or multiple sub-forums. We propose that a thread is the *observable trace* of a sequence of interactions that can represent or display innovation activities. Each post in a thread is a **contribution** by a community member (the **contributor**). We single out the **initial contribution**, as we assume that XYZ. A **community** consists of a number of contributors and their contributions in threads, which are organized in sub-forums.
+ 
+### Networks
+ 
+Additional levels of observation are the **networks** formed by contributors. The two main representations are the *co-contribution network* and the *comment network*.
+ 
+`co-contributor network`
+ 
+: The co-contributor network is an *undirected graph* where each node represents a contributor. A pair of contributors is connected by an edge if both have contributed in at least one shared thread. The edge weight is proportional to the number of threads both contributed to.
+ 
+`commenter network`
+ 
+: The commenter network is a *directed graph* where each node represents a contributor. A contributor *A* has an edge pointing to contributor *B* if *A* has contributed in at least one thread where contributor *B* has posted the initial contribution (*A* has "commented"). The weight of edge *A*→*B* is proportional to the total number of comments *A* made on initial contributions of *B*.
+ 
+<p align="center">
+    <img src="../../images/structure_and_terminology.png" width="700px" style="width: 75%; max-width:700px; min-width:300px;" />
+</p>
+ 
+### Levels of observation
+ 
+Each indicator is observed on either **contributor**, **contribution**, **thread**, or **community** level. Aggregations of indicators are provided for higher levels. For example, the *number of contributions made by a contributor* can be an indicator for their role in the community. This indicator would be provided on thread-level as, e.g., *average number of contributions per contributor*, measured for all contributors that have contributed to a specific thread. Common aggregations are mean, sum, concate, standard-deviation, min and max. Other aggregations (or *transformations*) could also pick out a single of multiple values. On thread-level, an example would be the *total number of contributions made by the contributor of the initial contribution*.
+ 
+The thread observation level can be subdivided into three further subsets of posts: the whole thread, only the **initial contribution**, or only the **feedback** (all posts that were not authored by the initial contributor). This helps to implement indicators that rely on more detailed concepts, such as *ideas* in *idea communities*, or *questions* in *question communities*, which can potentially be operationalized by *inital contribution*.
+ 
+[TODO: Grafik]
+ 
+### Data
+ 
+In order to be able to apply indicators to a heterogeneous set of communities, most indicators rely on the following basic data that can be collected from most online forums:
+ 
+- contribution meta data: contributor, date, associated thread, position in thread, sub-forum
+- contribution content: text, html, extracted links, images
+- contributor properties: name/id
+- thread: title
+ 
+Other data, such as likes/upvotes, friendship-relations, contributor location, thread views, etc., might be available in some communities and can be included in more specialized indicators.
 
-## Calculating metrics
-
-## Building reports
+## Generating indicator values
 
 Reports are groups of metrics. You can use reports if you would like to analyze a certain subset of metrics in one table, or if you would like to compare results for different metric parameters.
 
@@ -40,12 +78,12 @@ p.add_report(
 # generate report:
 p.reports.posts()
 ```
-
-## Calculating custom metrics
+ 
+## Defining new indicators
 
 You can define custom metrics that can then be used just like the pre-defined metrics. A custom metric is implemented as a decorated function and needs to be added to the "metrics registry".
 
-#### the @metric decorator
+### the @metric decorator
 
 You can define a custom metric by implementing a method that has the ``@metric`` decorator from [pici.decorators][pici.decorators] and takes (at least) ``community`` as parameter: 
 
@@ -194,6 +232,4 @@ p.add_metric(my_metric)
 p.communities['PreciousPlastic'].metrics.my_metric()
 ```
 
-## Visualizations
-
-## Dashboard
+## Evaluating indicators using labelled data
