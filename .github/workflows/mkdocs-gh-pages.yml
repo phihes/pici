@@ -7,14 +7,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-	steps:
-	- uses: actions/checkout@v3
-	- name: Install poetry
-	  run: pipx install poetry
-	- uses: actions/setup-python@v3
-	  with:
-	    python-version: '3.9'
-	    cache: 'poetry'
-	- run: pip install cdlib
-	- run: poetry install --no-interaction
-	- run: mkdocs gh-deploy --force
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+          cache: 'poetry'
+      - run: pip install cdlib
+      - run: poetry install --no-interaction
+      - run: mkdocs gh-deploy --force
