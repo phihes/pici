@@ -297,10 +297,17 @@ def preprocessor(level: CommunityDataLevel):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            series = func(*args, **kwargs)
-            series.name = func.__name__
+            result = func(*args, **kwargs)
+            df = None
+            if isinstance(result, pd.Series):
+                result.name = func.__name__
+                df = pd.DataFrame(result)
+            elif isinstance(result, dict):
+                for k in result.keys():
+                    result[k].name = f'{func.__name__}__{k}'
+                df = pd.DataFrame(result.values())
 
-            return level, series
+            return level, df
 
         wrapper.is_preprocessor = True
         wrapper.level = level
