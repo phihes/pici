@@ -14,6 +14,8 @@
 
 ## TODO
 
+- [x] Repository: Set up licence 
+- [ ] Document data structure
 - [ ] Use pandas.query for filtering
 - [ ] Indicator views:
   - initial post,
@@ -52,6 +54,8 @@
 - [ ] Labelling
 - [ ] Using the machine learning pipeline
 - [ ] Tuning metrics' hyperparameters using the ML pipeline
+- [ ] Adding a new forum representation (new network model, e.g., network based on links where two contributors are connected who contributed after each other "answering-network")
+- [ ] Loading a Community from Excel
 
 ### Advanced:
 - [ ] Adding new communities
