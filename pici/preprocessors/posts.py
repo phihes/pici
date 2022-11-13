@@ -1,5 +1,9 @@
+import spacy
 from pici.helpers import num_words
 from pici.reporting import posts_preprocessor
+from textacy import preprocessing, extract
+
+nlp = spacy.load("en_core_web_sm")
 
 
 @posts_preprocessor
@@ -43,3 +47,38 @@ def rounded_date(community, round_dates_to=None):
         r_dates = r_dates.round(freq=round_dates_to)
 
     return r_dates
+
+
+@posts_preprocessor
+def preprocessed_text(community):
+    text = community.posts[community.text_column]
+    text = text.str.lower()
+    clean = preprocessing.make_pipeline(
+        preprocessing.remove.html_tags,
+        preprocessing.replace.urls,
+        preprocessing.replace.user_handles,
+        preprocessing.replace.numbers,
+        preprocessing.replace.currency_symbols,
+        preprocessing.normalize.bullet_points,
+        preprocessing.normalize.quotation_marks,
+        preprocessing.replace.hashtags,
+        preprocessing.replace.emojis,
+        preprocessing.normalize.unicode,
+        preprocessing.remove.brackets,
+        preprocessing.normalize.whitespace
+    )
+
+    clean_text = text.apply(clean)
+    docs = clean_text.apply(nlp)
+
+    words_all = docs.apply(lambda t: list(extract.basics.words(t,
+                    filter_stops=False)))
+    words_no_stop = docs.apply(lambda t: list(extract.basics.words(t)))
+
+    return {
+        'clean': clean_text,
+        'all_words': words_all,
+        'words_no_stop': words_no_stop,
+        'num_words': words_all.apply(len),
+    }
+

@@ -237,4 +237,3 @@ def apply_to_initial_posts(community, new_cols, func):
 
     # return results with topic index
     return results.groupby(by=community.topic_column).first()
-

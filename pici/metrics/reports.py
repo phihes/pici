@@ -1,6 +1,6 @@
 """
 Reports are groups of metrics evaluated for all communities under
-analysis. See also: [building reports](/usage/#building-reports).
+analysis. See also: [building reports](/guide/#building-reports).
 
 Reports by level of observation:
 
