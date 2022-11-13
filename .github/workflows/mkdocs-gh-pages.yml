@@ -7,24 +7,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.x
-      - uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          installer-parallel: true          
-      - uses: actions/cache@v2.1.6
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/mkdocs-gh-pages.yml') }}
-      - run: pip install cdlib
-      - run: poetry config experimental.new-installer false
-      - if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction
-      - run: |
-          source .venv/bin/activate
-          mkdocs gh-deploy --force
+	steps:
+	- uses: actions/checkout@v3
+	- name: Install poetry
+	  run: pipx install poetry
+	- uses: actions/setup-python@v3
+	  with:
+	    python-version: '3.9'
+	    cache: 'poetry'
+	- run: pip install cdlib
+	- run: poetry install --no-interaction
+	- run: mkdocs gh-deploy --force
