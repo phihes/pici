@@ -23,7 +23,7 @@ jobs:
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/mkdocs-gh-pages.yml') }}
       - run: pip install cdlib
       - run: sudo apt-get install -y libxml2-dev libxslt-dev libxslt1-dev
-      - run: pip install lxml
+      - run: pip install lxml==4.8.0
       - run: poetry config experimental.new-installer false
       - if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
