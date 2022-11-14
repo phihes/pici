@@ -14,6 +14,7 @@
 
 ## TODO
 
+- [ ] optimize graph algorithms https://github.com/gboeing/osmnx/issues/710
 - [x] Repository: Set up licence 
 - [ ] Document data structure
 - [ ] Use pandas.query for filtering
