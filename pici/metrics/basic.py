@@ -15,14 +15,15 @@ By level of observation / concept:
 - [agg_number_of_posts_per_interval][pici.metrics.basic.agg_number_of_posts_per_interval]
 - [agg_posts_per_topic][pici.metrics.basic.agg_posts_per_topic]
 """
-from pici.reporting import metric, topics_metric, community_metric, contributors_metric
+from pici.metrics.cached_metrics import _threads_by_contributor, \
+    _comments_by_contributor, _replies_to_own_topics, _date_of_first_post, \
+    _contribution_regularity
+from pici.reporting import metric, topics_metric, community_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 from pici.helpers import aggregate, apply_to_initial_posts
 
 import numpy as np
 import pandas as pd
-from functools import lru_cache
-cache = lru_cache(maxsize=None)
 
 
 @topics_metric
@@ -290,97 +291,6 @@ def lorenz(community):
     }
 
 
-@cache
-def _threads_by_contributor(community, contributor, date_limit=None):
-    """
-    Get all threads initiated by contributor.
-
-    Args:
-        community:
-        contributor: User name
-        date_limit: Date in string format, e.g. '2020-01-15'
-
-    Returns: A list of thread-ids where the initial post was made by the
-    specified user (before the specified date_limit).
-
-    """
-    tfilter = (
-            (community.posts[community.contributor_column] == contributor) &
-            (community.posts['post_position_in_thread'] == 1)
-    )
-    if date_limit is not None:
-        tfilter = (tfilter & community.posts['rounded_date'] < date_limit)
-    threads = community.posts[tfilter][community.topic_column].tolist()
-
-    return threads
-
-
-@cache
-def _comments_by_contributor(community, contributor, date_limit=None):
-    """
-    Get all threads initiated by contributor.
-
-    Args:
-        community:
-        contributor: User name
-        date_limit: Date in string format, e.g. '2020-01-15'
-
-    Returns: A list of post-ids where the initial post was made by the
-    specified user (before the specified date_limit).
-
-    """
-    cfilter = (
-            (community.posts[community.contributor_column] == contributor) &
-            (community.posts['post_position_in_thread'] > 1)
-    )
-    if date_limit is not None:
-        cfilter = cfilter & (community.posts['rounded_date'] < date_limit)
-    comments = community.posts[cfilter].index.tolist()
-
-    return comments
-
-
-@cache
-def _replies_to_own_topics(community, contributor, date_limit=None):
-    """
-    The number of replies made to initial posts by specified
-    contributor in community.
-
-    Args:
-        community:
-        contributor:
-        date_limit: Date in string format, e.g. '2020-01-15'
-
-    Returns: The number of replies made to initial posts made by
-    contributor. If date_limit is provided, only threads & replies posted
-    before the date limit are considered.
-
-    """
-
-    if not pd.isna(contributor):
-        threads = _threads_by_contributor(community, contributor, date_limit)
-        in_threads_by_contributor = community.posts[
-            community.topic_column].isin(threads)
-        posted_before_limit = community.posts['rounded_date'] < \
-                              date_limit if date_limit is not None else True
-        replies = community.posts[in_threads_by_contributor &
-                                  posted_before_limit]
-        num_replies = replies.groupby(by=community.topic_column).apply(
-            lambda g: len(g) - 1).tolist()
-
-    # contributor is nan
-    else:
-        num_replies = [np.nan]
-
-    return num_replies
-
-
-@cache
-def _date_of_first_post(community, contributor):
-    posts = community.posts[community.contributor_column == contributor]
-    return posts['rounded_date'].min()
-
-
 @topics_metric
 def number_of_replies_to_topics_initiated_by_thread_initiator(
         community, ignore_temporal_dependency=True):
@@ -512,10 +422,17 @@ def initiator_experience_by_past_contributions(
     )
     # difference between date of current post and first post by same
     # contributor
+
+    def _day_diff(c, post):
+        d_fp = _date_of_first_post(
+            c, post[c.contributor_column])
+        diff = np.nan
+        if not pd.isna(d_fp):
+            diff = (post['rounded_date'] - d_fp).days
+        return diff
+
     initial_posts['days_since_first_post'] = initial_posts.apply(
-        lambda p: (p['rounded_date'] - _date_of_first_post(
-            community, p[community.contributor_column])).dt.days
-        , axis=1
+        lambda p: _day_diff(community, p), axis=1
     )
     # normalize counts by time since first post in days
     initial_posts['num_initial_posts_per_day'] = initial_posts[
@@ -537,35 +454,6 @@ def initiator_experience_by_past_contributions(
         'initiator experience: days since first post': results[
             'days_since_first_post']
     }
-
-
-@cache
-def _contribution_regularity(community, contributor, start, end):
-    """
-    Get the contribution regularity of ``contributor`` as the percentage of
-    days that contributor posted in the forum, between the dates ``start``
-    and ``end``.
-
-    Args:
-        community:
-        contributor:
-        start:
-        end:
-
-    Returns:
-
-    """
-
-    posts = community.post[community.posts['rounded_date'].between(
-        start, end
-    )]
-
-    posts = posts[community.contributor_column == contributor]
-    posts['buckets'] = posts[community.date_column].round(freq='d')
-    num_buckets = len(posts.buckets.unique().tolist())
-    max_buckets = (end - start).dt.days
-
-    return num_buckets / max_buckets
 
 
 @topics_metric
@@ -604,8 +492,7 @@ def initiator_helpfulness_by_contribution_regularity(community,
         f'regularity': results['_regularity']
     }
 
-
-@topics_metric
+#@topics_metric
 def initiator_helpfulness_by_top_commenter_status(community, contributor,
                                                   k=90):
     """
@@ -628,7 +515,7 @@ def initiator_helpfulness_by_top_commenter_status(community, contributor,
     }
 
 
-@topics_metric
+#@topics_metric
 def initiator_helpfulness_by_foreign_thread_comment_frequency(community):
     """
     This indicator measures initiator helpfulness by the frequency of

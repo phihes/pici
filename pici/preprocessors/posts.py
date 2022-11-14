@@ -29,7 +29,7 @@ def number_of_words(community):
 
 
 @posts_preprocessor
-def rounded_date(community, round_dates_to=None):
+def rounded_date(community, round_dates_to='30D'):
     """
     Round the post dates according to specified frequency.
     If ``round_dates_to`` is None (default), this preprocessor does nothing.
@@ -44,14 +44,14 @@ def rounded_date(community, round_dates_to=None):
     """
     r_dates = community.posts[community.date_column]
     if round_dates_to is not None:
-        r_dates = r_dates.round(freq=round_dates_to)
+        r_dates = r_dates.dt.round(freq=round_dates_to)
 
     return r_dates
 
 
 @posts_preprocessor
 def preprocessed_text(community):
-    text = community.posts[community.text_column]
+    text = community.posts[community.text_column].apply(str)
     text = text.str.lower()
     clean = preprocessing.make_pipeline(
         preprocessing.remove.html_tags,

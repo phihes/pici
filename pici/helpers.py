@@ -7,6 +7,7 @@ from functools import reduce
 import pandas as pd
 from bs4 import BeautifulSoup
 from collections import Counter
+from operator import and_
 
 
 def aggregate(dict_of_series,
@@ -116,9 +117,16 @@ def create_commenter_graph(link_data, node_data, node_col, group_col,
         _edges = Counter([(initiator, a) for a in authors])
         edges = _edges if edges is None else edges + _edges
 
-    G.add_edges_from([
-        (n[0], n[1], {"weight": c}) for n, c in edges.items()
-    ])
+    try:
+        G.add_edges_from([
+            (n[0], n[1], {"weight": c}) for n, c in edges.items()
+        ])
+    except AttributeError as e:
+        # edges has no attribute 'items'
+        # --> link_data is likely empty --> no information about network
+        # or network is empty
+        print("warning: commenter network without edges")
+
 
     # add attributes to nodes
     for n, d in node_data.iterrows():
@@ -237,3 +245,8 @@ def apply_to_initial_posts(community, new_cols, func):
 
     # return results with topic index
     return results.groupby(by=community.topic_column).first()
+
+
+def where_all(conditions):
+    return reduce(and_, conditions)
+

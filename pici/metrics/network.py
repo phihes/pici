@@ -10,6 +10,8 @@ By level of observation:
 - [contributor_communities][pici.metrics.network.contributor_communities]
 """
 from pici.helpers import apply_to_initial_posts
+from pici.metrics.cached_metrics import _cached_temporal_network_metric, \
+    _initial_post_author_network_metric
 from pici.reporting import metric, contributors_metric, topics_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
 import networkx as nx
@@ -131,33 +133,26 @@ def co_contributor_communities(community, leiden_lib='cdlib'):
 
 @topics_metric
 def initiator_prestige_by_commenter_network_in_deg_centrality(community):
+    """
+    Determines a thread initiator's 'prestige' by their degree centrality in
+    the commenter network at the time of thread creation, i.e., the number
+    of users that have commented on at least one of their threads at that
+    time.
 
-    degree_cache = {}
+    Args:
+        community:
 
-    def _c_centrality(initial_post):
-        contributor = initial_post[community.contributor_column],
-        thread_date = initial_post['rounded_date']
-        centrality = np.nan
-        if thread_date not in degree_cache.keys():
-            graph = community.temporal_graph(
-                start=None, end=thread_date, kind='commenter'
-            )
-            if graph is not None:
-                in_deg_centr = nx.in_degree_centrality(graph)
-                degree_cache[thread_date] = in_deg_centr
-            else:
-                # no network could be formed (e.g., because no posts exist
-                # that match the given time-slice) ==> centrality undefined
-                centrality = np.nan
-        try:
-            centrality = degree_cache[thread_date][contributor]
-        except KeyError:
-            # contributor was not found in the network ==> centrality undefined
-            centrality = np.nan
+    Returns:
 
-        return centrality
+    """
 
-    results = apply_to_initial_posts(community, ['_centrality'], _c_centrality)
+    results = apply_to_initial_posts(community, ['_centrality'],
+        lambda p: _initial_post_author_network_metric(
+            p, community,
+            metric='in_degree_centrality',
+            kind='commenter'
+        )
+    )
 
     return {
         'initiator prestige: commenter network in-degree centrality':
@@ -167,11 +162,20 @@ def initiator_prestige_by_commenter_network_in_deg_centrality(community):
 
 @topics_metric
 def initiator_centrality_in_co_contributor_network(community, k=None):
+    """
+    TODO: implement using _initial_post_author_network_metric()
+    Args:
+        community:
+        k:
+
+    Returns:
+
+    """
 
     _cache = dict()
 
     def centralities(initial_post):
-        contributor = initial_post[community.contributor_column],
+        contributor = initial_post[community.contributor_column]
         thread_date = initial_post['rounded_date']
         _centralities = dict()
 
@@ -180,6 +184,7 @@ def initiator_centrality_in_co_contributor_network(community, k=None):
                 start=None, end=thread_date, kind='co_contributor'
             )
             if graph is not None:
+                _cache[thread_date] = {}
                 # betweenness centrality
                 betw = nx.betweenness_centrality(graph, k=k,
                                                  normalized=True,

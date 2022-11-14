@@ -7,7 +7,8 @@ import datetime
 import pandas as pd
 import numpy as np
 
-from pici.helpers import create_co_contributor_graph, create_commenter_graph
+from pici.helpers import create_co_contributor_graph, create_commenter_graph, \
+    where_all
 from pici.registries import MetricRegistry, PreprocessorRegistry
 
 LOGGER = logging.getLogger(__name__)
@@ -38,6 +39,12 @@ class Community(ABC):
         else:
             self._attr = attr
         self._set_data(data, start, end)
+
+    def __str__(self):
+        return self.name
+
+    def __hash__(self):
+        return hash(str(self))
 
     def __eq__(self, other):
         """
@@ -141,7 +148,8 @@ class Community(ABC):
 
         if kind == 'co_contributor':
             return create_co_contributor_graph(
-                self.posts[(np.logical_and(*post_criteria))],
+                #self.posts[(np.logical_and(*post_criteria))],
+                self.posts[where_all(post_criteria)],
                 self.contributors,
                 self.contributor_column,
                 self.topic_column,
@@ -149,7 +157,8 @@ class Community(ABC):
             )
         elif kind == 'commenter':
             return create_commenter_graph(
-                self.posts[(np.logical_and(*post_criteria))],
+                #self.posts[(np.logical_and(*post_criteria))],
+                self.posts[where_all(post_criteria)],
                 self.contributors,
                 self.contributor_column,
                 self.topic_column,

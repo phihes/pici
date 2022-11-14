@@ -303,9 +303,12 @@ def preprocessor(level: CommunityDataLevel):
                 result.name = func.__name__
                 df = pd.DataFrame(result)
             elif isinstance(result, dict):
+                _results = {}
                 for k in result.keys():
-                    result[k].name = f'{func.__name__}__{k}'
-                df = pd.DataFrame(result.values())
+                    new_name = f'{func.__name__}__{k}'
+                    result[k].name = new_name
+                    _results[new_name] = result[k]
+                df = pd.DataFrame(_results)
 
             return level, df
 
