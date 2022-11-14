@@ -55,6 +55,7 @@
 #### Refactoring
 
 - [ ] move label plot methods to visualizations.py
+- [ ] rename metrics to indicators
 
 #### Optimization
 
