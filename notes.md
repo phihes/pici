@@ -35,6 +35,7 @@
 #### Issues
 
 - [ ] fix: indicators "xxx per day" produce inf values --> likely due to quantization of dates & diff=0
+- [ ] fix: centralities for new participants (at time of first post...) should be 0 and not nan
 
 #### Testing & documentation
 
@@ -56,6 +57,7 @@
 
 - [ ] move label plot methods to visualizations.py
 - [ ] rename metrics to indicators
+- [ ] group indicators according to concept (elaboration.py, distinctiveness.py, ...)
 
 #### Optimization
 
