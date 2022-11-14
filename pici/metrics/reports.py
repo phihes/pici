@@ -11,8 +11,6 @@ Reports by level of observation:
 
 from pici.reporting import report
 from pici.metrics.basic import *
-from pici.metrics.network import *
-from pici.metrics.text import *
 
 
 @report

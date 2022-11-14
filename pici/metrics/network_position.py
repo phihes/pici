@@ -10,15 +10,11 @@ By level of observation:
 - [contributor_communities][pici.metrics.network.contributor_communities]
 """
 from pici.helpers import apply_to_initial_posts
-from pici.metrics.cached_metrics import _cached_temporal_network_metric, \
-    _initial_post_author_network_metric
-from pici.reporting import metric, contributors_metric, topics_metric
-from pici.datatypes import CommunityDataLevel, MetricReturnType
+from pici.reporting import contributors_metric, topics_metric
 import networkx as nx
 import numpy as np
 from networkx.algorithms.centrality import *
 from cdlib import algorithms as cd
-from cdlib import viz as cdviz
 import igraph as ig
 import leidenalg
 
@@ -128,35 +124,6 @@ def co_contributor_communities(community, leiden_lib='cdlib'):
 
     return {
         'co-contributor communities: leiden': leiden
-    }
-
-
-@topics_metric
-def initiator_prestige_by_commenter_network_in_deg_centrality(community):
-    """
-    Determines a thread initiator's 'prestige' by their degree centrality in
-    the commenter network at the time of thread creation, i.e., the number
-    of users that have commented on at least one of their threads at that
-    time.
-
-    Args:
-        community:
-
-    Returns:
-
-    """
-
-    results = apply_to_initial_posts(community, ['_centrality'],
-        lambda p: _initial_post_author_network_metric(
-            p, community,
-            metric='in_degree_centrality',
-            kind='commenter'
-        )
-    )
-
-    return {
-        'initiator prestige: commenter network in-degree centrality':
-            results['_centrality']
     }
 
 

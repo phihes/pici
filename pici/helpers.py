@@ -2,6 +2,7 @@ import functools
 from itertools import combinations
 import networkx as nx
 import nltk
+import numpy
 import numpy as np
 from functools import reduce
 import pandas as pd
@@ -250,3 +251,26 @@ def apply_to_initial_posts(community, new_cols, func):
 def where_all(conditions):
     return reduce(and_, conditions)
 
+
+def generate_indicator_results(posts, initial_post,
+                               feedback, indicator_text,
+                               column):
+    res = []
+    entry = lambda t, v: (f"{indicator_text} in {t}", v)
+
+    # initial post
+    res.append(entry("initial post", initial_post[column].apply(np.sum)))
+
+    # posts
+    for f in [np.sum, np.mean, np.min, np.max]:
+        res.append(entry(
+            f"thread ({f.__name__})", posts[column].apply(f)
+        ))
+
+    # feedback
+    for f in [np.sum, np.mean, np.min, np.max, np.std]:
+        res.append(entry(
+            f"feedback ({f.__name__})", feedback[column].apply(f)
+        ))
+
+    return dict(res)

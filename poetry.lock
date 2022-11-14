@@ -2411,6 +2411,17 @@ dev = ["wheel", "twine (>=3.0.0)", "pytest-cov", "pytest (>=6.0,<7.0)", "sphinx 
 build_and_test = ["wheel", "twine (>=3.0.0)", "pytest-cov", "pytest (>=6.0,<7.0)", "build"]
 
 [[package]]
+name = "textblob"
+version = "0.17.1"
+description = "Simple, Pythonic text processing. Sentiment analysis, part-of-speech tagging, noun phrase parsing, and more."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+nltk = {version = ">=3.1", markers = "python_version >= \"3\""}
+
+[[package]]
 name = "texttable"
 version = "1.6.4"
 description = "module for creating simple ASCII tables"
@@ -2746,7 +2757,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.12"
-content-hash = "9a7f6265e8d3aebe57adbafde614ee0a770e15ecdc671b36e1ba0dd05de7b6da"
+content-hash = "bda7e47c5d59b7d23e9fe9d9e0ebc764d4fb5ab8d32d55d304e79ef673cdaa76"
 
 [metadata.files]
 angel-cd = []
@@ -4123,6 +4134,10 @@ terminado = [
 textacy = [
     {file = "textacy-0.12.0-py3-none-any.whl", hash = "sha256:cefb6d5744bd3ff8ab0a8436206dbc96e7c00da1ef6dfd544a5c37e3328816d3"},
     {file = "textacy-0.12.0.tar.gz", hash = "sha256:2c92bdd6b47305447b64e4cb6cc43c11675f021f910a8074bc8149dbf5325e5b"},
+]
+textblob = [
+    {file = "textblob-0.17.1-py2.py3-none-any.whl", hash = "sha256:15546d7f309e96a3f542bee42751c8e5ce4d519d3d274ee79df2318141f0b788"},
+    {file = "textblob-0.17.1.tar.gz", hash = "sha256:8dc0875dfab1eaf0dc772a9dbc4afaa9ca93d0e35cd62cb792f3a38e067ab68f"},
 ]
 texttable = []
 thinc = [
