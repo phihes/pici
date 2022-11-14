@@ -15,15 +15,14 @@ By level of observation / concept:
 - [agg_number_of_posts_per_interval][pici.metrics.basic.agg_number_of_posts_per_interval]
 - [agg_posts_per_topic][pici.metrics.basic.agg_posts_per_topic]
 """
-from pici.metrics.cached_metrics import _threads_by_contributor, \
-    _comments_by_contributor, _replies_to_own_topics, _date_of_first_post, \
-    _contribution_regularity
-from pici.reporting import metric, topics_metric, community_metric
+import pandas as pd
+
+from pici.reporting import metric, topics_metric, community_metric, \
+    posts_metric
 from pici.datatypes import CommunityDataLevel, MetricReturnType
-from pici.helpers import aggregate, apply_to_initial_posts
+from pici.helpers import aggregate, num_words, word_occurrences
 
 import numpy as np
-import pandas as pd
 
 
 @topics_metric
@@ -291,276 +290,52 @@ def lorenz(community):
     }
 
 
-@topics_metric
-def number_of_replies_to_topics_initiated_by_thread_initiator(
-        community, ignore_temporal_dependency=True):
+@posts_metric
+def number_of_words(community):
     """
-    Bla.
+    The number of words in a post (removing html).
 
     Args:
-
-        ignore_temporal_dependency: Whether to simple count all replies,
-        instead of only those that were given before the thread was initiated.
-        community:
+        community (pici.Community):
 
     Returns:
-
+        results (dict of str:int):
+            - ``number of words``
     """
-    """
-    reply_cache = {}
 
-    def cached_replies(p):
-        k = (
-            p[community.contributor_column],
-            None if ignore_temporal_dependency else p['date']
+    return {
+        'number of words': community.posts[community.text_column].apply(
+            num_words
         )
-        try:
-            return reply_cache[k]
-        except KeyError:
-            reply_cache[k] = _replies_to_own_topics(
-                community=community,
-                contributor=k[0],
-                date_limit=k[1]
-            )
-            return reply_cache[k]
-
-    initial_posts = community.posts[
-        community.posts['post_position_in_thread'] == 1
-    ]
-    initial_posts['_r'] = initial_posts.apply(cached_replies, axis=1)
-    """
-    initial_posts = community.posts[
-        community.posts['post_position_in_thread'] == 1
-    ]
-    initial_posts['_r'] = initial_posts.apply(
-        lambda p: _replies_to_own_topics(
-            community, p[community.contributor_column],
-            date_limit=None if ignore_temporal_dependency else p[
-                'rounded_date']
-        ),
-        axis=1
-    )
-    reply_counts = initial_posts.groupby(
-        by=community.topic_column
-    ).first()['_r']
-
-    return aggregate({
-        'initiator prestige: replies to topics by initial contributor':
-            reply_counts
-    })
-
-
-@topics_metric
-def initiator_experience_by_past_contributions(
-        community, ignore_temporal_dependency=True):
-    """
-
-    Args:
-        ignore_temporal_dependency:
-        community:
-
-    Returns:
-
-    """
-    """
-    thread_cache = {}
-    comment_cache = {}
-
-    def cached_threads(p):
-        k = p[community.contributor_column]
-        try:
-            return thread_cache[k]
-        except KeyError:
-            thread_cache[k] = len(_threads_by_contributor(
-                community=community,
-                contributor=k,
-                date_limit=None if ignore_temporal_dependency else p['date']
-            ))
-            return thread_cache[k]
-
-    def cached_comments(p):
-        k = p[community.contributor_column]
-        try:
-            return comment_cache[k]
-        except KeyError:
-            comment_cache[k] = len(_comments_by_contributor(
-                community=community,
-                contributor=k,
-                date_limit=None if ignore_temporal_dependency else p['date']
-            ))
-            return comment_cache[k]
-
-    initial_posts = community.posts[
-        community.posts['post_position_in_thread'] == 1
-    ]
-    num_initial_posts = initial_posts.apply(cached_threads, axis=1)
-    num_comments = initial_posts.apply(cached_comments, axis=1)
-    """
-    # select all posts at position 1 in thread (initial posts)
-    initial_posts = community.posts[
-        community.posts['post_position_in_thread'] == 1
-    ]
-    # count number of all threads that were initiated by the author of each
-    # initial post
-    initial_posts['num_initial_posts'] = initial_posts.apply(
-        lambda p: len(_threads_by_contributor(
-            community, p[community.contributor_column],
-            date_limit=None if ignore_temporal_dependency else p[
-                'rounded_date']
-        )),
-        axis=1
-    )
-    # count number of all comments (=posts at position 2, 3, ...) that were
-    # posted by author of each initial post
-    initial_posts['num_comments'] = initial_posts.apply(
-        lambda p: len(_comments_by_contributor(
-            community, p[community.contributor_column],
-            date_limit=None if ignore_temporal_dependency else p[
-                'rounded_date']
-        )),
-        axis=1
-    )
-    # difference between date of current post and first post by same
-    # contributor
-
-    def _day_diff(c, post):
-        d_fp = _date_of_first_post(
-            c, post[c.contributor_column])
-        diff = np.nan
-        if not pd.isna(d_fp):
-            diff = (post['rounded_date'] - d_fp).days
-        return diff
-
-    initial_posts['days_since_first_post'] = initial_posts.apply(
-        lambda p: _day_diff(community, p), axis=1
-    )
-    # normalize counts by time since first post in days
-    initial_posts['num_initial_posts_per_day'] = initial_posts[
-        'num_initial_posts'].divide(initial_posts['days_since_first_post'])
-    initial_posts['num_comments_per_day'] = initial_posts[
-        'num_comments'].divide(initial_posts['days_since_first_post'])
-
-    # group initial posts by thread to generate required index
-    results = initial_posts.groupby(by=community.topic_column).first()
-
-    return {
-        'initiator experience: number of past initial posts': results[
-            'num_initial_posts'],
-        'initiator experience: number of past initial posts (per day)': results[
-            'num_initial_posts_per_day'],
-        'initiator experience: number of past comments': results['num_comments'],
-        'initiator experience: number of past comments (per day)': results[
-            'num_comments_per_day'],
-        'initiator experience: days since first post': results[
-            'days_since_first_post']
     }
 
 
-@topics_metric
-def initiator_helpfulness_by_contribution_regularity(community,
-                                                     lookback_days=100):
+@posts_metric
+def posts_word_occurrence(community, words, normalize=True):
     """
-    Calculates the contribution regularity of the initiator of each thread.
-    Contribution regularity is the percentage of _past days_ in which the
-    initiator posted in the forum. Past days is limited by ``lookback_days``
-    parameter.
+    Counts the occurrence of a set of words in each post.
 
     Args:
-        lookback_days:
-        community:
+        community (pici.Community):
+        words (list of str): List of words to count in post texts.
+        normalize (bool): Normalize occurrence count by text length.
 
     Returns:
-
-    """
-    # select all posts at position 1 in thread (initial posts)
-    initial_posts = community.posts[
-        community.posts['post_position_in_thread'] == 1
-    ]
-    # calculate the contribution regularity for the initial contributor
-    initial_posts['_regularity'] = initial_posts.apply(
-        lambda p: _contribution_regularity(
-            community=community,
-            contributor=p[community.contributor_column],
-            start=p['rounded_date']-pd.DateOffset(days=lookback_days),
-            end=p['rounded_date']
-        ), axis=1
-    )
-    results = initial_posts.groupby(by=community.topic_column).first()
-
-    return {
-        f'initiator helpfulness: past ({lookback_days} days) contribution '
-        f'regularity': results['_regularity']
-    }
-
-#@topics_metric
-def initiator_helpfulness_by_top_commenter_status(community, contributor,
-                                                  k=90):
-    """
-    Calculates whether a thread's initiator has top commenter status. A 'top
-    commenter' has posted more comments than the ``k``-th percentile (default:
-    k=90).
-
-    Args:
-        community:
-        contributor:
-
-    Returns:
-
+        results (dict of str:int):
+            - ``occurrence of <word>`` for each provided ``word``
     """
 
-    # TODO
+    def countw(t):
+        if normalize:
+            nw = num_words(t)
+            return {
+                k: v / nw if nw > 0 else 0
+                for k, v in word_occurrences(t, words).items()
+            }
+        else:
+            return word_occurrences(t, words)
 
-    return {
-        f'initiator helpfulness: top commenter ({k} percentile)': None
-    }
+    results = community.posts[
+        community.text_column].apply(countw).apply(pd.Series)
 
-
-#@topics_metric
-def initiator_helpfulness_by_foreign_thread_comment_frequency(community):
-    """
-    This indicator measures initiator helpfulness by the frequency of
-    comments by the thread's initiator that were posted in threads with a
-    different initiator ('foreign threads').
-
-    Args:
-        community:
-
-    Returns:
-
-    """
-
-    # TODO
-
-    return {
-        'initiator helpfulness: comment frequency in foreign threads': None
-    }
-
-
-@topics_metric
-def idea_popularity_by_number_of_unique_users_commenting(community):
-    """
-
-    Args:
-        community:
-
-    Returns:
-
-    """
-    def _metric(initial_post):
-        tposts = community.posts[
-            community.posts[community.topic_column] ==
-            initial_post[community.topic_column]
-        ]
-        num_commenters = tposts[community.contributor_column].nunique() -1
-        num_comments = len(tposts.index) -1
-
-        return num_comments, num_commenters
-
-    results = apply_to_initial_posts(
-        community, ['num_comments', 'num_commenters'], _metric)
-
-    return {
-        'idea popularity: number of unique commenters': results[
-            'num_commenters'],
-        'idea popularity: number of comments': results['num_comments']
-    }
+    return {'occurrence of {c}': results[c] for c in results.columns}
