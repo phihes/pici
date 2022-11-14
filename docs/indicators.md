@@ -108,7 +108,7 @@ Number of contributions, number of intial contributions.
  
 - [``number of contributions``](../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions)
 - [``number of initial contributions``](../reference/pici/metrics/basic/#pici.metrics.basic.number_of_initial_contributions)
- 
+
 ### Normalized contributions
  
 <span class="label contributor">contributor</span>
@@ -166,7 +166,7 @@ The diversity of a contributor's contributions in regard to which sub-forum they
 - [``number of sub-forums made initial contributions to``](../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions)
 - [``entropy of sub-forums contributed to``](../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions)
 - [``entropy of sub-forums made inital contributions to``](../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions)
- 
+
 ### Links to external resources
 
 TODO
@@ -215,7 +215,7 @@ Possible indicators capturing assistance provision are initiator helpfulness and
 
 [6] Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142.
  
-## Past success (TO BE EXCLUDED? non-generalizable metrics (idea community specific))
+## Past success
 
 <span class="label contributor">contributor</span>
 
@@ -267,9 +267,11 @@ This group of metrics assigns one of the four classes to each contributor: It us
 *Implemented:*
  
 Contributor:
+
 - [``fuger-role``](../reference/pici/metrics/basic/#pici.metrics.network.fuger_role)
  
 Topic:
+
 - [``first post by collaborator``](../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role)
 - [``first post by contributor``](../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role)
 - [``first post by allrounder``](../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role)
@@ -297,16 +299,18 @@ In the context of innovation-contest communities, [1] define six contributor rol
 *Implemented:*
  
 Contributor:
+
 - [``fueller-role``](../reference/pici/metrics/basic/#pici.metrics.network.fueller_role)
  
 Topic:
+
 - [``first post by socializer``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
 - [``first post by idea generator``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
 - [``first post by master``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
 - [``first post by efficient contributor``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
 - [``first post by passive idea generator``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
 - [``first post by passive commentator``](../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role)
- 
+
 [1] Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User Roles and Contributions in Innovation-Contest Communities. *Journal of Management Information Systems, 31(1),* 273–308. https://doi.org/10.2753/MIS0742-1222310111
  
 ### Lead user
@@ -317,7 +321,7 @@ Topic:
  
 <span class="label contributor">contributor</span>
  
-## Demographics (TO BE EXCLUDED?)
+## Demographics
 
 <span class="label contributor">contributor</span>
 
@@ -327,7 +331,7 @@ In the context of idea communtities, the contributors' demographics such as age,
 
 [2] Jensen, M. B., Hienerth, C., & Lettl, C. (2014). Forecasting the commercial attractiveness of user‐generated designs using online data: An empirical study within the LEGO user community. Journal of Product Innovation Management, 31, 75-93.
  
-## Idea popularity (TO BE EXCLUDED?)
+## Idea popularity
 
 Idea popularity marks a high assessment of ideas' value and quality by community members reducing uncertainties and positively impacting their future adaption. In alliance with the assumption that users best know their needs, idea popularity increases the likelihood of idea realization [1][2][3][4]. 
 
@@ -339,7 +343,7 @@ Idea popularity marks a high assessment of ideas' value and quality by community
 
 [4] Beretta, M. (2019). Idea selection in web‐enabled ideation systems. Journal of Product Innovation Management, 36(1), 5-23.
 
-## Diversity of collaborators (TO BE EXCLUDED?)
+## Diversity of collaborators
 
 #### Concept
 The diversity of collaborators refers to the composition of teams in collaboration efforts concerning the distribution of knowledge, status, roles, and backgrounds [1][2][3]. Users with more functional diversity view ideas from different angles promoting more creativity in problem-solving [4]. Geographic diversity can impact innovativeness ambiguously. Sharing globally distributed and contextual expertise as well as diverse cultural comprehension can foster innovation activities. However, too diverse views and inputs can lead to unfocused ideas. Nonetheless, shared experiences, norms, and beliefs are important to facilitate mutual understanding [5].
@@ -504,14 +508,17 @@ Possible elaboration measures are obtained through descriptive statistics techni
 ### High Elaboration
  
 #### Length of text (number of words)
+
 - [``avg_thread_length``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 - [``aggregated_thread_length``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Number of syllables
+
 - [``avg_number_syllables_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 - [``aggregated_number_syllables_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Punctuation Density (Proportion of all characters)
+
 - [``avg_content_punctuation_prop_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 - [``aggregated_content_punctuation_prop_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
@@ -520,42 +527,53 @@ Possible elaboration measures are obtained through descriptive statistics techni
 #### Capitalization Density (proportion of all characters)
  
 #### Flesch-Reading-Ease Score
+
 - [``flesch_reading_ease``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Automatic Readability Index
+
 - [``automated_readability_index``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 ### Complex Elaboration
  
 #### Number of References (links)
+
 - [``avg_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 - [``aggregated_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Flesch-Kincaid Formula
+
 - [``flesch_kincaid_grade``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Smog Grading
+
 - [``smog_index``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Coleman-Lieau Index
+
 - [``coleman_liau_index``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Dale-Chall Readbility Score
+
 - [``dale_chall_readability_score``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Number of difficult words
+
 - [``difficult_words``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 #### Linsear Write Formula
+
 - [``linsear_write_formula``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
 ### Low Elaboration
  
 #### Number of Spelling Mistakes
+
 - [``avg_spelling_mistakes_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
 - [``aggregated_spelling_mistakes_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO  
  
 #### Number of Punctuation Mistakes
+
 - [``avg_content_punctuations_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 - [``aggregated_content_punctuations_thread``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
  
@@ -595,6 +613,24 @@ Distinctiveness can be measured with the aid of descriptive statistics technique
 - probability per topic (total number of topics depends on highest coherence score)
 
 ## Community feedback
+
+ <span class="label contribution">contribution</span> <span class="label thread">thread</span> 
+
+#### Concept
+
+Online communities provide their members with the possibility to give feedback by commenting on published contributions. The feedback was found to be one of the main benefits for innovators joining a community as an important determinant of a contribution's innovative advancement [Franke & Shah 2003] [Hoonaert 2017] [Jensen 2014]. The provision of high-quality assistance from innovative collaborators enhances product optimizations and facilitates the diffusion of emerging innovations.
+
+#### Metrics
+
+Community feedback can be measured by its quantity [Hoonaerth] [Martinez-Torres 2016] [Lee 2018] [Chan et al 2020], positivity [Jensen 2014] [Ogink 2019], and quality, e.g. feedback from users with high reputation or experience (top commenter / previously launched ideas).
+
+### Number of comments
+
+### Length of comments
+
+### Feedback length dispersion
+
+### Feedback from top commenters
  
 ## Activity level
 
