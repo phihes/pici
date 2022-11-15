@@ -64,7 +64,7 @@
 
 - [ ] repair pickling to allow n_jobs > 1 in sklearn FeatureUnion (related to registries!?)
 - [ ] Add n_jobs parameter globally and to pipelines.py allow parallelization of FeatureUnion
-- [ ] optimize graph algorithms https://github.com/gboeing/osmnx/issues/710
+- [ ] optimize graph algorithms https://github.com/gboeing/osmnx/issues/710, https://stackoverflow.com/questions/65206818/efficient-way-to-speeding-up-graph-theory-and-complex-network-algorithms-on-cpu
 - [ ] Use pandas.query for filtering
 
 #### New features
