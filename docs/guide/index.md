@@ -13,7 +13,7 @@ The toolbox makes use of online forums as a data source for the investigation of
 For further processing, the Toolbox requires a certain data structure that records the time of contribution, the text, a unique contributor and the associated thread for each forum post, where each post forms a data point.
 The data model links the table of individual contributions (posts) with a table of contributors (authors) and a table with information on the discussion threads. The three data tables form the basis for the analysis of online interactions in peer communities. 
 The data required can be obtained using two approaches: Loading the data dynamically or from a static file. 
-The data tables available as files correspond to the [specified data structure](../../../indicators).
+The data tables available as files correspond to the [specified data structure](../reference/pici/docs/guide/indicators#pici/docs/guide/indicators.Data).
 Alternatively, the data can be loaded dynamically from publicly accessible online forums via web scraping, a database or another interface (API).
 Thereby, appropriate adjustments must be made for each new data source. If the data of the forums of several communities are structured in the same way, e.g. because they use the same forum software (e.g. Discourse), they can be collected with a comprehensive query. 
 
