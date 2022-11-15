@@ -36,6 +36,7 @@
 
 - [ ] fix: indicators "xxx per day" produce inf values --> likely due to quantization of dates & diff=0
 - [ ] fix: centralities for new participants (at time of first post...) should be 0 and not nan
+- [ ] fix: data cut-off --> can't reconstruct networks for 'early' posts as there is no data. how to fix?
 
 #### Testing & documentation
 
