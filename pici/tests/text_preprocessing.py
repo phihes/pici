@@ -22,7 +22,7 @@ def test_preprocessing_osm():
     level, df = preprocessed_text(osm)
     print(level)
     print(df)
-
+    df.to_excel("preprocessed_text.xlsx")
 
 
 if __name__ == "__main__":

@@ -60,7 +60,7 @@ def rounded_date(community, round_dates_to='30D'):
 @posts_preprocessor
 def preprocessed_text(community):
     text = community.posts[community.text_column].apply(str)
-    #text = text.str.lower()
+    lower_text = text.str.lower()
     clean = preprocessing.make_pipeline(
         preprocessing.remove.html_tags,
         preprocessing.replace.urls,
@@ -69,14 +69,14 @@ def preprocessed_text(community):
         preprocessing.replace.currency_symbols,
         preprocessing.normalize.bullet_points,
         #preprocessing.normalize.quotation_marks,
+        preprocessing.remove.brackets,
         preprocessing.replace.hashtags,
         preprocessing.replace.emojis,
         preprocessing.normalize.unicode,
-        preprocessing.remove.brackets,
         preprocessing.normalize.whitespace
     )
 
-    clean_text = text.apply(clean)
+    clean_text = lower_text.apply(clean)
     docs = clean_text.apply(nlp)
 
     def frac_uppercase_chars(t):
@@ -96,6 +96,9 @@ def preprocessed_text(community):
     words_all = docs.apply(lambda t: list(extract.basics.words(t,
                     filter_stops=False)))
     words_no_stop = docs.apply(lambda t: list(extract.basics.words(t)))
+    words_no_stop = words_no_stop.apply(
+        lambda l: tuple(str(t) for t in l)
+    )
 
     #stats = docs.apply(lambda t: text_stats.TextStats(t))
 

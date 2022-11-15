@@ -11,8 +11,8 @@ set_config(display="text")
 pici = Pici(
     communities={
         'OpenEnergyMonitor': OEMCommunityFactory,
-        #'OpenStreetMap': OSMCommunityFactory,
-        #'PreciousPlastic': PPCommunityFactory,
+        'OpenStreetMap': OSMCommunityFactory,
+        'PreciousPlastic': PPCommunityFactory,
     },
     start='2017-01-01',
     end='2019-01-01',
@@ -23,7 +23,7 @@ pici = Pici(
 def test_topics_indicators():
     pipe = pici.pipelines.topics()
     indicators = pipe.transform(pici.communities)
-    #indicators.to_excel("generated_indicators.xlsx")
+    indicators.to_excel("generated_indicators.xlsx")
 
 
 if __name__ == "__main__":
