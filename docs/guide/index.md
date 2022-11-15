@@ -4,6 +4,7 @@
     <img src="../images/structure.png" width="1200px" style="width: 100%; max-width:1200px; min-width:400px;" />
 </p>
 
+
 ## Community data collection
 
 #### Concept
@@ -51,7 +52,20 @@ The research project aims to validate suitable indicators for innovation activit
 
 #### Extension possibilities 
 
-Furthermore, additional metrics can be added to the toolbox by extending the indicator library. The procedure is explained in the online manual [link]. A new method must then be defined at the respective observation level, which can be called like metrics that have already been implemented. For example, additional text-based indicators could focus on certain keywords in the contributions or mark certain features in the contributors' response behaviour.
+Furthermore, additional metrics can be added to the toolbox by extending the indicator library. The procedure is explained in the [Examples for Creating a custom indicator](../../Examples/Creating a custom indicator.ipynb). A new metric must then be defined at the respective observation level. For example, additional text-based indicators could focus on certain keywords in the contributions or mark certain features in the contributors' response behaviour.
+
+## Data labelling 
+
+#### Concept
+
+A part of the data set must be labelled so that the supervised classification algorithm can be trained with it. For this part of the data, the relevance of the forum content must be defined, because the performance of the indicators is measured by this ground truth. The training data set can be created in different ways. 
+	
+#### Example of [Peer Innovation research project](https://www.peer-innovation.de/) 
+
+The research project investigated how peer communities drive sustainable innovation. For this purpose, those processes were determined, which provide information about the further development and dissemination of sustainable technologies by the community. In the forum discussions, there is evidence of activities with which community members contribute to the innovation process: not only sharing blueprints and designs, but also testing and evaluating technical solutions, pointing out alternatives or ways to overcome difficulties in implementation. So with the training dataset, the toolbox should be geared for detecting indications of these multiple activities.
+Indications of innovation activities and innovation potential in the content of some of the forum posts were manually assessed by the project team and in an online survey. For this purpose, rules were first defined (Heß & Gleu 2021), according to which the evaluators assigned labels to the contents of the discussions in the forums. In this way, a training data set of evaluated threads was created, which could then be used to check the suitability of the various metrics for identifying peer innovation.
+	However, the classification of forum content could also be based on completely different criteria, depending on the cognitive interest and application context. Other content-related criteria could be used for labelling as well as indications of innovation activities or innovation potential, and labelling could also be carried out at other observation levels than the thread. For example, individual forum posts could also be evaluated. Furthermore, additional data from the community forum, such as upvotes or likes, could also be used as training data. 
+
 
 
 
