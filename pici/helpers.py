@@ -9,6 +9,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from collections import Counter
 from operator import and_
+from typing import Iterable
 
 
 def aggregate(dict_of_series,
@@ -34,7 +35,7 @@ def aggregate(dict_of_series,
     return results
 
 
-def num_words(text):
+def num_words(text: str):
     """
     Counts the number of words in a text. Does account for html tags and comments
     (not included in count).
@@ -55,7 +56,7 @@ def num_words(text):
         return np.nan
 
 
-def word_occurrences(text, words):
+def word_occurrences(text: str, words: Iterable[str]):
     """
     Counts the number of occurrences of specified ``words`` in ``text``.
 
@@ -78,7 +79,7 @@ def word_occurrences(text, words):
         return {f'{w}': np.nan for w in words}
 
 
-def series_most_common(series):
+def series_most_common(series: pd.Series):
     """
     Get most common element from Pandas.Series.
 
@@ -92,10 +93,11 @@ def series_most_common(series):
     return c.index[0] if len(c) > 0 else np.nan
 
 
-def merge_dfs(dfs, only_unique=False):
+def merge_dfs(dfs: Iterable[pd.DataFrame], only_unique: bool = False):
     """
     Wrapper for Pandas.merge(). Merges DataFrames, so that
-    # TODO
+
+    TODO: document
 
     Args:
         dfs:
@@ -121,7 +123,7 @@ def merge_dfs(dfs, only_unique=False):
         )
 
 
-def flat(df, columns="community_name"):
+def flat(df: pd.DataFrame, columns: str = "community_name"):
     """
     Returns a pivoted version of ``df`` with flattened index.
 
@@ -350,7 +352,7 @@ def generate_indicator_results(posts, initial_post,
     Returns results from ``column`` in DataFrames ``posts``,
     ``initial_post``, and ``feedback`` as different aggregations
     (sum, mean, ...). Initial post is only aggregated as sum. Output is a
-    dict with df/agg: value, e.g. "posts <indicator_text> (mean)":value.
+    dict with df/agg: value, e.g. "posts indicator_text (mean)":value.
 
     Args:
         posts:

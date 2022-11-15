@@ -4,6 +4,7 @@ import statistics
 import spacy
 from nltk import RegexpTokenizer
 
+import pici.community
 from pici.helpers import num_words
 from pici.reporting import posts_preprocessor
 from textacy import preprocessing, extract, text_stats
@@ -58,7 +59,44 @@ def rounded_date(community, round_dates_to='30D'):
 
 
 @posts_preprocessor
-def preprocessed_text(community):
+def preprocessed_text(community: pici.community.Community):
+    """
+    This preprocessor supplies cleaned text, text statistics (using Textacy)
+    and sentiment statistics (TextBlob). The following columns are added to
+    ``Community.posts``:
+
+    - clean
+    - all_words
+    - words_no_stop
+    - n_words_no_stop
+    - frac_uppercase
+    - frac_punctuation_marks
+    - avg_syllables_per_word
+    - sentiment_polarity
+    - sentiment_subjectivity
+    - n_words
+    - n_chars
+    - n_long_words
+    - n_unique_words
+    - n_syllables
+    - n_syllables_per_word
+    - entropy
+    - ttr
+    - segmented_ttr
+    - hdd
+    - automated_index
+    - flesch_reading_ease
+    - smog_index
+    - coleman_liau_index
+    - flesch_kincaid_grade_level
+    - gunning_fog_index
+
+    Args:
+        community:
+
+    Returns:
+
+    """
     text = community.posts[community.text_column].apply(str)
     lower_text = text.str.lower()
     clean = preprocessing.make_pipeline(
@@ -99,8 +137,6 @@ def preprocessed_text(community):
     words_no_stop = words_no_stop.apply(
         lambda l: tuple(str(t) for t in l)
     )
-
-    #stats = docs.apply(lambda t: text_stats.TextStats(t))
 
     avg_syllables = docs.apply(lambda t: np.mean(
         text_stats.n_syllables_per_word(t)))

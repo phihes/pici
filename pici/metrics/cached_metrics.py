@@ -1,8 +1,20 @@
+"""
+This is a collection of all cachable functions that are used in the
+calculation of indicators. The cache is implemented using
+``functools.lru_cache`` with ``maxsize=None``. Caching is commonly done at
+least on community level (pici.Community is hashable). Examples for when
+using a cache makes sense:
+
+- calculating the similarity of post texts (done once for all combinations)
+- generating "temporal networks" (filtered representations of networks,
+depending on dates of posts)
+
+It is recommended to define cached parts of indicators here.
+"""
 import numpy as np
 import networkx as nx
 from functools import lru_cache
 from textacy.representations.network import build_similarity_network
-
 import pandas as pd
 
 cache = lru_cache(maxsize=None)
