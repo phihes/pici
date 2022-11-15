@@ -82,6 +82,22 @@ In the research project, the classification algorithm was trained with the manua
 
 In this way, the previously generated metrics could be validated in terms of how well they can predict the occurrence of innovation activities in discussion threads.
 
+## Generating indicator values for (new) communities 
+
+The toolbox calculates key figures and network statistics from the forum data of the peer communities, such as the shares of occasional and core contributors or the network density. These values are used to compare and characterise the peer communities and their network structures.
+
+#### Concept 
+
+The forum data can be statistically evaluated with the toolbox for each peer community. The implemented metrics can be calculated and compared with the other peer communities to identify special features in the interaction structures. In addition, depending on the interest of the study, average values can be calculated for any period of time in order to investigate dynamic changes in the communities.
+	Example from PI In the research project, three peer communities were examined and described with the help of the implemented metrics. The investigations were limited to the period from 2017 to 2019 for better comparability of the communities. In the comparison of the values, clear differences between the communities became visible, which could be related to the qualitative research results from interviews with community members.
+
+#### Example of [Peer Innovation research project](https://www.peer-innovation.de/)
+ 
+For example, the network densities of the peer communities Precious Plastic, OpenEnergyMonitor and Open Street Map could be compared (based on the undirected graphs). One finding, for example, was that the Precious Plastic community has a comparatively high network density. The core of the community (the largest sub-group in which all have interacted with each other at least once) includes just under 10% of the participants. In contrast, however, there is also a large proportion of occasional users in the forum (more than 50%).  More detailed examples as well as comparative tables can be found in the project's work report 3 (link).
+
+#### Extension possibilities 
+
+Extensions of the community comparisons are easily possible by adding forum data from other communities or defining alternative metrics. In addition, comparing the average values of different time periods offers another possibility for evaluation that was not pursued in the research project. Thus, on the one hand, the dynamic development of the communities could be examined or the effect of certain events or interventions on the communities could be evaluated. 
 
 
 [^1]: Paxton, A., Varoquaux, N., Holdgraf, C., & Geiger, R. S. (2022). Community, Time, and (Con) text: A Dynamical Systems Analysis of Online Communication and Community Health among Open‐Source Software Communities. Cognitive Science, 46(5), e13134.
