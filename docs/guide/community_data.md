@@ -11,10 +11,11 @@ The data required to evaluate the forums of peer communities can be loaded using
 ## Loading data from file
 
 The data tables are available as files. The static file must correspond to the [specified data structure](pici/docs/guide/indicators):
-contribution meta data: contributor, date, associated thread, position in thread, sub-forum
-contribution content: text, html, extracted links, images
-contributor properties: name/id
-thread: title
+
+- contribution meta data: contributor, date, associated thread, position in thread, sub-forum
+- contribution content: text, html, extracted links, images
+- contributor properties: name/id
+- thread: title
 
 ## Loading data dynamically
 
