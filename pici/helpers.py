@@ -79,11 +79,31 @@ def word_occurrences(text, words):
 
 
 def series_most_common(series):
+    """
+    Get most common element from Pandas.Series.
+
+    Args:
+        series: Pandas.Series
+
+    Returns: Most common element in ``series``.
+
+    """
     c = series.value_counts()
     return c.index[0] if len(c) > 0 else np.nan
 
 
 def merge_dfs(dfs, only_unique=False):
+    """
+    Wrapper for Pandas.merge(). Merges DataFrames, so that
+    # TODO
+
+    Args:
+        dfs:
+        only_unique:
+
+    Returns:
+
+    """
     iname = dfs[0].index.name
     duplicate_columns = set.intersection(*[set(df.columns) for df in dfs])
     unique_data = reduce(lambda left, right:
@@ -102,6 +122,16 @@ def merge_dfs(dfs, only_unique=False):
 
 
 def flat(df, columns="community_name"):
+    """
+    Returns a pivoted version of ``df`` with flattened index.
+
+    Args:
+        df: Pandas.DataFrame
+        columns: Column name to pivot on.
+
+    Returns:
+
+    """
     p = df.pivot(columns=columns)
     p.columns = p.columns.get_level_values(1)
 
@@ -110,6 +140,21 @@ def flat(df, columns="community_name"):
 
 def create_commenter_graph(link_data, node_data, node_col, group_col,
                            node_attributes, conntected=True):
+    """
+    Creates a networkx.DiGraph with nodes=users and directed edges a->b if a
+    has replied to an initial post by b. Edge weight is the number of comments.
+
+    Args:
+        link_data:
+        node_data:
+        node_col:
+        group_col:
+        node_attributes:
+        conntected:
+
+    Returns:
+
+    """
     G = nx.DiGraph()
     edges = None
     for topic, group in link_data.groupby(group_col):
@@ -141,6 +186,22 @@ def create_commenter_graph(link_data, node_data, node_col, group_col,
 
 def create_co_contributor_graph(link_data, node_data, node_col, group_col,
                                 node_attributes, connected=True):
+    """
+    Creates a networkx.Graph with nodes=users and edges if two users have
+    contributed to the same thread. Edge weights = number of threads where
+    two users co-contributed.
+
+    Args:
+        link_data:
+        node_data:
+        node_col:
+        group_col:
+        node_attributes:
+        connected:
+
+    Returns:
+
+    """
     G = nx.Graph()
     for topic, group in link_data.groupby(group_col):
         authors = group[node_col].tolist()
@@ -170,6 +231,16 @@ def create_co_contributor_graph(link_data, node_data, node_col, group_col,
 
 
 def join_df(func):
+    """
+    Decorator that joins results to existing dataframe in community.
+    TODO: document
+
+    Args:
+        func:
+
+    Returns:
+
+    """
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
         df = None
@@ -205,11 +276,22 @@ def join_df(func):
 
 
 def as_table(func):
+    """
+    Decorator that returns results as table, indexed with community name.
+    TODO: document
+
+    Args:
+        func:
+
+    Returns:
+
+    """
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
         stats = func(self, *args, **kwargs)
 
-        return pd.DataFrame(stats, index=pd.Index([self._community.name], name='community_name'))
+        return pd.DataFrame(stats, index=pd.Index([self._community.name],
+                                                  name='community_name'))
 
     return wrapper
 
@@ -249,12 +331,37 @@ def apply_to_initial_posts(community, new_cols, func):
 
 
 def where_all(conditions):
+    """
+    Concatenates logical condition with ``and``.
+
+    Args:
+        conditions:
+
+    Returns:
+
+    """
     return reduce(and_, conditions)
 
 
 def generate_indicator_results(posts, initial_post,
                                feedback, indicator_text,
                                column):
+    """
+    Returns results from ``column`` in DataFrames ``posts``,
+    ``initial_post``, and ``feedback`` as different aggregations
+    (sum, mean, ...). Initial post is only aggregated as sum. Output is a
+    dict with df/agg: value, e.g. "posts <indicator_text> (mean)":value.
+
+    Args:
+        posts:
+        initial_post:
+        feedback:
+        indicator_text:
+        column:
+
+    Returns:
+
+    """
     res = []
     entry = lambda t, v: (f"{indicator_text} in {t}", v)
 
