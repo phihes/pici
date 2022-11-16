@@ -89,11 +89,11 @@ The toolbox calculates key figures and network statistics from the forum data of
 #### Concept 
 
 The forum data can be statistically evaluated with the toolbox for each peer community. The implemented metrics can be calculated and compared with the other peer communities to identify special features in the interaction structures. In addition, depending on the interest of the study, average values can be calculated for any period of time in order to investigate dynamic changes in the communities.
-	Example from PI In the research project, three peer communities were examined and described with the help of the implemented metrics. The investigations were limited to the period from 2017 to 2019 for better comparability of the communities. In the comparison of the values, clear differences between the communities became visible, which could be related to the qualitative research results from interviews with community members.
 
 #### Example of [Peer Innovation research project](https://www.peer-innovation.de/)
- 
-For example, the network densities of the peer communities Precious Plastic, OpenEnergyMonitor and Open Street Map could be compared (based on the undirected graphs). One finding, for example, was that the Precious Plastic community has a comparatively high network density. The core of the community (the largest sub-group in which all have interacted with each other at least once) includes just under 10% of the participants. In contrast, however, there is also a large proportion of occasional users in the forum (more than 50%).  More detailed examples as well as comparative tables can be found in the project's work report 3 (link).
+
+In the research project, three peer communities were examined and described with the help of the implemented metrics. The investigations were limited to the period from 2017 to 2019 for better comparability of the communities. In the comparison of the values, clear differences between the communities became visible, which alligns with the qualitative research results from interviews with community members.
+For example, the network densities of the peer communities Precious Plastic, OpenEnergyMonitor and OpenStreetMap could be compared (based on the undirected graphs). One finding was that the Precious Plastic community has a comparatively high network density. The core of the community (the largest sub-group in which all have interacted with each other at least once) includes just under 10% of the participants. In contrast, however, there is also a large proportion of occasional users in the forum (more than 50%).  More detailed examples as well as comparative tables can be found in the project's [work report 3](https://www.peer-innovation.de/deutsch/publikationen/).
 
 #### Extension possibilities 
 
