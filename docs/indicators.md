@@ -299,11 +299,11 @@ The strength, nature and diversity of sentiments expressed in the formulation of
  
 #### Proportion of positive words
  
-- [``idea_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_feedback_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_feedback_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+- [``idea_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_feedback_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_feedback_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_pos_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
  
 #### Mean positivity of words
  
@@ -311,7 +311,7 @@ The strength, nature and diversity of sentiments expressed in the formulation of
 - [``avg_feedback_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``aggregated_feedback_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``avg_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
-- [``aggregated_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+- [``aggregated_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 ### Negative Sentiment
  
@@ -320,7 +320,7 @@ The strength, nature and diversity of sentiments expressed in the formulation of
 - [``avg_feedback_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``aggregated_feedback_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``avg_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
-- [``aggregated_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``aggregated_neg_prop``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
  
 #### Mean negativity of words
  
@@ -328,27 +328,27 @@ The strength, nature and diversity of sentiments expressed in the formulation of
 - [``avg_feedback_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``aggregated_feedback_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 - [``avg_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
-- [``aggregated_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``aggregated_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 ### Diverse Sentiment
  
 #### Standard Deviation of Polarity of words (Textblob, Sentiwordnet)
  
 - [``std_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
-- [``std_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``std_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 #### Standard Deviation of Subjectivity of words (Textblob, Sentiwordnet)
  
 - [``std_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
-- [``std_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``std_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 #### Standard Deviation of Mean positivity of words
  
-- [``std_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``std_mean_positivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 #### Standard Deviation of Mean negativity of words
  
-- [``std_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``std_mean_negativity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 ## Elaboration
  
@@ -596,18 +596,23 @@ To measure the degree of openness in open-source hardware projects, [2] develope
 - [``Use of collaborative tools``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 
 
-[^1]:
+[^1]: 
 Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
 
-[^2] Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
+[^2]: 
+Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
 
-[^3] Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
+[^3]: 
+Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
 
-[^4] Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
+[^4]: 
+Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
 
-[^5] Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
+[^5]: 
+Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
 
-[6] Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
+[^6]: 
+Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
 
 [^7] Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
 
