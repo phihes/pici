@@ -7,7 +7,7 @@
 
 ## Community data collection
 
-#### Concept
+#### Brief description
 
 The toolbox makes use of online forums as a data source for the investigation of peer communities. 
 For further processing, the Toolbox requires a certain data structure that records the time of contribution, the text, a unique contributor and the associated thread for each forum post, where each post forms a data point.
@@ -26,8 +26,7 @@ In the three communities examined, the dynamic data links have already been crea
 
 ## Data preprocessing (Calculation of Networks)
 
-#### Concept
-
+#### Brief description
 Based on the forum data, the toolbox calculates two different interaction networks: Directed and undirected network relationships between contributors. 
 Thus, for the calculation of network metrics, different graphs are created, where the nodes of the networks refer to the contributors in the online forum, and the edges represent their interactions. 
 
@@ -42,7 +41,7 @@ There are other rules of network formation possible. For example, the respective
 
 ## Data labelling 
 
-#### Concept
+#### Brief Description
 
 A part of the data set must be labelled so that the supervised classification algorithm can be trained with it. For this part of the data, the relevance of the forum content must be defined, because the performance of the indicators is measured by this ground truth. The training data set can be created in different ways. 
 	
@@ -57,7 +56,7 @@ The classification of forum content could also be based on completely different 
 
 ## Indicator generation 
 
-#### Concept
+#### Brief Description
 
 The indicator metrics implemented in the toolbox stem from the literature analysis conducted in the [Peer Innovation project](https://www.peer-innovation.de/) in the research context of open innovation and user innovation [^2]. These metrics are each assigned to different observation levels (initial idea, feedback, interaction). When adding further metrics, it must be taken into account to which level the new metric refers. An overview of the current implementations can be found [here](../../indicators).
 
@@ -71,7 +70,7 @@ Furthermore, additional metrics can be added to the toolbox by extending the ind
 
 ## Indicator evaluation  
 
-#### Concept
+#### Brief description
 
 Using supvervised machine learning, the performance of the indicator metrics in classifying forum content is evaluated based on the training dataset. In this way, suitable indicators and their best possible combination are selected for the automated detection of relevant content in the community forum.
 The toolbox uses various machine learning techniques to train classification models that combine the most suitable metrics for classifying forum content.
@@ -86,7 +85,7 @@ In this way, the previously generated metrics could be validated in terms of how
 
 The toolbox calculates key figures and network statistics from the forum data of the peer communities, such as the shares of occasional and core contributors or the network density. These values are used to compare and characterise the peer communities and their network structures.
 
-#### Concept 
+#### Brief description 
 
 The forum data can be statistically evaluated with the toolbox for each peer community. The implemented metrics can be calculated and compared with the other peer communities to identify special features in the interaction structures. In addition, depending on the interest of the study, average values can be calculated for any period of time in order to investigate dynamic changes in the communities.
 
@@ -95,10 +94,23 @@ The forum data can be statistically evaluated with the toolbox for each peer com
 In the research project, three peer communities were examined and described with the help of the implemented metrics. The investigations were limited to the period from 2017 to 2019 for better comparability of the communities. In the comparison of the values, clear differences between the communities became visible, which alligns with the qualitative research results from interviews with community members.
 For example, the network densities of the peer communities Precious Plastic, OpenEnergyMonitor and OpenStreetMap could be compared (based on the undirected graphs). One finding was that the Precious Plastic community has a comparatively high network density. The core of the community (the largest sub-group in which all have interacted with each other at least once) includes just under 10% of the participants. In contrast, however, there is also a large proportion of occasional users in the forum (more than 50%).  More detailed examples as well as comparative tables can be found in the project's [work report 3](https://www.peer-innovation.de/deutsch/publikationen/).
 
+#### Extension possibilities
+
+Extensions of the community comparisons are easily possible by adding forum data from other communities or defining alternative metrics. In addition, comparing the average values of different time periods offers another possibility for evaluation that was not pursued in the research project. Thus, on the one hand, the dynamic development of the communities could be examined or the effect of certain events or interventions on the communities could be evaluated.
+
+## Applying and evaluating indicator values to the entire data set 
+
+#### Brief description
+The integration of the selection of suitable estimation models and indicators allows for the classification of the whole forum content. In this way, the relationships existing in the partial data set between the measurable characteristics and the relevance of the forum content are transferred to the community level. 
+In this step, the trained classification models are applied to the entire data set in order to classify all the forum content extracted. Thereby, the automated evaluation learned from the training data is applied to all forum content. The results of the automated classification can in turn be evaluated and compared for individual communities, different time periods or sub-forums.
+
+#### Example of [Peer Innovation research project](https://www.peer-innovation.de/)
+
+In the research project, the trained models were used to estimate innovation activities of the peer communities in the forum data. The proportion of threads that are related to innovation activities or show a certain innovation potential could be determined automatically for the communities studied. However, the transferability of the estimation models between communities could not be examined more closely within the framework of the project.
+
 #### Extension possibilities 
 
-Extensions of the community comparisons are easily possible by adding forum data from other communities or defining alternative metrics. In addition, comparing the average values of different time periods offers another possibility for evaluation that was not pursued in the research project. Thus, on the one hand, the dynamic development of the communities could be examined or the effect of certain events or interventions on the communities could be evaluated. 
-
+The toolbox could easily be used to make comparative estimates for different time periods or sub-forums of the same community. In the future, the robustness of the estimates should be tested when transferring the models to different communities in order to enable automated classification without prior labelling.
 
 [^1]: Paxton, A., Varoquaux, N., Holdgraf, C., & Geiger, R. S. (2022). Community, Time, and (Con) text: A Dynamical Systems Analysis of Online Communication and Community Health among Open‐Source Software Communities. Cognitive Science, 46(5), e13134.
 
