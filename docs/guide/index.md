@@ -66,7 +66,7 @@ The research project aims to validate suitable indicators for innovation activit
 
 #### Extension possibilities 
 
-Furthermore, additional metrics can be added to the toolbox by extending the indicator library. The procedure is explained in the [Examples for Creating a custom indicator](pici/docs/examples/Creating a custom indicator.ipynb). A new metric must then be defined at the respective observation level. For example, additional text-based indicators could focus on certain keywords in the contributions or mark certain features in the contributors' response behaviour.
+Furthermore, additional metrics can be added to the toolbox by extending the indicator library. The procedure is explained in the [Examples for Creating a custom indicator](pici/docs/examples/Creating a custom indicator). A new metric must then be defined at the respective observation level. For example, additional text-based indicators could focus on certain keywords in the contributions or mark certain features in the contributors' response behaviour.
 
 ## Indicator evaluation  
 
