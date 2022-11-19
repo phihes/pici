@@ -486,19 +486,6 @@ Community feedback can be measured by its quantity [^19] [^40] [^12], positivity
 
 The factor "Activity Level" represents the aggregated degree of interaction and engagement at community level. The higher the activity level the more ideas and comments are shared, and the greater the prevalence of innovation activity assuming contribution quality remains constant. Also, highly active communities might attract more active and therefore innovative users whose engagement in turn lifts community activity culminating in self-reinforcing effects. Additionally, the community's age influences its activity level. In its early stages, a peer community draws more attention and sparks curiosity in potential contributors. Thisinterest and engagement tends to decline over time. However, communities can build their user base and optimize structures as they mature, which in turn has a positive impact on activity. 
 
-[1] Bayus, B. L. (2013). Crowdsourcing new product ideas over time: An analysis of the Dell IdeaStorm community. Management science, 59(1), 226-244.
-
-[2] Chan, K. W., Li, S. Y., Ni, J., & Zhu, J. J. (2021). What feedback matters? The role of experience in motivating crowdsourcing innovation. Production and Operations Management, 30(1), 103-126.
-
-[3] Hoornaert, S., Ballings, M., Malthouse, E. C., & Van den Poel, D. (2017). Identifying new product ideas: waiting for the wisdom of the crowd or screening ideas in real time. Journal of Product Innovation Management, 34(5), 580-597.
-
-[4] Li, M., Kankanhalli, A., & Kim, S. H. (2016). Which ideas are more likely to be implemented in online user innovation communities? An empirical analysis. Decision Support Systems, 84, 28-40.
-
-[5] Ma, J., Lu, Y., & Gupta, S. (2019). User innovation evaluation: Empirical evidence from an online game community. Decision Support Systems, 117, 113-123.
-
-[6] Piezunka, H., & Dahlander, L. (2015). Distant search, narrow attention: How crowding alters organizations’ filtering of suggestions in crowdsourcing. Academy of Management Journal, 58(3), 856-880.
-
-
 #### Same day submissions
 
 - [``Same day submissions``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
@@ -597,25 +584,25 @@ To measure the degree of openness in open-source hardware projects, [2] develope
 
 
 [^1]: 
-Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
+1. Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
 
 [^2]: 
-Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
+2. Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
 
 [^3]: 
-Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
+3. Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
 
 [^4]: 
-Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
+4. Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
 
 [^5]: 
-Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
+5. Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
 
 [^6]: 
-Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
+6. Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
 
 [^7]: 
-Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
+7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
 
 [^8]: 
 Agichtein, E., Castillo, C., Donato, D., Gionis, A., & Mishne, G. (2008, February). Finding high-quality content in social media. In Proceedings of the 2008 international conference on web search and data mining (pp. 183-194).
