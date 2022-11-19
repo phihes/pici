@@ -683,10 +683,10 @@ McDonough III, E. F., Kahnb, K. B., & Barczaka, G. (2001). An investigation of t
 [^29]: 
 Blau, P. M. (1977). A macrosociological theory of social structure. American journal of sociology, 83(1), 26-54.
 
-[^30]: :
+[^30]: 
 Choi, J. N., Sung, S. Y., Lee, K., & Cho, D. S. (2011). Balancing cognition and emotion: Innovation implementation as a function of cognitive appraisal and emotional reactions toward innovation. Journal of Organizational Behavior, 32(1), 107-124.
 
-[^31]: :
+[^31]: 
 Weiss, H. M., & Cropanzano, R. (1996). Affective events theory. Research in organizational behavior, 18(1), 1-74.
 
 [^32]: 
