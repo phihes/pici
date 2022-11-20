@@ -72,14 +72,12 @@ Furthermore, additional metrics can be added to the toolbox by extending the ind
 
 #### Brief description
 
-Using supvervised machine learning, the performance of the indicator metrics in classifying forum content is evaluated based on the training dataset. In this way, suitable indicators and their best possible combination are selected for the automated detection of relevant content in the community forum.
-The toolbox uses various machine learning techniques to train classification models that combine the most suitable metrics for classifying forum content.
+The toolbox uses supervised machine learning techniques to train classification models that combine the most suitable metrics for classifying forum content.
+The labelled presence or absence of innovation potential and activities per thread represent the target in the dataset for classification. Different parts of this data set are used to train the cross-validated classification model. The change in classification accuracy based on the inserted indicator metrics benchmarks their importance or explanatory power. In this way, suitable indicators and their best possible combination are selected for the automated detection of relevant content in the community forum.
 
 #### Example of [Peer Innovation research project](https://www.peer-innovation.de/) 
 
-In the research project, the classification algorithm was trained with the manually labelled threads. 
-
-In this way, the previously generated metrics could be validated in terms of how well they can predict the occurrence of innovation activities in discussion threads.
+In the research project, the classification algorithm was trained with the manually labelled threads. Performing supervised feature selection, e.g., using recursive feature elimination methods such as boruta, returns a list of indicators suitable for classifying threads according to their degree of innovation. In this way, the previously generated metrics could be validated in terms of how well they can predict the occurrence of innovation activities in discussion threads.
 
 ## Generating indicator values for (new) communities 
 
