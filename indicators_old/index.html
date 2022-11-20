@@ -1,0 +1,990 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Documentation of the PICI (Peer Innovation Community Indicators) toolbox" name="description"/>
+<meta content="Philipp Heß" name="author"/>
+<link href="https://phihes.github.io/pici/indicators_old/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.3.0, mkdocs-material-8.3.9" name="generator"/>
+<title>Indicators - PICI</title>
+<link href="../assets/stylesheets/main.1d29e8d0.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.cbb835fc.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"PT Sans";--md-code-font:"JetBrains Mono"}</style>
+<link href="../assets/_mkdocstrings.css" rel="stylesheet"/>
+<link href="../extra/peerinnovation.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="peerinnovation" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#indicators">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+            
+  PICI is currently under development. <img alt="🔥" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f525.svg" title=":fire:"/> A first release is planned for Q1 2023.
+
+          </div>
+</aside>
+</div>
+<div data-md-component="outdated" hidden="">
+<aside class="md-banner md-banner--warning">
+</aside>
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="PICI" class="md-header__button md-logo" data-md-component="logo" href=".." title="PICI">
+<img alt="logo" src="../images/logo_64px.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            PICI
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Indicators
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/phihes/pici" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="..">
+<span><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 128c17.67 0 32 14.33 32 32s-14.33 32-32 32-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2 0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25 0-24-10.75-24-24s10.8-24 24-24h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24s-10.7 24-24 24z"></path></svg>About</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../guide/">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../examples/">
+<span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../indicators/">
+<span><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z"></path></svg>Indicators</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../reference/pici/">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="PICI" class="md-nav__button md-logo" data-md-component="logo" href=".." title="PICI">
+<img alt="logo" src="../images/logo_64px.png"/>
+</a>
+    PICI
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/phihes/pici" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+<span><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 128c17.67 0 32 14.33 32 32s-14.33 32-32 32-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2 0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25 0-24-10.75-24-24s10.8-24 24-24h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24s-10.7 24-24 24z"></path></svg>About</span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../guide/"><span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span></a>
+<label for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--&gt;&lt;path d='M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z'&gt;&lt;/path&gt;&lt;/svg&gt;User guide&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../guide/community_data/">
+        Community data
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../guide/indicators/">
+        Indicators
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../guide/data_labels/">
+        Data labels
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../examples/"><span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span></a>
+<label for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 384 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;path d='M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z'&gt;&lt;/path&gt;&lt;/svg&gt;Examples&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../examples/Loading%20the%20toolbox/">
+        Loading the toolbox
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../examples/Creating%20a%20custom%20indicator/">
+        Creating a custom indicator
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../indicators/">
+<span><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z"></path></svg>Indicators</span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;path d='M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z'&gt;&lt;/path&gt;&lt;/svg&gt;API&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" id="__nav_5_1" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../reference/pici/">pici</a>
+<label for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="pici" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+          pici
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/classification/">
+        classification
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" id="__nav_5_1_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../reference/pici/communities/">communities</a>
+<label for="__nav_5_1_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="communities" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_2">
+<span class="md-nav__icon md-icon"></span>
+          communities
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/communities/discourse/">
+        discourse
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/communities/oem/">
+        oem
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/communities/osm/">
+        osm
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/communities/preciousplastic/">
+        preciousplastic
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/community/">
+        community
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/datatypes/">
+        datatypes
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/helpers/">
+        helpers
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/labelling/">
+        labelling
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_7" id="__nav_5_1_7" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../reference/pici/metrics/">metrics</a>
+<label for="__nav_5_1_7">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="metrics" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_7">
+<span class="md-nav__icon md-icon"></span>
+          metrics
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/basic/">
+        basic
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/cached_metrics/">
+        cached_metrics
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/distinctiveness/">
+        distinctiveness
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/elaboration/">
+        elaboration
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/experience/">
+        experience
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/helpfulness/">
+        helpfulness
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/idea_popularity/">
+        idea_popularity
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/network_position/">
+        network_position
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/reports/">
+        reports
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/sentiment/">
+        sentiment
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/metrics/status_reputation/">
+        status_reputation
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/pici/">
+        pici
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/pipelines/">
+        pipelines
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_10" id="__nav_5_1_10" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../reference/pici/preprocessors/">preprocessors</a>
+<label for="__nav_5_1_10">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="preprocessors" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_10">
+<span class="md-nav__icon md-icon"></span>
+          preprocessors
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/preprocessors/posts/">
+        posts
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/preprocessors/topics/">
+        topics
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/registries/">
+        registries
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/reporting/">
+        reporting
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/pici/visualizations/">
+        visualizations
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#overview">
+    Overview
+  </a>
+<nav aria-label="Overview" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#structure">
+    Structure
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#networks">
+    Networks
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#levels-of-observation">
+    Levels of observation
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#data">
+    Data
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#list-of-indicators">
+    List of indicators
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#status-and-reputation">
+    Status and reputation
+  </a>
+<nav aria-label="Status and reputation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-degree-centrality">
+    In-degree centrality
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#average-number-of-replies-to-initial-contribution">
+    Average number of replies to initial contribution
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#expertise">
+    Expertise
+  </a>
+<nav aria-label="Expertise" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pagerank">
+    PageRank
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hits">
+    HITS
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#experience">
+    Experience
+  </a>
+<nav aria-label="Experience" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#topic-re-occurence">
+    Topic re-occurence
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#previous-knowledge-domains">
+    Previous knowledge domains
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tenure">
+    Tenure
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#absolute-contribution">
+    Absolute contribution
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#normalized-contribution">
+    Normalized contribution
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#out-degree-centrality">
+    Out-degree centrality
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diversity-of-contributions">
+    Diversity of contributions
+  </a>
+<nav aria-label="Diversity of contributions" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sub-forum-diversity">
+    Sub-forum diversity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#links-to-external-resources">
+    Links to external resources
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#content-distance">
+    Content distance
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#providing-assistance">
+    Providing assistance
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#past-success">
+    Past success
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#network-position">
+    Network position
+  </a>
+<nav aria-label="Network position" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fuger-role">
+    Fuger-role
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fueller-role">
+    Fueller-role
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lead-user">
+    Lead user
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#hero">
+    Hero
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#demographics">
+    Demographics
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#idea-popularity">
+    Idea popularity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#diversity-of-collaborators">
+    Diversity of collaborators
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#sentiment">
+    Sentiment
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#openness">
+    Openness
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#elaboration">
+    Elaboration
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#distinctiveness">
+    Distinctiveness
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#community-feedback">
+    Community feedback
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#activity-level">
+    Activity level
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prominence">
+    Prominence
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#crowd-vs-community">
+    Crowd vs community
+  </a>
+<nav aria-label="Crowd vs community" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#lorenz-curve">
+    Lorenz curve
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/phihes/pici/edit/master/docs/indicators_old.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
+</a>
+<h1 id="indicators">Indicators</h1>
+<h2 id="overview">Overview</h2>
+<p>The toolbox provides a repository of predefined indicators and simple tools to add new, custom indicators.</p>
+<h3 id="structure">Structure</h3>
+<p>By default, the central unit of observation is the forum <strong>thread</strong>, which can be part of one or multiple sub-forums. We propose that a thread is the <em>observable trace</em> of a sequence of interactions that can represent or display innovation activities. Each post in a thread is a <strong>contribution</strong> by a community member (the <strong>contributor</strong>). We single out the <strong>initial contribution</strong>, as we assume that XYZ. A <strong>community</strong> consists of a number of contributors and their contributions in threads, which are organized in sub-forums.</p>
+<h3 id="networks">Networks</h3>
+<p>Additional levels of observation are the <strong>networks</strong> formed by contributors. The two main representations are the <em>co-contribution network</em> and the <em>comment network</em>.</p>
+<dl>
+<dt><code>co-contributor network</code></dt>
+<dd>
+<p>The co-contributor network is an <em>undirected graph</em> where each node represents a contributor. A pair of contributors is connected by an edge if both have contributed in at least one shared thread. The edge weight is proportional to the number of threads both contributed to.</p>
+</dd>
+<dt><code>commenter network</code></dt>
+<dd>
+<p>The commenter network is a <em>directed graph</em> where each node represents a contributor. A contributor <em>A</em> has an edge pointing to contributor <em>B</em> if <em>A</em> has contributed in at least one thread where contributor <em>B</em> has posted the initial contribution (<em>A</em> has "commented"). The weight of edge <em>A</em>→<em>B</em> is proportional to the total number of comments <em>A</em> made on initial contributions of <em>B</em>.</p>
+</dd>
+</dl>
+<p align="center">
+<a class="glightbox" href="../images/structure_and_terminology.png"><img src="../images/structure_and_terminology.png" style="width: 55%; max-width:700px; min-width:300px;" width="700px"/></a>
+</p>
+<h3 id="levels-of-observation">Levels of observation</h3>
+<p>Each indicator is observed on either <strong>contributor</strong>, <strong>contribution</strong>, <strong>thread</strong>, or <strong>community</strong> level. Aggregations of indicators are provided for higher levels. For example, the <em>number of contributions made by a contributor</em> can be an indicator for their role in the community. This indicator would be provided on thread-level as, e.g., <em>average number of contributions per contributor</em>, measured for all contributors that have contributed to a specific thread. Common aggregations are mean, sum, standard-deviation, min and max. Other aggregations (or <em>transformations</em>) could also pick out a single of multiple values. On thread-level, an example would be the <em>total number of contributions made by the contributor of the initial contribution</em>.</p>
+<p>The thread observation level can be subdivided into three further subsets of posts: the whole thread, only the <strong>initial contribution</strong>, or only the <strong>feedback</strong> (all posts that were not authored by the initial contributor). This helps to implement indicators that rely on more detailed concepts, such as <em>ideas</em> in <em>idea communities</em>, or <em>questions</em> in <em>question communities</em>, which can potentially be operationalized by <em>inital contribution</em>.</p>
+<p>[TODO: Grafik]</p>
+<h3 id="data">Data</h3>
+<p>In order to be able to apply indicators to a heterogeneous set of communities, most indicators rely on the following basic data that can be collected from most online forums:</p>
+<ul>
+<li>contribution meta data: contributor, date, associated thread, position in thread, sub-forum</li>
+<li>contribution content: text, html, extracted links, images</li>
+<li>contributor properties: name/id</li>
+<li>thread: title</li>
+</ul>
+<p>Other data, such as likes/upvotes, friendship-relations, contributor location, thread views, etc., might be available in some communities and can be included in more specialized indicators.</p>
+<h3 id="list-of-indicators">List of indicators</h3>
+<p>The following list conceptually groups all available indicators. Each indicator description links to all relevant metrics that are implemented in the toolbox. Each indicator is labelled with its level of observation: <span class="label contributor">contributor</span> <span class="label contribution">contribution</span> <span class="label initial-contribution">initial contribution</span>
+<span class="label thread">thread</span> <span class="label community">community</span>. Specialized indicators are marked with <span class="label specialized">specialized</span> and state which additional data is required.</p>
+<p>Please refer to the <a href="">user guide</a> and the <a href="">examples</a> on how to <a href="">generate the indicators</a> or how to <a href="">implement a custom indicator</a>.</p>
+<h2 id="status-and-reputation">Status and reputation</h2>
+<h3 id="in-degree-centrality">In-degree centrality</h3>
+<ul>
+<li><a href="../reference/pici/metrics/network/#pici.metrics.network.in_degree_centrality"><code>in-degree centrality</code></a></li>
+</ul>
+<p>[1] Füller, J., Hutter, K., Hautz, J., &amp; Matzler, K. (2014). User Roles and Contributions in Innovation-Contest Communities. Journal of Management Information Systems, 31(1), 273–308. https://doi.org/10.2753/MIS0742-1222310111</p>
+<h3 id="average-number-of-replies-to-initial-contribution">Average number of replies to initial contribution</h3>
+<ul>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.replies_to_initial_post"><code>avg number of replies</code></a></li>
+</ul>
+<p>[1] Yuan, X., Yang, S., &amp; Wang, C. (2017). Lead user identification in online user innovation communities: A method based on random forest classification. <em>2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC), 157–160.</em> https://doi.org/10.1109/ICEIEC.2017.8076534</p>
+<h2 id="expertise">Expertise</h2>
+<h3 id="pagerank">PageRank</h3>
+<p>[1] Zhang, J., Ackerman, M. S., &amp; Adamic, L. (2007). Expertise Networks in Online Communities: Structure and Algorithms. <em>WWW ’07: Proceedings of the 16th International Conference on World Wide Web, 221–230.</em></p>
+<p>[2] Agichtein, E., Castillo, C., &amp; Donato, D. (2008). Finding High-Quality Content in Social Media. <em>Proceedings of the 2008 International Conference on Web Search and Data Mining, 11.</em></p>
+<h3 id="hits">HITS</h3>
+<h2 id="experience">Experience</h2>
+<h3 id="topic-re-occurence">Topic re-occurence</h3>
+<p><span class="label initial-contribution">initial contribution</span></p>
+<p>"The number of times a topic of the uploaded idea appeared in previous own ideas".</p>
+<p>[1] Resch, C., &amp; Kock, A. (2020). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. <em>Research Policy, 104142.</em> https://doi.org/10.1016/j.respol.2020.104142</p>
+<h3 id="previous-knowledge-domains">Previous knowledge domains</h3>
+<p><span class="label initial-contribution">initial contribution</span></p>
+<p>"The number of different knowledge domains with which an individual engaged in previous own ideas"</p>
+<p>[1] Resch, C., &amp; Kock, A. (2020). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. <em>Research Policy, 104142.</em> https://doi.org/10.1016/j.respol.2020.104142</p>
+<h3 id="tenure">Tenure</h3>
+<p><span class="label contributor">contributor</span></p>
+<p>TODO:would have to include data since forum inception..?!</p>
+<ul>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.days_since_first_contribution"><code>days since first contribution</code></a></li>
+</ul>
+<h3 id="absolute-contribution">Absolute contribution</h3>
+<p><span class="label contributor">contributor</span></p>
+<p>Number of contributions, number of intial contributions.</p>
+<ul>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>number of contributions</code></a></li>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_initial_contributions"><code>number of initial contributions</code></a></li>
+</ul>
+<h3 id="normalized-contribution">Normalized contribution</h3>
+<p><span class="label contributor">contributor</span></p>
+<p>Number of contributions, number of initial contributions; normalized by time spent in community / length of contribution / number of replies to initial contribution</p>
+<ul>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>number of contributions</code></a></li>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_initial_contributions"><code>number of initial contributions</code></a></li>
+</ul>
+<h3 id="out-degree-centrality">Out-degree centrality</h3>
+<p><span class="label contributor">contributor</span></p>
+<h2 id="diversity-of-contributions">Diversity of contributions</h2>
+<h3 id="sub-forum-diversity">Sub-forum diversity</h3>
+<p><span class="label contributor">contributor</span></p>
+<p>The diversity of a contributor's contributions in regard to which sub-forum they were made to. Diversity is either defined as a) <em>total number of different sub-forums</em>, or b) <em>the entropy of contributing behavior in gerade to sub-forum "classes"</em>. Each metric is defined for both 1) <em>all contributions</em>, and 2) <em>inital contributions</em> only.</p>
+<ul>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>number of sub-forums contributed to</code></a></li>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>number of sub-forums made inital contributions to</code></a></li>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>entropy of sub-forums contributed to</code></a></li>
+<li><a href="../reference/pici/metrics/basic/#pici.metrics.basic.number_of_contributions"><code>entropy of sub-forums made inital contributions to</code></a></li>
+</ul>
+<h3 id="links-to-external-resources">Links to external resources</h3>
+<h3 id="content-distance">Content distance</h3>
+<h2 id="providing-assistance">Providing assistance</h2>
+<h2 id="past-success">Past success</h2>
+<h2 id="network-position">Network position</h2>
+<h3 id="fuger-role">Fuger-role</h3>
+<p><span class="label contributor">contributor</span></p>
+<h4 id="concept">Concept</h4>
+<p>Contributors can be classified by how much they engage in discussions by commenting (reacting to initial contributions), versus how much they initially contribute themselves. [1] distinguish the four classes "collaborator", "contributor", "allrounder", and "passive user". For example, "collaborators" are contributors that are often involved in discussions, but do not often contribute own ideas. Their contributions were found to be of higher quality in a crowdsourcing context [1].</p>
+<p>[1] constructed a social network of "actor-to-actor relationships" "based on comments written on ideas". They used in-degree (comments received) and out-degree (comments given), as well as the number of contributions (ideas, stories, etc.) to determine user clusters (k-means) and users' roles. Qualitatively, their classification/clustering results can be summarized as:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>In-degree</th>
+<th>Out-degree</th>
+<th>Contributions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collaborator</td>
+<td>High</td>
+<td>High</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Contributor</td>
+<td>High</td>
+<td>High</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Allrounder</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Passive user</td>
+<td>Low</td>
+<td>Low</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<h4 id="metrics">Metrics</h4>
+<p>This group of metrics assigns one of the four classes to each contributor: It uses the co-contribution network to determine each user's number of "received" and "given" comments (weighted in- and out-degree). In- and out-degree and number of initial posts form the basis for a community-level clustering with a fixed number of four clusters. Cluster centers are then ranked, and cluster labels assigned according to the table above. </p>
+<p><em>Implemented:</em></p>
+<p>Contributor:
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.fuger_role"><code>fuger-role</code></a></p>
+<p>Topic:
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role"><code>first post by collaborator</code></a>
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role"><code>first post by contributor</code></a>
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role"><code>first post by allrounder</code></a>
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.first_post_fuger_role"><code>first post by passive user</code></a></p>
+<p>[1] Fuger, S., Schimpf, R., Füller, J., &amp; Hutter, K. (2017). User roles and team structures in a crowdsourcing community for international development - a social  network perspective. <em>Information Technology for Development, 23(3)</em>, 438-462. https://doi.org/10.1080/02681102.2017.1353947</p>
+<h3 id="fueller-role">Fueller-role</h3>
+<p><span class="label contributor">contributor</span></p>
+<h4 id="concept_1">Concept</h4>
+<p>In the context of innovation-contest communities, [1] define six contributor roles by qualitative evaluation of contributor clusters, formed based on contribution patterns. Contribution patterns are defined on a co-contribution network using in-degree (comments directed towards contributor), out-degree (comments made by contributor), and number of contributions by contributor. The roles are labelled <em>socializer</em>, <em>idea generator</em>, <em>master</em>, <em>efficient contributor</em>, <em>passive idea generator</em>, and <em>passive commentator</em> (see table below). They find that  </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>In-degree</th>
+<th>Out-degree</th>
+<th>Contributions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socializer</td>
+<td>Low</td>
+<td>High</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Idea generator</td>
+<td>Medium</td>
+<td>Low</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Master</td>
+<td>Very high</td>
+<td>High</td>
+<td>Very high</td>
+</tr>
+<tr>
+<td>Efficient contributor</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Passive idea generator</td>
+<td>None</td>
+<td>None</td>
+<td>Very low</td>
+</tr>
+<tr>
+<td>Passive commentator</td>
+<td>None</td>
+<td>Very low</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><em>Implemented:</em></p>
+<p>Contributor:
+- <a href="../reference/pici/metrics/basic/#pici.metrics.network.fueller_role"><code>fueller-role</code></a></p>
+<p>Topic:
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by socializer</code></a>
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by idea generator</code></a>
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by master</code></a>
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by efficient contributor</code></a>
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by passive idea generator</code></a>
+- <a href="../reference/pici/metrics/network/#pici.metrics.network.first_post_fuger_role"><code>first post by passive commentator</code></a></p>
+<p>[1] Füller, J., Hutter, K., Hautz, J., &amp; Matzler, K. (2014). User Roles and Contributions in Innovation-Contest Communities. <em>Journal of Management Information Systems, 31(1),</em> 273–308. https://doi.org/10.2753/MIS0742-1222310111</p>
+<h3 id="lead-user">Lead user</h3>
+<p><span class="label contributor">contributor</span></p>
+<h3 id="hero">Hero</h3>
+<p><span class="label contributor">contributor</span></p>
+<h2 id="demographics">Demographics</h2>
+<h2 id="idea-popularity">Idea popularity</h2>
+<h2 id="diversity-of-collaborators">Diversity of collaborators</h2>
+<h2 id="sentiment">Sentiment</h2>
+<h2 id="openness">Openness</h2>
+<h2 id="elaboration">Elaboration</h2>
+<h2 id="distinctiveness">Distinctiveness</h2>
+<h2 id="community-feedback">Community feedback</h2>
+<h2 id="activity-level">Activity level</h2>
+<h2 id="prominence">Prominence</h2>
+<h2 id="crowd-vs-community">Crowd vs community</h2>
+<h3 id="lorenz-curve">Lorenz curve</h3>
+<p><span class="label community">community</span></p>
+<h4 id="concept_2">Concept</h4>
+<p>The Lorenz curve of % posts (x-axis) made by % contributors (y-axis) can be used to indicate contribution inequality in communities.</p>
+<h4 id="metrics_1">Metrics</h4>
+<p>Community:
+- <a href="../reference/pici/metrics/basic/#pici.metrics.basic.lorenz"><code>% contributors</code> + <code>% posts</code></a></p>
+<h4 id="visualizations">Visualizations</h4>
+<ul>
+<li><a href="../reference/pici/visualizations/#pici.visualizations.plot_lorenz_curves"><code>plot_lorenz_curves</code></a></li>
+</ul>
+</article>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://twitter.com/Peer_Innovation" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.tabs.link", "navigation.tabs", "navigation.sections", "navigation.tracking", "announce.dismiss"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+<script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+<script src="../extra/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://kit.fontawesome.com/1a2b3c4d5e.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "width": "100%", "height": "auto", "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom"});})</script></body>
+</html>

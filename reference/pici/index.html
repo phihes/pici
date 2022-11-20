@@ -1,0 +1,5015 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Documentation of the PICI (Peer Innovation Community Indicators) toolbox" name="description"/>
+<meta content="Philipp Heß" name="author"/>
+<link href="https://phihes.github.io/pici/reference/pici/" rel="canonical"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.3.0, mkdocs-material-8.3.9" name="generator"/>
+<title>pici - PICI</title>
+<link href="../../assets/stylesheets/main.1d29e8d0.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.cbb835fc.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"PT Sans";--md-code-font:"JetBrains Mono"}</style>
+<link href="../../assets/_mkdocstrings.css" rel="stylesheet"/>
+<link href="../../extra/peerinnovation.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>html.glightbox-open { overflow: initial; height: 100%; }</style><script src="../../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="" data-md-color-scheme="peerinnovation" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#pici">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+            
+  PICI is currently under development. <img alt="🔥" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f525.svg" title=":fire:"/> A first release is planned for Q1 2023.
+
+          </div>
+</aside>
+</div>
+<div data-md-component="outdated" hidden="">
+<aside class="md-banner md-banner--warning">
+</aside>
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="PICI" class="md-header__button md-logo" data-md-component="logo" href="../.." title="PICI">
+<img alt="logo" src="../../images/logo_64px.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            PICI
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              pici
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/phihes/pici" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="Tabs" class="md-tabs" data-md-component="tabs">
+<div class="md-tabs__inner md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+<span><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 128c17.67 0 32 14.33 32 32s-14.33 32-32 32-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2 0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25 0-24-10.75-24-24s10.8-24 24-24h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24s-10.7 24-24 24z"></path></svg>About</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../guide/">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../examples/">
+<span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../indicators/">
+<span><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z"></path></svg>Indicators</span>
+</a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link md-tabs__link--active" href="./">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="PICI" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="PICI">
+<img alt="logo" src="../../images/logo_64px.png"/>
+</a>
+    PICI
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/phihes/pici" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span><svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 128c17.67 0 32 14.33 32 32s-14.33 32-32 32-32-14.3-32-32 14.3-32 32-32zm40 256h-80c-13.2 0-24-10.7-24-24s10.75-24 24-24h16v-64h-8c-13.25 0-24-10.75-24-24s10.8-24 24-24h32c13.25 0 24 10.75 24 24v88h16c13.25 0 24 10.75 24 24s-10.7 24-24 24z"></path></svg>About</span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../../guide/"><span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span></a>
+<label for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--&gt;&lt;path d='M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z'&gt;&lt;/path&gt;&lt;/svg&gt;User guide&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M448 336V48c0-26.51-21.5-48-48-48H96C42.98 0 0 42.98 0 96v320c0 53.02 42.98 96 96 96h320c17.67 0 32-14.33 32-31.1 0-11.72-6.607-21.52-16-27.1v-81.36c9.8-9.64 16-22.24 16-36.44zM143.1 128h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zm0 64h192c9.7 0 16.9 7.2 16.9 16s-7.2 16-16 16H143.1c-7.9 0-15.1-7.2-15.1-16s7.2-16 15.1-16zM384 448H96c-17.67 0-32-14.33-32-32s14.33-32 32-32h288v64z"></path></svg>User guide</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guide/community_data/">
+        Community data
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guide/indicators/">
+        Indicators
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../guide/data_labels/">
+        Data labels
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="../../examples/"><span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span></a>
+<label for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 384 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;path d='M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z'&gt;&lt;/path&gt;&lt;/svg&gt;Examples&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 384 512" xmlns="http://www.w3.org/2000/svg"><path d="M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7l.128-39.2H112l.1 39.2zM192 0C90.02.32 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8 16.53 18.84 42.34 58.23 52.22 91.45.031.25.094.517.125.782h160.2c.031-.265.094-.516.125-.782 9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1 368 78.8 289.2.004 192 0zm96.4 260.1c-15.66 17.85-35.04 46.3-49.05 75.89h-94.61c-14.01-29.59-33.39-58.04-49.04-75.88C75.24 236.8 64 206.1 64 175.1 64 113.3 112.1 48.25 191.1 48 262.6 48 320 105.4 320 175.1c0 31-11.2 61.7-31.6 85zM176 80c-44.1 0-80 35.9-80 80 0 8.844 7.156 16 16 16s16-7.2 16-16c0-26.47 21.53-48 48-48 8.844 0 16-7.148 16-15.99S184.8 80 176 80z"></path></svg>Examples</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../examples/Loading%20the%20toolbox/">
+        Loading the toolbox
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../examples/Creating%20a%20custom%20indicator/">
+        Creating a custom indicator
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../indicators/">
+<span><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z"></path></svg>Indicators</span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5">
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="&lt;span&gt;&lt;svg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;path d='M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z'&gt;&lt;/path&gt;&lt;/svg&gt;API&lt;/span&gt;" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+<span><svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"></path></svg>API</span>
+</label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" id="__nav_5_1" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index md-nav__link--active">
+<a href="./">pici</a>
+<label for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="pici" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_5_1">
+<span class="md-nav__icon md-icon"></span>
+          pici
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="classification/">
+        classification
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_2" id="__nav_5_1_2" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="communities/">communities</a>
+<label for="__nav_5_1_2">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="communities" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_2">
+<span class="md-nav__icon md-icon"></span>
+          communities
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="communities/discourse/">
+        discourse
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="communities/oem/">
+        oem
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="communities/osm/">
+        osm
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="communities/preciousplastic/">
+        preciousplastic
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="community/">
+        community
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="datatypes/">
+        datatypes
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="helpers/">
+        helpers
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="labelling/">
+        labelling
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_7" id="__nav_5_1_7" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="metrics/">metrics</a>
+<label for="__nav_5_1_7">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="metrics" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_7">
+<span class="md-nav__icon md-icon"></span>
+          metrics
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/basic/">
+        basic
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/cached_metrics/">
+        cached_metrics
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/distinctiveness/">
+        distinctiveness
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/elaboration/">
+        elaboration
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/experience/">
+        experience
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/helpfulness/">
+        helpfulness
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/idea_popularity/">
+        idea_popularity
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/network_position/">
+        network_position
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/reports/">
+        reports
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/sentiment/">
+        sentiment
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="metrics/status_reputation/">
+        status_reputation
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="pici/">
+        pici
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="pipelines/">
+        pipelines
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_10" id="__nav_5_1_10" type="checkbox"/>
+<div class="md-nav__link md-nav__link--index">
+<a href="preprocessors/">preprocessors</a>
+<label for="__nav_5_1_10">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-label="preprocessors" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_5_1_10">
+<span class="md-nav__icon md-icon"></span>
+          preprocessors
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="preprocessors/posts/">
+        posts
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="preprocessors/topics/">
+        topics
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="registries/">
+        registries
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="reporting/">
+        reporting
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="visualizations/">
+        visualizations
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici">
+    pici
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.community">
+    community
+  </a>
+<nav aria-label="community" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.community.Community">
+    Community
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.datatypes">
+    datatypes
+  </a>
+<nav aria-label="datatypes" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.datatypes.CommunityDataLevel">
+    CommunityDataLevel
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.datatypes.MetricReturnType">
+    MetricReturnType
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers">
+    helpers
+  </a>
+<nav aria-label="helpers" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.aggregate">
+    aggregate()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.apply_to_initial_posts">
+    apply_to_initial_posts()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.as_table">
+    as_table()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.create_co_contributor_graph">
+    create_co_contributor_graph()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.create_commenter_graph">
+    create_commenter_graph()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.flat">
+    flat()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.generate_indicator_results">
+    generate_indicator_results()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.join_df">
+    join_df()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.merge_dfs">
+    merge_dfs()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.num_words">
+    num_words()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.series_most_common">
+    series_most_common()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.where_all">
+    where_all()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.helpers.word_occurrences">
+    word_occurrences()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.labelling">
+    labelling
+  </a>
+<nav aria-label="labelling" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.labelling.InnovationLabels">
+    InnovationLabels
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.labelling.LabelCollection">
+    LabelCollection
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.labelling.LabelStats">
+    LabelStats
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.labelling.Labels">
+    Labels
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics">
+    metrics
+  </a>
+<nav aria-label="metrics" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.basic">
+    basic
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.cached_metrics">
+    cached_metrics
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.distinctiveness">
+    distinctiveness
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.elaboration">
+    elaboration
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.experience">
+    experience
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.helpfulness">
+    helpfulness
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.idea_popularity">
+    idea_popularity
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.network_position">
+    network_position
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.reports">
+    reports
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.metrics.status_reputation">
+    status_reputation
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.pici">
+    pici
+  </a>
+<nav aria-label="pici" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.pici.Pici">
+    Pici
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.pipelines">
+    pipelines
+  </a>
+<nav aria-label="pipelines" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.pipelines.Pipelines">
+    Pipelines
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.preprocessors">
+    preprocessors
+  </a>
+<nav aria-label="preprocessors" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.preprocessors.posts">
+    posts
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.preprocessors.topics">
+    topics
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.registries">
+    registries
+  </a>
+<nav aria-label="registries" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.registries.MetricRegistry">
+    MetricRegistry
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.registries.PreprocessorRegistry">
+    PreprocessorRegistry
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.registries.ReportRegistry">
+    ReportRegistry
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting">
+    reporting
+  </a>
+<nav aria-label="reporting" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting.Metric">
+    Metric
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting.Report">
+    Report
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting.metric">
+    metric()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting.preprocessor">
+    preprocessor()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.reporting.report">
+    report()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.visualizations">
+    visualizations
+  </a>
+<nav aria-label="visualizations" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pici.visualizations.plot_lorenz_curves">
+    plot_lorenz_curves()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/phihes/edit/master/docs/pici/__init__.py" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
+</a>
+<h1>pici</h1>
+<div class="doc doc-object doc-module">
+<a id="pici"></a>
+<div class="doc doc-contents first">
+<div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.community">
+<code>community</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.community.Community">
+<code>Community</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="abc.ABC">ABC</span></code></p>
+<p>Abstract community class.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.community.Community.__eq__">
+<code class="highlight language-python"><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Two communities are the same if they have the same name. This is
+used to simplify caching.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.community.Community._generate_temporal_graph">
+<code class="highlight language-python"><span class="n">_generate_temporal_graph</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'co_contributor'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Generate a graph based only on posts created after start (&gt;) and
+before end (&lt;).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>
+</td>
+<td><p>datetime</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>
+</td>
+<td><p>datetime</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>
+</td>
+<td><p>string (one of 'co_contributor', 'commenter')</p></td>
+<td>
+<code>'co_contributor'</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.community.Community.temporal_graph">
+<code class="highlight language-python"><span class="n">temporal_graph</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'co_contributor'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Cached access to temporal graphs.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>
+</td>
+<td><p>None or datetime start of graph snapshot</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>
+</td>
+<td><p>None or datetime end of graph snapshot</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>
+</td>
+<td><p>string ('co_contributor' or 'commenter').</p></td>
+<td>
+<code>'co_contributor'</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.datatypes">
+<code>datatypes</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.datatypes.CommunityDataLevel">
+<code>CommunityDataLevel</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="enum.Enum">Enum</span></code></p>
+<p>View on community.</p>
+<details class="todo">
+<summary>TODO</summary>
+<p>Document properly</p>
+</details>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.datatypes.MetricReturnType">
+<code>MetricReturnType</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="enum.Enum">Enum</span></code></p>
+<p>Category of representation of metrics' return type.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-attribute">
+<h4 class="doc doc-heading" id="pici.datatypes.MetricReturnType.DATAFRAME">
+<code class="highlight language-python"><span class="n">DATAFRAME</span> <span class="o">=</span> <span class="s1">'dataframe'</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>Metric's return values as series in Pandas.Dataframe</p>
+</div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h4 class="doc doc-heading" id="pici.datatypes.MetricReturnType.PLAIN">
+<code class="highlight language-python"><span class="n">PLAIN</span> <span class="o">=</span> <span class="s1">'plain'</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>Metric's original return value (not modified).</p>
+</div>
+</div>
+<div class="doc doc-object doc-attribute">
+<h4 class="doc doc-heading" id="pici.datatypes.MetricReturnType.TABLE">
+<code class="highlight language-python"><span class="n">TABLE</span> <span class="o">=</span> <span class="s1">'table'</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>Metric's return value(s) in table format.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.helpers">
+<code>helpers</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.aggregate">
+<code class="highlight language-python"><span class="n">aggregate</span><span class="p">(</span><span class="n">dict_of_series</span><span class="p">,</span> <span class="n">aggregations</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">])</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Applies a number of aggregations to the series supplied as values in
+<code>dict_of_series</code>. Keys are names of series, the name of the
+aggregation is appended to the series names as "(agg-name)".</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aggregations</code></td>
+<td>
+</td>
+<td><p>list of aggregation functions</p></td>
+<td>
+<code>[np.mean, np.min, np.max, np.std, np.sum]</code>
+</td>
+</tr>
+<tr>
+<td><code>dict_of_series</code></td>
+<td>
+</td>
+<td><p>dict of indicator_name:Pandas.Series</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>dict of formatted indicator_name: aggregated series</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.apply_to_initial_posts">
+<code class="highlight language-python"><span class="n">apply_to_initial_posts</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">new_cols</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Applies <code>func</code> to initial posts (<code>community.posts</code> where
+<code>post_position_in_thread==1</code>). Returns DataFrame with <code>topic_column</code>
+field as index. Cols in retured df are named according to strings in
+<code>new_cols</code>, values in cols in order of values returned by <code>func</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td><p>pici.Community</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>new_cols</code></td>
+<td>
+</td>
+<td><p>list of strings</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>func</code></td>
+<td>
+</td>
+<td><p>function to apply to each initial post from community.posts</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p>and indexed by thread-ids.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.as_table">
+<code class="highlight language-python"><span class="n">as_table</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Decorator that returns results as table, indexed with community name.
+TODO: document</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>func</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.create_co_contributor_graph">
+<code class="highlight language-python"><span class="n">create_co_contributor_graph</span><span class="p">(</span><span class="n">link_data</span><span class="p">,</span> <span class="n">node_data</span><span class="p">,</span> <span class="n">node_col</span><span class="p">,</span> <span class="n">group_col</span><span class="p">,</span> <span class="n">node_attributes</span><span class="p">,</span> <span class="n">connected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Creates a networkx.Graph with nodes=users and edges if two users have
+contributed to the same thread. Edge weights = number of threads where
+two users co-contributed.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>link_data</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_data</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>group_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_attributes</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>connected</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.create_commenter_graph">
+<code class="highlight language-python"><span class="n">create_commenter_graph</span><span class="p">(</span><span class="n">link_data</span><span class="p">,</span> <span class="n">node_data</span><span class="p">,</span> <span class="n">node_col</span><span class="p">,</span> <span class="n">group_col</span><span class="p">,</span> <span class="n">node_attributes</span><span class="p">,</span> <span class="n">conntected</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Creates a networkx.DiGraph with nodes=users and directed edges a-&gt;b if a
+has replied to an initial post by b. Edge weight is the number of comments.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>link_data</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_data</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>group_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>node_attributes</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>conntected</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.flat">
+<code class="highlight language-python"><span class="n">flat</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'community_name'</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Returns a pivoted version of <code>df</code> with flattened index.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df</code></td>
+<td>
+<code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
+</td>
+<td><p>Pandas.DataFrame</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>columns</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>Column name to pivot on.</p></td>
+<td>
+<code>'community_name'</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.generate_indicator_results">
+<code class="highlight language-python"><span class="n">generate_indicator_results</span><span class="p">(</span><span class="n">posts</span><span class="p">,</span> <span class="n">initial_post</span><span class="p">,</span> <span class="n">feedback</span><span class="p">,</span> <span class="n">indicator_text</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">aggs</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">])</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Returns results from <code>column</code> in DataFrames <code>posts</code>,
+<code>initial_post</code>, and <code>feedback</code> as different aggregations
+(sum, mean, ...). Initial post is only aggregated as sum. Output is a
+dict with df/agg: value, e.g. "posts indicator_text (mean)":value.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>posts</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>initial_post</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>feedback</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>indicator_text</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>column</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.join_df">
+<code class="highlight language-python"><span class="n">join_df</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Decorator that joins results to existing dataframe in community.
+TODO: document</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>func</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.merge_dfs">
+<code class="highlight language-python"><span class="n">merge_dfs</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">only_unique</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Wrapper for Pandas.merge(). Merges DataFrames, so that</p>
+<p>TODO: document</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dfs</code></td>
+<td>
+<code><span title="typing.Iterable">Iterable</span>[<span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span>]</code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>only_unique</code></td>
+<td>
+<code>bool</code>
+</td>
+<td></td>
+<td>
+<code>False</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.num_words">
+<code class="highlight language-python"><span class="n">num_words</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Counts the number of words in a text. Does account for html tags and comments
+(not included in count).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>Text to count words in.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>count</code></td> <td>
+<code>int</code>
+</td>
+<td><p>Number of words.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.series_most_common">
+<code class="highlight language-python"><span class="n">series_most_common</span><span class="p">(</span><span class="n">series</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Get most common element from Pandas.Series.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>series</code></td>
+<td>
+<code><span title="pandas">pd</span>.<span title="pandas.Series">Series</span></code>
+</td>
+<td><p>Pandas.Series</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.where_all">
+<code class="highlight language-python"><span class="n">where_all</span><span class="p">(</span><span class="n">conditions</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Concatenates logical condition with <code>and</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>conditions</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.helpers.word_occurrences">
+<code class="highlight language-python"><span class="n">word_occurrences</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">words</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Counts the number of occurrences of specified <code>words</code> in <code>text</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>A text with words.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>words</code></td>
+<td>
+<code>list of str</code>
+</td>
+<td><p>Words.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>occurrences</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p>A <code>word (str), number of occurrences (int)</code> dictionary</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.labelling">
+<code>labelling</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.labelling.InnovationLabels">
+<code>InnovationLabels</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><a class="autorefs autorefs-internal" href="labelling/#pici.labelling.Labels" title="pici.labelling.Labels">Labels</a></code></p>
+<p>TODO: add documentation</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.InnovationLabels.from_limesurvey">
+<code class="highlight language-python"><span class="n">from_limesurvey</span><span class="p">(</span><span class="n">limesurvey_results</span><span class="p">,</span> <span class="n">drop_labellers</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Adds label entries from Limesurvey results format. Limesurvey
+results can contain multiple
+labelled threads per response. For each thread i and associated url
+and labels, the data
+must contain one column, e.g.:
+"thread1" (=url), "labelA1", "labelB1", ..., "thread2", "labelA2",
+"labelB2", ...</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>limesurvey_results</code></td>
+<td>
+</td>
+<td><p>String (path to file) or Pandas.DataFrame</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.labelling.LabelCollection">
+<code>LabelCollection</code>
+</h3>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelCollection.all_label_names">
+<code class="highlight language-python"><span class="n">all_label_names</span><span class="p">()</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-property"><code>property</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelCollection.by_level">
+<code class="highlight language-python"><span class="n">by_level</span><span class="p">(</span><span class="n">level</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: Add documentation</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelCollection.labels">
+<code class="highlight language-python"><span class="n">labels</span><span class="p">()</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-property"><code>property</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.labelling.LabelStats">
+<code>LabelStats</code>
+</h3>
+<div class="doc doc-contents">
+<p>This class provides metrics and visualizations to analyze the annotations
+made by the labellers.</p>
+<details class="available-metrics-are">
+<summary>Available metrics are</summary>
+<ul>
+<li>% agreement ("a_0")</li>
+<li>Cohen's kappa (two labellers)</li>
+<li>Fleiss' kappa (multiple labellers)</li>
+<li>Krippendorff's alpha (multiple labellers, missing data)</li>
+</ul>
+</details> <p>Labellers' annotations can furthermore be evaluated against a subsample of
+"goldstandard" annotations, allowing to associate labellers with a quality-
+score.</p>
+<p>TODO refactor --&gt; move visualizations to visualizations.py ?</p>
+<p>See [1] for a comparison of inter-rater agreement metrics.</p>
+<p>[1] <em>Xinshu Zhao, Jun S. Liu &amp; Ke Deng (2013) Assumptions behind
+Intercoder Reliability Indices, Annals of the International Communication
+Association, 36:1, 419-480, DOI: 10.1080/23808985.2013.11679142</em></p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats._melt_goldstandard_agreement">
+<code class="highlight language-python"><span class="n">_melt_goldstandard_agreement</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Prepares <code>interrater_agreement</code> dataframe for plotting (e.g., with
+seaborn): wide format to long format, shorten label names.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>
+</td>
+<td><p>Pandas.DataFrame with label names as index, "labellers"-</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>Pandas.DataFrame with columns:
+- index: shortened label names
+- labellers: labeller names
+- variable: metric name
+- value: metric value</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.cohen_kappa">
+<code class="highlight language-python"><span class="n">cohen_kappa</span><span class="p">()</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get Cohen's kappa for all labels, using scikit-learn implementation
+<a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics
+.cohen_kappa_score.html"><code>sklearn.metrics.cohen_kappa_score</code></a>.
+Returns NaN if number of labellers != 2.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>dict of (label name, kappa)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.complete_agreement">
+<code class="highlight language-python"><span class="n">complete_agreement</span><span class="p">()</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get percentage of cases where all labellers agree (per label).</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agreement</code></td> <td>
+</td>
+<td><p>Pandas.DataFrame with 'label', '% perfect agreement',</p></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p>'% n'</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.fleiss_kappa">
+<code class="highlight language-python"><span class="n">fleiss_kappa</span><span class="p">()</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get Fleiss kappa for all labels, based on Statsmodels
+implementation (<code>statsmodels.stats.inter_rater.fleiss_kappa</code>).
+Returns NaN if number of labellers &lt; 2.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>dict of (label name, kappa)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.interrater_agreement">
+<code class="highlight language-python"><span class="n">interrater_agreement</span><span class="p">()</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Calculated the overall interrater agreement for all labellers in
+data. If number of labellers &gt; 2, all values for Cohen/Fleiss kappa
+will be NaN.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>agreement dataframe</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.krippendorff_alpha">
+<code class="highlight language-python"><span class="n">krippendorff_alpha</span><span class="p">()</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get Krippendorff alphas using the ''krippendorff'' package.</p>
+<p>See also:
+<em>Andrew F. Hayes &amp; Klaus Krippendorff (2007) Answering the Call for a
+Standard Reliability Measure for Coding Data, Communication Methods
+and Measures, 1:1, 77-89, DOI: 10.1080/19312450709336664</em></p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>Pandas.DataFrame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.pairwise_interrater_agreement">
+<code class="highlight language-python"><span class="n">pairwise_interrater_agreement</span><span class="p">(</span><span class="n">goldstandard</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_comparisons</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Calculates the agreement metrics for all combinations of two
+labellers. If goldstandard is set (name of labeller),
+only comparisons with the goldstandard are calculated.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>goldstandard</code></td>
+<td>
+</td>
+<td><p>Name of labeller</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>min_comparisons</code></td>
+<td>
+</td>
+<td><p>Minimum number of shared labelled cases</p></td>
+<td>
+<code>1</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>Agreement dataframe with "labellers" column that contains</p></td>
+</tr>
+<tr>
+<td>
+</td>
+<td><ul>
+<li>(labeller A, labeller B) tuples (default), or</li>
+</ul></td>
+</tr>
+<tr>
+<td>
+</td>
+<td><ul>
+<li>labeller B strings (if labeller A is set as goldstandard)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.LabelStats.plot_goldstandard_agreement">
+<code class="highlight language-python"><span class="n">plot_goldstandard_agreement</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'label_boxplots'</span><span class="p">,</span> <span class="n">goldstandard</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Plot the labellers' agreement with goldstandard. Provides different
+plots through <code>kind</code>:
+- label_boxplots: values: each labeller's agreement with
+goldstandard, x: metric, y: boxplot of values
+- labellers_points: values: each labeller's agreement with
+goldstandard, grid, col per metric, x: labels, y: values</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kind</code></td>
+<td>
+</td>
+<td><p>One of {'label_boxplots','labellers_points'}</p></td>
+<td>
+<code>'label_boxplots'</code>
+</td>
+</tr>
+<tr>
+<td><code>goldstandard</code></td>
+<td>
+</td>
+<td><p>Name of labeller to use as goldstandard
+(used if data is None, generates data)</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>data</code></td>
+<td>
+</td>
+<td><p>agreement dataframe generated by
+<code>pairwise_interrater_agreement</code></p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.labelling.Labels">
+<code>Labels</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="abc.ABC">ABC</span></code></p>
+<p>TODO: add documentation</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.__init__">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">DEFAULT_COLS</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>
+<code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>cols</code></td>
+<td>
+<code>dict</code>
+</td>
+<td></td>
+<td>
+<code>DEFAULT_COLS</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.append">
+<code class="highlight language-python"><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="n">DEFAULT_COLS</span><span class="p">,</span> <span class="n">drop_labellers</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data</code></td>
+<td>
+<code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>cols</code></td>
+<td>
+<code>dict</code>
+</td>
+<td></td>
+<td>
+<code>DEFAULT_COLS</code>
+</td>
+</tr>
+<tr>
+<td><code>drop_labellers</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.data_by_label">
+<code class="highlight language-python"><span class="n">data_by_label</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">'sklearn'</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dropna</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>False</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.labellers">
+<code class="highlight language-python"><span class="n">labellers</span><span class="p">()</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-property"><code>property</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.rating_table">
+<code class="highlight language-python"><span class="n">rating_table</span><span class="p">(</span><span class="n">label_name</span><span class="p">,</span> <span class="n">communities</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">custom_filter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_missing_data</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get the rating table for one label to be used, e.g.,
+with <code>statsmodels.stats.inter_rater</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>communities</code></td>
+<td>
+</td>
+<td><p>List of communities to include in table,</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>label_name</code></td>
+<td>
+</td>
+<td><p>label to be returned in table</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>allow_missing_data</code></td>
+<td>
+</td>
+<td><p>whether to drop columns with missing ratings</p></td>
+<td>
+<code>False</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>rating table: labels as 2-dim table with raters (labellers) in</p></td>
+</tr>
+<tr>
+<td>
+</td>
+<td><p>rows and ratings in columns.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.labelling.Labels.set_filter">
+<code class="highlight language-python"><span class="n">set_filter</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>f</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.metrics">
+<code>metrics</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.basic">
+<code>basic</code>
+</h3>
+<div class="doc doc-contents">
+<p>Basic metrics based on counts, dates etc. of posts, contributors.</p>
+<p>By level of observation / concept:</p>
+<p><strong>topics</strong></p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.number_of_contributors_per_topic">number_of_contributors_per_topic</a></li>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.post_delays_per_topic">post_delays_per_topic</a></li>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.post_dates_per_topic">post_dates_per_topic</a></li>
+</ul>
+<p><strong>community</strong></p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.number_of_posts">number_of_posts</a></li>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.agg_number_of_posts_per_interval">agg_number_of_posts_per_interval</a></li>
+<li><a class="autorefs autorefs-internal" href="metrics/basic/#pici.metrics.basic.agg_posts_per_topic">agg_posts_per_topic</a></li>
+</ul>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.agg_number_of_posts_per_interval">
+<code class="highlight language-python"><span class="n">agg_number_of_posts_per_interval</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of posts per <code>interval</code>.</p>
+<p>Total number of posts in community per <code>interval</code> (parameter).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>The interval over which to aggregate.
+See <code>pandas.Timedelta</code> (<a href="https://pandas.pydata.org/docs/user_guide/timedeltas.html">https://pandas.pydata.org/docs/user_guide/timedeltas.html</a>)</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td><ul>
+<li><code>number of posts per &lt;interval&gt;</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.agg_posts_per_topic">
+<code class="highlight language-python"><span class="n">agg_posts_per_topic</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Min, max, and average number of posts authored per topic.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td><ul>
+<li><code>&lt;agg&gt; posts per topic</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.contributors_per_interval">
+<code class="highlight language-python"><span class="n">contributors_per_interval</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of users that have authored at least one post in time interval.</p>
+<details class="todo">
+<summary>TODO</summary>
+<ul>
+<li>document</li>
+<li>add to TOC</li>
+</ul>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.lorenz">
+<code class="highlight language-python"><span class="n">lorenz</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Distribution of posts (in analogy to lorenz curve). Returns (x,y) where
+x is the (least-contributing) bottom x% of users, and y the proportion
+of posts made by them.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td><p>report:
+    - % contributors
+    - % posts</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.number_of_contributors_per_topic">
+<code class="highlight language-python"><span class="n">number_of_contributors_per_topic</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of different contributors that have authored at least one post in a thread.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str: int</code>
+</td>
+<td><ul>
+<li><code>number of contributors</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.number_of_posts">
+<code class="highlight language-python"><span class="n">number_of_posts</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Total number of posts authored by community.</p>
+<details class="todo">
+<summary>TODO</summary>
+<p>document</p>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.number_of_posts_per_topic">
+<code class="highlight language-python"><span class="n">number_of_posts_per_topic</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of posts per topic.</p>
+<details class="todo">
+<summary>TODO</summary>
+<ul>
+<li>add to toc</li>
+</ul>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>report</code></td> <td>
+</td>
+<td><ul>
+<li>number of posts</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.number_of_words">
+<code class="highlight language-python"><span class="n">number_of_words</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>The number of words in a post (removing html).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td><ul>
+<li><code>number of words</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.post_dates_per_topic">
+<code class="highlight language-python"><span class="n">post_dates_per_topic</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Date of first post, second post, and last post.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:date</code>
+</td>
+<td><ul>
+<li><code>first post date</code></li>
+<li><code>second post date</code></li>
+<li><code>last post date</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.post_delays_per_topic">
+<code class="highlight language-python"><span class="n">post_delays_per_topic</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Delays (in days) between first and second post, and first and last post.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td><ul>
+<li><code>delay first last post</code></li>
+<li><code>delay first second post</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.posts_per_interval">
+<code class="highlight language-python"><span class="n">posts_per_interval</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of posts authored by community per time interval.</p>
+<details class="todo">
+<summary>TODO</summary>
+<ul>
+<li>document</li>
+<li>add to TOC</li>
+</ul>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.basic.posts_word_occurrence">
+<code class="highlight language-python"><span class="n">posts_word_occurrence</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Counts the occurrence of a set of words in each post.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>words</code></td>
+<td>
+<code>list of str</code>
+</td>
+<td><p>List of words to count in post texts.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>normalize</code></td>
+<td>
+<code>bool</code>
+</td>
+<td><p>Normalize occurrence count by text length.</p></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td> <td>
+<code>dict of str:int</code>
+</td>
+<td><ul>
+<li><code>occurrence of &lt;word&gt;</code> for each provided <code>word</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.cached_metrics">
+<code>cached_metrics</code>
+</h3>
+<div class="doc doc-contents">
+<p>This is a collection of all cachable functions that are used in the
+calculation of indicators. The cache is implemented using
+<code>functools.lru_cache</code> with <code>maxsize=None</code>. Caching is commonly done at
+least on community level (pici.Community is hashable). Examples for when
+using a cache makes sense:</p>
+<ul>
+<li>calculating the similarity of post texts (done once for all combinations)</li>
+<li>generating "temporal networks" (filtered representations of networks,
+depending on dates of posts)</li>
+</ul>
+<p>It is recommended to define cached parts of indicators here.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._comments_by_contributor">
+<code class="highlight language-python"><span class="n">_comments_by_contributor</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">contributor</span><span class="p">,</span> <span class="n">date_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get all threads initiated by contributor.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>contributor</code></td>
+<td>
+</td>
+<td><p>User name</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>date_limit</code></td>
+<td>
+</td>
+<td><p>Date in string format, e.g. '2020-01-15'</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>specified user (before the specified date_limit).</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._contribution_regularity">
+<code class="highlight language-python"><span class="n">_contribution_regularity</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">contributor</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get the contribution regularity of <code>contributor</code> as the percentage of
+days that contributor posted in the forum, between the dates <code>start</code>
+and <code>end</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>contributor</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._initial_post_author_network_metric">
+<code class="highlight language-python"><span class="n">_initial_post_author_network_metric</span><span class="p">(</span><span class="n">initial_post</span><span class="p">,</span> <span class="n">community</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="n">kind</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get a cached network metric for the author of an initial post.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>initial_post</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>metric</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>thread_date</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>kind</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>The value of the metric.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._replies_to_own_topics">
+<code class="highlight language-python"><span class="n">_replies_to_own_topics</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">contributor</span><span class="p">,</span> <span class="n">date_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>The number of replies made to initial posts by specified
+contributor in community.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>contributor</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>date_limit</code></td>
+<td>
+</td>
+<td><p>Date in string format, e.g. '2020-01-15'</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>contributor. If date_limit is provided, only threads &amp; replies posted
+before the date limit are considered.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._temporal_text_similarity_dict">
+<code class="highlight language-python"><span class="n">_temporal_text_similarity_dict</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">text_col</span><span class="o">=</span><span class="s1">'preprocessed_text__words_no_stop'</span><span class="p">,</span> <span class="n">similarity_metric</span><span class="o">=</span><span class="s1">'token_sort_ratio'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Returns a dictionary of post-text:1xn-similarity-matrix for similarity
+subgraph filtered by date.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>text_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__words_no_stop'</code>
+</td>
+</tr>
+<tr>
+<td><code>similarity_metric</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'token_sort_ratio'</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._temporal_text_similarity_network">
+<code class="highlight language-python"><span class="n">_temporal_text_similarity_network</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">text_col</span><span class="o">=</span><span class="s1">'preprocessed_text__words_no_stop'</span><span class="p">,</span> <span class="n">similarity_metric</span><span class="o">=</span><span class="s1">'token_sort_ratio'</span><span class="p">,</span> <span class="n">only_initial_posts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Create a subview graph of the text similarity network created by
+<code>`_text_similarity_network()</code> by filtering out all nodes (=posts)
+where post.date is &gt; date.</p>
+<p>Args:
+    community:
+    date:
+    text_col:
+    similarity_metric:
+    only_initial_posts:</p>
+<p>Returns:</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._text_similarity_network">
+<code class="highlight language-python"><span class="n">_text_similarity_network</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">text_col</span><span class="o">=</span><span class="s1">'preprocessed_text__words_no_stop'</span><span class="p">,</span> <span class="n">similarity_metric</span><span class="o">=</span><span class="s1">'token_sort_ratio'</span><span class="p">,</span> <span class="n">only_initial_posts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Create a text-similarity network for all posts in community, using
+<code>textacy.representations.network.build_similarity_network()</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>text_col</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__words_no_stop'</code>
+</td>
+</tr>
+<tr>
+<td><code>similarity_metric</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'token_sort_ratio'</code>
+</td>
+</tr>
+<tr>
+<td><code>only_initial_posts</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.cached_metrics._threads_by_contributor">
+<code class="highlight language-python"><span class="n">_threads_by_contributor</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">contributor</span><span class="p">,</span> <span class="n">date_limit</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get all threads initiated by contributor.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>contributor</code></td>
+<td>
+</td>
+<td><p>User name</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>date_limit</code></td>
+<td>
+</td>
+<td><p>Date in string format, e.g. '2020-01-15'</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>specified user (before the specified date_limit).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.distinctiveness">
+<code>distinctiveness</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.distinctiveness.initial_post_text_distance">
+<code class="highlight language-python"><span class="n">initial_post_text_distance</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">similarity_metric</span><span class="o">=</span><span class="s1">'token_sort_ratio'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Calculates the text distance of initial posts to previously authored
+initial posts as a measure of distinctiveness.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>similarity_metric</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'token_sort_ratio'</code>
+</td>
+</tr>
+<tr>
+<td><code>agg_method</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.elaboration">
+<code>elaboration</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.elaboration.basic_text_based_elaboration">
+<code class="highlight language-python"><span class="n">basic_text_based_elaboration</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">col_n_words</span><span class="o">=</span><span class="s1">'preprocessed_text__n_words'</span><span class="p">,</span> <span class="n">col_n_words_no_stop</span><span class="o">=</span><span class="s1">'preprocessed_text__n_words_no_stop'</span><span class="p">,</span> <span class="n">col_syllables</span><span class="o">=</span><span class="s1">'preprocessed_text__n_syllables'</span><span class="p">,</span> <span class="n">col_avg_syllables</span><span class="o">=</span><span class="s1">'preprocessed_text__avg_syllables_per_word'</span><span class="p">,</span> <span class="n">col_smog_index</span><span class="o">=</span><span class="s1">'preprocessed_text__smog_index'</span><span class="p">,</span> <span class="n">col_auto_readability</span><span class="o">=</span><span class="s1">'preprocessed_text__automated_readability_index'</span><span class="p">,</span> <span class="n">col_coleman_liau</span><span class="o">=</span><span class="s1">'preprocessed_text__coleman_liau_index'</span><span class="p">,</span> <span class="n">col_flesch_kincaid</span><span class="o">=</span><span class="s1">'preprocessed_text__flesch_kincaid_grade_level'</span><span class="p">,</span> <span class="n">col_frac_uppercase</span><span class="o">=</span><span class="s1">'preprocessed_text__frac_uppercase'</span><span class="p">,</span> <span class="n">col_frac_punctuation_marks</span><span class="o">=</span><span class="s1">'preprocessed_text__frac_punctuation_marks'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Provides basic text-based elaboration indicators, such as number of
+words, number of syllables, and different readability scores.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>col_flesch_kincaid</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__flesch_kincaid_grade_level'</code>
+</td>
+</tr>
+<tr>
+<td><code>col_coleman_liau</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__coleman_liau_index'</code>
+</td>
+</tr>
+<tr>
+<td><code>col_auto_readability</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__automated_readability_index'</code>
+</td>
+</tr>
+<tr>
+<td><code>col_smog_index</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>'preprocessed_text__smog_index'</code>
+</td>
+</tr>
+<tr>
+<td><code>col_syllables</code></td>
+<td>
+</td>
+<td><p>column name in community.posts to use for mean number</p></td>
+<td>
+<code>'preprocessed_text__n_syllables'</code>
+</td>
+</tr>
+<tr>
+<td><code>col_n_words</code></td>
+<td>
+</td>
+<td><p>column name in community.posts to use for word count</p></td>
+<td>
+<code>'preprocessed_text__n_words'</code>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.experience">
+<code>experience</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.experience.initiator_experience_by_commenter_network_out_deg_centrality">
+<code class="highlight language-python"><span class="n">initiator_experience_by_commenter_network_out_deg_centrality</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Determines a thread initiator's 'experience' by their out-degree
+centrality in the commenter network at the time of thread creation,
+i.e., the number of users the initiator has 'commented on' (has replied
+to in a user's thread).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.experience.initiator_experience_by_past_contributions">
+<code class="highlight language-python"><span class="n">initiator_experience_by_past_contributions</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">ignore_temporal_dependency</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rounded_date</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ignore_temporal_dependency</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.helpfulness">
+<code>helpfulness</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.helpfulness.initiator_helpfulness_by_contribution_regularity">
+<code class="highlight language-python"><span class="n">initiator_helpfulness_by_contribution_regularity</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">lookback_days</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Calculates the contribution regularity of the initiator of each thread.
+Contribution regularity is the percentage of <em>past days</em> in which the
+initiator posted in the forum. Past days is limited by <code>lookback_days</code>
+parameter.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lookback_days</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>100</code>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.helpfulness.initiator_helpfulness_by_foreign_thread_comment_frequency">
+<code class="highlight language-python"><span class="n">initiator_helpfulness_by_foreign_thread_comment_frequency</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>This indicator measures initiator helpfulness by the frequency of
+comments by the thread's initiator that were posted in threads with a
+different initiator ('foreign threads').</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.helpfulness.initiator_helpfulness_by_top_commenter_status">
+<code class="highlight language-python"><span class="n">initiator_helpfulness_by_top_commenter_status</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">contributor</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Calculates whether a thread's initiator has top commenter status. A 'top
+commenter' has posted more comments than the <code>k</code>-th percentile (default:
+k=90).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>contributor</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.idea_popularity">
+<code>idea_popularity</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.idea_popularity.idea_popularity_by_number_of_unique_users_commenting">
+<code class="highlight language-python"><span class="n">idea_popularity_by_number_of_unique_users_commenting</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.network_position">
+<code>network_position</code>
+</h3>
+<div class="doc doc-contents">
+<p>Metrics using the community's graph object (representation of contributor network).</p>
+<p>By level of observation:</p>
+<p><strong>contributors</strong></p>
+<ul>
+<li>[contributor_degree][pici.metrics.network.contributor_degree]</li>
+<li>[contributor_centralities][pici.metrics.network.contributor_centralities]</li>
+<li>[contributor_communities][pici.metrics.network.contributor_communities]</li>
+</ul>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.network_position.co_contributor_centralities">
+<code class="highlight language-python"><span class="n">co_contributor_centralities</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Contributor centralities.</p>
+<p>Includes degree centrality, betweenness centrality, and eigenvector centrality.
+Using <code>networkx</code> implementation.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.network_position.co_contributor_communities">
+<code class="highlight language-python"><span class="n">co_contributor_communities</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">leiden_lib</span><span class="o">=</span><span class="s1">'cdlib'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Find communities within the contributor network.</p>
+<p>Uses weighted Leiden algorithm (Traag et al., 2018) implemented in
+<code>cdlib.algorithms.leiden</code> or <code>leidgenalg</code>.</p>
+<p>Traag, Vincent, Ludo Waltman, and Nees Jan van Eck.
+<a href="https://arxiv.org/abs/1810.08473/">From Louvain to Leiden: guaranteeing well-connected communities.</a> arXiv preprint arXiv:1810.08473 (2018).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>leiden_lib</code></td>
+<td>
+</td>
+<td><p>Which Leiden alg. implementation to use, 'cdlib' or</p></td>
+<td>
+<code>'cdlib'</code>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node_communities_map</code></td> <td>
+<code>dict of node:list(communities)</code>
+</td>
+<td><p>List of</p></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p>communities a contributor belongs to. See [</p></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p><code>cdlib.NodeClustering.to_node_community_map</code>]</p></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p>(https://cdlib.readthedocs.io/en/latest/reference/classes</p></td>
+</tr>
+<tr>
+<td></td> <td>
+</td>
+<td><p>/node_clustering.html).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.network_position.co_contributor_degree">
+<code class="highlight language-python"><span class="n">co_contributor_degree</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of contributors each contributor has co-authored with in a thread.</p>
+<p>Using implementation of <code>networkx.Graph.degree</code>.</p>
+<details class="todo">
+<summary>TODO</summary>
+<p>document</p>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.Community">Community</span></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.network_position.initiator_centrality_in_co_contributor_network">
+<code class="highlight language-python"><span class="n">initiator_centrality_in_co_contributor_network</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>TODO: implement using _initial_post_author_network_metric()</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>k</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.reports">
+<code>reports</code>
+</h3>
+<div class="doc doc-contents">
+<p>Reports are groups of metrics evaluated for all communities under
+analysis. See also: <a href="/guide/#building-reports">building reports</a>.</p>
+<p>Reports by level of observation:</p>
+<p><strong>community</strong></p>
+<ul>
+<li><a class="autorefs autorefs-internal" href="metrics/reports/#pici.metrics.reports.summary">summary</a></li>
+</ul>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.reports.posts_contributors_per_interval">
+<code class="highlight language-python"><span class="n">posts_contributors_per_interval</span><span class="p">(</span><span class="n">pici</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Number of contributors and posts for each time <code>interval</code>.</p>
+<details class="todo">
+<summary>TODO</summary>
+<ul>
+<li>document</li>
+<li>add to TOC</li>
+</ul>
+</details>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pici</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>report</code></td> <td>
+</td>
+<td><ul>
+<li>number of posts per <code>interval</code></li>
+<li>number of contributors per <code>interval</code></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.reports.summary">
+<code class="highlight language-python"><span class="n">summary</span><span class="p">(</span><span class="n">pici</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Summarizes communities by posting behavior.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pici</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<a class="autorefs autorefs-internal" href="pici/#pici.pici.Pici" title="pici.pici.Pici">Pici</a></code>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th> <th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>report</code></td> <td>
+</td>
+<td><ul>
+<li>number of posts,</li>
+<li>number of posts per day (aggregated)</li>
+<li>number of posts per month (aggregated)</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.metrics.status_reputation">
+<code>status_reputation</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.status_reputation.initiator_prestige_by_commenter_network_in_deg_centrality">
+<code class="highlight language-python"><span class="n">initiator_prestige_by_commenter_network_in_deg_centrality</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Determines a thread initiator's 'prestige' by their degree centrality in
+the commenter network at the time of thread creation, i.e., the number
+of users that have commented on at least one of their threads at that
+time.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.metrics.status_reputation.number_of_replies_to_topics_initiated_by_thread_initiator">
+<code class="highlight language-python"><span class="n">number_of_replies_to_topics_initiated_by_thread_initiator</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">ignore_temporal_dependency</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Bla.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ignore_temporal_dependency</code></td>
+<td>
+</td>
+<td><p>Whether to simple count all replies,</p></td>
+<td>
+<code>True</code>
+</td>
+</tr>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.pici">
+<code>pici</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.pici.Pici">
+<code>Pici</code>
+</h3>
+<div class="doc doc-contents">
+<details class="todo">
+<summary>TODO</summary>
+<p>Add documentation.</p>
+</details>
+<p><strong>Examples:</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="pici.pici.Pici--__tabbed_1_1" name="pici.pici.Pici--__tabbed_1" type="radio"><div class="tabbed-labels"><label for="pici.pici.Pici--__tabbed_1_1">Python</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</input></div>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">communities</span> <span class="kn">import</span> <span class="n">OEMCommunityFactory</span><span class="p">,</span> <span class="n">OSMCommunityFactory</span><span class="p">,</span> <span class="n">PPCommunityFactory</span>
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">p</span> <span class="o">=</span> <span class="n">Pici</span><span class="p">(</span>
+<a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>    <span class="n">communities</span><span class="o">=</span><span class="p">{</span>
+<a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>        <span class="s1">'OpenEnergyMonitor'</span><span class="p">:</span> <span class="n">OEMCommunityFactory</span><span class="p">,</span>
+<a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>        <span class="s1">'OpenStreetMap'</span><span class="p">:</span> <span class="n">OSMCommunityFactory</span><span class="p">,</span>
+<a href="#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>        <span class="s1">'PreciousPlastic'</span><span class="p">:</span> <span class="n">PPCommunityFactory</span><span class="p">,</span>
+<a href="#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>    <span class="p">},</span>
+<a href="#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>    <span class="n">start</span><span class="o">=</span><span class="s1">'2017-01-01'</span><span class="p">,</span>
+<a href="#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>    <span class="n">end</span><span class="o">=</span><span class="s1">'2017-12-01'</span><span class="p">,</span>
+<a href="#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>    <span class="n">cache_nrows</span><span class="o">=</span><span class="mi">5000</span>
+<a href="#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="p">)</span>
+</code></pre></div>
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.pici.Pici.__init__">
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">communities</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[],</span> <span class="n">cache_dir</span><span class="o">=</span><span class="s1">'cache'</span><span class="p">,</span> <span class="n">cache_nrows</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Loads communities.</p>
+<p>Communities can be loaded from cache or scraped. Loaded data can be restricted either
+by number of rows loaded from cache (<code>cache_nrows</code>), or by setting <code>start</code> and
+<code>end</code> dates (filter on publication dates of posts).</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>communities</code></td>
+<td>
+<code>dict of str</code>
+</td>
+<td><p>pici.CommunityFactory): Dictionary of communities.
+Communities are provided as <code>name (str): CommunityFactory</code> tuples.</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>cache_dir</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>Path to folder that contains cache files.</p></td>
+<td>
+<code>'cache'</code>
+</td>
+</tr>
+<tr>
+<td><code>cache_nrows</code></td>
+<td>
+<code>int</code>
+</td>
+<td><p>Number of rows to load from cache (None (default): load all rows).</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>Start-date for filtering posts. String format must be valid input for <code>pandas.Timestamp</code>.</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>
+<code>str</code>
+</td>
+<td><p>End-date for filtering posts. String format must be valid input for <code>pandas.Timestamp</code>.</p></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.pici.Pici.get_metrics">
+<code class="highlight language-python"><span class="n">get_metrics</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">returntype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unwrapped</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">select_func</span><span class="o">=</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get all available metrics that are defined for the communities. The
+<code>select_func</code> parameter is set to <code>set.intersection</code> per
+default, meaning that only those metrics are returned, that exist
+for all communities. Metrics can be filtered by <code>level</code> and
+<code>returntype</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>returntype</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>unwrapped</code></td>
+<td>
+</td>
+<td><p>'Unwrap' the returned metric functions from their</p></td>
+<td>
+<code>False</code>
+</td>
+</tr>
+<tr>
+<td><code>select_func</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>set.intersection</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>dict of str:func metricname:metric</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.pici.Pici.get_preprocessors">
+<code class="highlight language-python"><span class="n">get_preprocessors</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">returntype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">unwrapped</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">select_func</span><span class="o">=</span><span class="nb">set</span><span class="o">.</span><span class="n">intersection</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Get all available metrics that are defined for the communities. The
+<code>select_func</code> parameter is set to <code>set.intersection</code> per
+default, meaning that only those metrics are returned, that exist
+for all communities. Metrics can be filtered by <code>level</code> and
+<code>returntype</code>.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>returntype</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>None</code>
+</td>
+</tr>
+<tr>
+<td><code>unwrapped</code></td>
+<td>
+</td>
+<td><p>'Unwrap' the returned metric functions from their</p></td>
+<td>
+<code>False</code>
+</td>
+</tr>
+<tr>
+<td><code>select_func</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<code>set.intersection</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>dict of str:func metricname:metric</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.pipelines">
+<code>pipelines</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.pipelines.Pipelines">
+<code>Pipelines</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.pipelines.Pipelines._append_preprocessing_results">
+<code class="highlight language-python"><span class="n">_append_preprocessing_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span></code>
+<span class="doc doc-properties">
+<small class="doc doc-label doc-label-staticmethod"><code>staticmethod</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>Appends Series generated by preprocessing to according datalevel
+objects of a Community.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results</code></td>
+<td>
+</td>
+<td><p>should have format (
+[ (datalevel, Series), (datalevel, Series), ...],
+Community</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.preprocessors">
+<code>preprocessors</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.preprocessors.posts">
+<code>posts</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.preprocessors.posts.number_of_words">
+<code class="highlight language-python"><span class="n">number_of_words</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Adds the number of words in each post as <code>int</code> to <code>community.posts</code>.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.preprocessors.posts.post_position_in_thread">
+<code class="highlight language-python"><span class="n">post_position_in_thread</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Adds each post's position in thread (as int, starting with 1) to
+<code>community.posts</code>.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.preprocessors.posts.preprocessed_text">
+<code class="highlight language-python"><span class="n">preprocessed_text</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">n_topics</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>This preprocessor supplies cleaned text, text statistics (using Textacy)
+and sentiment statistics (TextBlob). The following columns are added to
+<code>Community.posts</code>:</p>
+<ul>
+<li>clean</li>
+<li>all_words</li>
+<li>words_no_stop</li>
+<li>n_words_no_stop</li>
+<li>frac_uppercase</li>
+<li>frac_punctuation_marks</li>
+<li>avg_syllables_per_word</li>
+<li>sentiment_polarity</li>
+<li>sentiment_subjectivity</li>
+<li>n_words</li>
+<li>n_chars</li>
+<li>n_long_words</li>
+<li>n_unique_words</li>
+<li>n_syllables</li>
+<li>n_syllables_per_word</li>
+<li>entropy</li>
+<li>ttr</li>
+<li>segmented_ttr</li>
+<li>hdd</li>
+<li>automated_index</li>
+<li>flesch_reading_ease</li>
+<li>smog_index</li>
+<li>coleman_liau_index</li>
+<li>flesch_kincaid_grade_level</li>
+<li>gunning_fog_index</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.preprocessors.posts.rounded_date">
+<code class="highlight language-python"><span class="n">rounded_date</span><span class="p">(</span><span class="n">community</span><span class="p">,</span> <span class="n">round_dates_to</span><span class="o">=</span><span class="s1">'7D'</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Round the post dates according to specified frequency.
+If <code>round_dates_to</code> is None (default), this preprocessor does nothing.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>community</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>round_dates_to</code></td>
+<td>
+</td>
+<td><p>Frequency to round the initial posts'</p></td>
+<td>
+<code>'7D'</code>
+</td>
+</tr>
+<tr>
+<td><code>&lt;https</code></td>
+<td>
+</td>
+<td><p>//pandas.pydata.org/docs/user_guide/timeseries.html</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="pici.preprocessors.topics">
+<code>topics</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h4 class="doc doc-heading" id="pici.preprocessors.topics.thread_text">
+<code class="highlight language-python"><span class="n">thread_text</span><span class="p">(</span><span class="n">community</span><span class="p">)</span></code>
+</h4>
+<div class="doc doc-contents">
+<p>Adds column <code>thread_text</code> to <code>community.topics</code>. Supplies texts of all
+posts in thread as tuple of strings in order of post creation date
+(starting with initial post).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.registries">
+<code>registries</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.registries.MetricRegistry">
+<code>MetricRegistry</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="pici.registries.FuncExposer">FuncExposer</span></code></p>
+<p>This class exposes all methods decorated with @metric as
+its own methods and passes the <code>community</code> parameter to them.</p>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.registries.PreprocessorRegistry">
+<code>PreprocessorRegistry</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="pici.registries.FuncExposer">FuncExposer</span></code></p>
+<p>This class exposes all methods decorated with @community_preprocessor as
+its own methods and passes the <code>community</code> parameter to them.</p>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.registries.ReportRegistry">
+<code>ReportRegistry</code>
+</h3>
+<div class="doc doc-contents">
+<p class="doc doc-class-bases">
+          Bases: <code><span title="pici.registries.FuncExposer">FuncExposer</span></code></p>
+<p>This class exposes all methods decorated with @report as
+its own methods and passes the <code>communities</code> parameter to them.</p>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.reporting">
+<code>reporting</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.reporting.Metric">
+<code>Metric</code>
+</h3>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="pici.reporting.Report">
+<code>Report</code>
+</h3>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<div class="doc doc-children">
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.reporting.metric">
+<code class="highlight language-python"><span class="n">metric</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">returntype</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>A decorator for community metrics.</p>
+<p>The parameters <code>level</code> and <code>type</code> determine how and using which level of
+observation (topics, posts, etc.) the metrics' results are represented.</p>
+<ul>
+<li>Only methods using this decorator are available as metrics through
+<code>pici.Community.metrics</code>.</li>
+</ul>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>level</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.datatypes">datatypes</span>.<a class="autorefs autorefs-internal" href="datatypes/#pici.datatypes.CommunityDataLevel" title="pici.datatypes.CommunityDataLevel">CommunityDataLevel</a></code>
+</td>
+<td><p>The metric's data level
+Determines to which 'view' of pici.Community metric's results
+are appended to.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+<tr>
+<td><code>returntype</code></td>
+<td>
+<code><a class="autorefs autorefs-internal" href="pici/#pici.pici" title="pici.pici">pici</a>.<span title="pici.pici.datatypes">datatypes</span>.<a class="autorefs autorefs-internal" href="datatypes/#pici.datatypes.MetricReturnType" title="pici.datatypes.MetricReturnType">MetricReturnType</a></code>
+</td>
+<td><p>Data type of metric's return value.</p></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+</td>
+<td><p>Returns either plain metric value, or determined value(s) appended to community data.
+Type determined by <code>returntype</code> parameter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.reporting.preprocessor">
+<code class="highlight language-python"><span class="n">preprocessor</span><span class="p">(</span><span class="n">level</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>A decorator for preprocessors.</p>
+</div>
+</div>
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.reporting.report">
+<code class="highlight language-python"><span class="n">report</span><span class="p">(</span><span class="n">func</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>TODO: add documentation</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>func</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="pici.visualizations">
+<code>visualizations</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-function">
+<h3 class="doc doc-heading" id="pici.visualizations.plot_lorenz_curves">
+<code class="highlight language-python"><span class="n">plot_lorenz_curves</span><span class="p">(</span><span class="n">pici</span><span class="p">)</span></code>
+</h3>
+<div class="doc doc-contents">
+<p>Plots the %posts vs %contributors Lorenz curves for all communities.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pici</code></td>
+<td>
+</td>
+<td></td>
+<td>
+<em>required</em>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: &lt;span&gt;&lt;svg viewBox='0 0 640 512' xmlns='http://www.w3.org/2000/svg'&gt;&lt;!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--&gt;&lt;path d='M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z'&gt;&lt;/path&gt;&lt;/svg&gt;Indicators&lt;/span&gt;" class="md-footer__link md-footer__link--prev" href="../../indicators/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+<span><svg viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M160 442.5c-10.9 3.6-20.8 5.5-32 5.5-53.02 0-96-43-96-96V64C14.33 64 0 49.67 0 32S14.33 0 32 0h192c17.7 0 32 14.33 32 32s-14.3 32-32 32v245.9l-49 79.5c-9.8 16-15 34.4-15 53.1zM96 160h64V64H96v96zM512 0c17.7 0 32 14.33 32 32s-14.3 32-32 32v150.9l117.7 191.3c6.7 11 10.3 23.5 10.3 36.4 0 38.3-31.1 69.4-69.4 69.4H261.4c-38.3 0-70.3-31.1-70.3-69.4 0-12.9 4.5-25.4 11.2-36.4l116.8-191.3V64c-16.8 0-32-14.33-32-32s15.2-32 32-32H512zM384 64v160c0 5.9-1.6 11.7-4.7 16.8L330.5 320h171l-48.8-79.2c-3.1-5.1-4.7-10.9-4.7-16.8V64h-64z"></path></svg>Indicators</span>
+</div>
+</div>
+</a>
+<a aria-label="Next: classification" class="md-footer__link md-footer__link--next" href="classification/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              classification
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+<div class="md-social">
+<a class="md-social__link" href="https://twitter.com/Peer_Innovation" rel="noopener" target="_blank" title="twitter.com">
+<svg viewbox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tabs.link", "navigation.tabs", "navigation.sections", "navigation.tracking", "announce.dismiss"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+<script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+<script src="../../extra/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://kit.fontawesome.com/1a2b3c4d5e.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "width": "100%", "height": "auto", "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom"});})</script></body>
+</html>

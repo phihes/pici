@@ -1,0 +1,1 @@
+::: pici.preprocessors.posts
