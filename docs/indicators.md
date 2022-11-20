@@ -273,27 +273,26 @@ The strength, nature and diversity of sentiments expressed in the formulation of
  
 #### Polarity of words (Textblob, Sentiwordnet)
  
-- [``avg_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``idea_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``idea_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_feedback_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_feedback_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_feedback_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+- [``avg_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
+- [``aggregated_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``idea_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``idea_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_feedback_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_feedback_textblob_pol``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_feedback_SWN_Polarity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 #### Subjectivity of words (Textblob, Sentiwordnet)
- 
-- [``avg_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``idea_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_feedback_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``avg_feedback_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_feedback_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
-- [``aggregated_feedback_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+
+- [``aggregated_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``idea_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_feedback_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``avg_feedback_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_feedback_textblob_sub``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
+- [``aggregated_feedback_SWN_Subjectivity``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
  
 ### Positive Sentiment
  
@@ -492,11 +491,11 @@ The factor "Activity Level" represents the aggregated degree of interaction and 
 
 #### Number of month since the inception of the community (community age)
 
-- [``Number of month since the inception of the community``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+- [``Number of month since the inception of the community``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 #### Time-varying effects (Month, year of contribution)
 
-- [``Time-varying effects (Month, year of contribution)``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO
+- [``Time-varying effects (Month, year of contribution)``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 ## Prominence
 
@@ -548,39 +547,34 @@ Community:
 
 #### Concept
 
-Openness refers to the accessibility of projects and processes to external parties. A high degree of openness, for example through open project licenses in the open-source software or hardware area, makes it easier for users to participate in and modify projects driving innovation [1]. 
+Openness refers to the accessibility of projects and processes to external parties. A high degree of openness, for example through open project licenses in the open-source software or hardware area, makes it easier for users to participate in and modify projects driving innovation [^46]. 
 
 #### Metrics
 
-To measure the degree of openness in open-source hardware projects, [2] developed the "Open-O-Meter," which tests the following criteria: (1) the presence of a version control system with editing capabilities for all, (2) guidance on how to contribute, and (3) the presence of a bug tracking system. The existence of these criteria depends on the technical equipment and organization of the community.
-
-[^46] Bonvoisin, J., Mies, R., Boujut, J. F., & Stark, R. (2017). What is the “source” of open source hardware?.
-
-[^47] Bonvoisin, J., & Mies, R. (2018). Measuring openness in open source hardware with the open-o-meter. Procedia CIRP, 78, 388-393.
+To measure the degree of openness in open-source hardware projects,  Bonvoisin & Mies (2018)[^47] developed the "Open-O-Meter," which tests the following criteria: (1) the presence of a version control system with editing capabilities for all, (2) guidance on how to contribute, and (3) the presence of a bug tracking system. The existence of these criteria depends on the technical equipment and organization of the community.
 
 #### Type of license
 
-- [``Type of license``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
-
+- [``Type of license``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 #### Accessibility of files/design/documentation/instructions
 
-- [``Accessibility of files/design/documentation/instructions``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``Accessibility of files/design/documentation/instructions``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 #### version control system
 
-- [``version control system``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``version control system``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 #### guidance on how to contribute
 
-- [``guidance on how to contribute``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``guidance on how to contribute``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 #### Issue tracking
 
-- [``Issue tracking``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``Issue tracking``](../reference/pici/metrics/basic/#pici.metrics.basic.XY)
 
 #### Use of collaborative tools
 
-- [``Use of collaborative tools``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
+- [``Use of collaborative tools``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) 
 
 
 [^1]: Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
