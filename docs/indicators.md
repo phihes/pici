@@ -24,18 +24,6 @@ Possible metrics indicating status and reputation are the In-degree centrality [
  
 - [``avg number of replies``](../reference/pici/metrics/basic/#pici.metrics.basic.replies_to_initial_post)
 
-[^1]: 
-1. Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
-
-[^2]: 
-2. Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
-
-[^3]: 
-3. Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
-
-[^4]: 
-4. Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
-
 
 ## Expertise
 
@@ -53,21 +41,6 @@ Measuring the existing product knowledge of contributors can be accomplished by 
  
 ### the number of times a topic of the uploaded idea appeared in the commented ideas 
 
-[^5]: 
-5. Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
-
-[^6]: 
-6. Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
-
-[^7]: 
-7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
-
-[^8]: 
-Agichtein, E., Castillo, C., Donato, D., Gionis, A., & Mishne, G. (2008, February). Finding high-quality content in social media. In Proceedings of the 2008 international conference on web search and data mining (pp. 183-194).
-
-[^9]: 
-Zhang, J., Ackerman, M. S., & Adamic, L. (2007, May). Expertise networks in online communities: structure and algorithms. In Proceedings of the 16th international conference on World Wide Web (pp. 221-230).
-
 
 ## Experience
 
@@ -80,10 +53,6 @@ The contributors' experience evolves from continuous learning by observing the a
 #### Metrics
 
 The most common experience metrics are the number of contributions [^11][^14][^16][^5][^17][^18] and the amount of time spent in the community [^13][^14][^19]. More sophisticated metrics use network analysis to determine out-degree centrality [^5] and topic modelling to determine the number of times a topic appeared in a contributor's previous ideas [^7].
-[^10]: 
-Piezunka, H., & Dahlander, L. (2015). Distant search, narrow attention: How crowding alters organizations’ filtering of suggestions in crowdsourcing. Academy of Management Journal, 58(3), 856-880.
-[^7]: 
-7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
 
 ### Topic re-occurence
 
@@ -636,121 +605,124 @@ To measure the degree of openness in open-source hardware projects, [2] develope
 7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
 
 [^8]: 
-Agichtein, E., Castillo, C., Donato, D., Gionis, A., & Mishne, G. (2008, February). Finding high-quality content in social media. In Proceedings of the 2008 international conference on web search and data mining (pp. 183-194).
+8. Agichtein, E., Castillo, C., Donato, D., Gionis, A., & Mishne, G. (2008, February). Finding high-quality content in social media. In Proceedings of the 2008 international conference on web search and data mining (pp. 183-194).
 
 [^9]: 
-Zhang, J., Ackerman, M. S., & Adamic, L. (2007, May). Expertise networks in online communities: structure and algorithms. In Proceedings of the 16th international conference on World Wide Web (pp. 221-230).
+9. Zhang, J., Ackerman, M. S., & Adamic, L. (2007, May). Expertise networks in online communities: structure and algorithms. In Proceedings of the 16th international conference on World Wide Web (pp. 221-230).
 
 [^10]: 
-Piezunka, H., & Dahlander, L. (2015). Distant search, narrow attention: How crowding alters organizations’ filtering of suggestions in crowdsourcing. Academy of Management Journal, 58(3), 856-880.
+10. Piezunka, H., & Dahlander, L. (2015). Distant search, narrow attention: How crowding alters organizations’ filtering of suggestions in crowdsourcing. Academy of Management Journal, 58(3), 856-880.
 
 [^11]: 
-Beretta, M. (2019). Idea selection in web‐enabled ideation systems. Journal of Product Innovation Management, 36(1), 5-23.
+11. Beretta, M. (2019). Idea selection in web‐enabled ideation systems. Journal of Product Innovation Management, 36(1), 5-23.
 
 [^12]: 
-Chan, K. W., Li, S. Y., Ni, J., & Zhu, J. J. (2021). What feedback matters? The role of experience in motivating crowdsourcing innovation. Production and Operations Management, 30(1), 103-126.
+12. Chan, K. W., Li, S. Y., Ni, J., & Zhu, J. J. (2021). What feedback matters? The role of experience in motivating crowdsourcing innovation. Production and Operations Management, 30(1), 103-126.
 
 [^13]: 
-Li, M., Kankanhalli, A., & Kim, S. H. (2016). Which ideas are more likely to be implemented in online user innovation communities? An empirical analysis. Decision Support Systems, 84, 28-40.
+13. Li, M., Kankanhalli, A., & Kim, S. H. (2016). Which ideas are more likely to be implemented in online user innovation communities? An empirical analysis. Decision Support Systems, 84, 28-40.
 
 [^14]: 
-Bayus, B. L. (2013). Crowdsourcing new product ideas over time: An analysis of the Dell IdeaStorm community. Management science, 59(1), 226-244.
+14. Bayus, B. L. (2013). Crowdsourcing new product ideas over time: An analysis of the Dell IdeaStorm community. Management science, 59(1), 226-244.
 
 [^15]: 
-Simonton, D. K. (2003). Scientific creativity as constrained stochastic behavior: the integration of product, person, and process perspectives. Psychological bulletin, 129(4), 475.
+15. Simonton, D. K. (2003). Scientific creativity as constrained stochastic behavior: the integration of product, person, and process perspectives. Psychological bulletin, 129(4), 475.
 
 [^16]: 
-Fuger, S., Schimpf, R., Füller, J., & Hutter, K. (2017). User roles and team structures in a crowdsourcing community for international development–a social network perspective. Information Technology for Development, 23(3), 438-462.
+16. Fuger, S., Schimpf, R., Füller, J., & Hutter, K. (2017). User roles and team structures in a crowdsourcing community for international development–a social network perspective. Information Technology for Development, 23(3), 438-462.
 
 [^17]: 
-Jensen, M. B., Hienerth, C., & Lettl, C. (2014). Forecasting the commercial attractiveness of user‐generated designs using online data: An empirical study within the LEGO user community. Journal of Product Innovation Management, 31, 75-93.
+17. Jensen, M. B., Hienerth, C., & Lettl, C. (2014). Forecasting the commercial attractiveness of user‐generated designs using online data: An empirical study within the LEGO user community. Journal of Product Innovation Management, 31, 75-93.
 
 [^18]: 
-Lee, H., & Suh, Y. (2016). Who creates value in a user innovation community? A case study of MyStarbucksIdea. com. Online Information Review.
+18. Lee, H., & Suh, Y. (2016). Who creates value in a user innovation community? A case study of MyStarbucksIdea. com. Online Information Review.
 
 [^19]: 
-Hoornaert, S., Ballings, M., Malthouse, E. C., & Van den Poel, D. (2017). Identifying new product ideas: waiting for the wisdom of the crowd or screening ideas in real time. Journal of Product Innovation Management, 34(5), 580-597.
+19. Hoornaert, S., Ballings, M., Malthouse, E. C., & Van den Poel, D. (2017). Identifying new product ideas: waiting for the wisdom of the crowd or screening ideas in real time. Journal of Product Innovation Management, 34(5), 580-597.
 
 [^20]: 
-Franke, N., & Shah, S. (2003). How communities support innovative activities: an exploration of assistance and sharing among end-users. Research policy, 32(1), 157-178.
+20. Franke, N., & Shah, S. (2003). How communities support innovative activities: an exploration of assistance and sharing among end-users. Research policy, 32(1), 157-178.
 
 [^21]: 
-Bilgram, V., Brem, A., & Voigt, K. I. (2008). User-centric innovations in new product development—Systematic identification of lead users harnessing interactive and collaborative online-tools. International journal of innovation management, 12(03), 419-458.
+21. Bilgram, V., Brem, A., & Voigt, K. I. (2008). User-centric innovations in new product development—Systematic identification of lead users harnessing interactive and collaborative online-tools. International journal of innovation management, 12(03), 419-458.
 
 [^22]: 
-Grosse, M., Pohlisch, J., & Korbel, J. J. (2018). Triggers of collaborative innovation in online user communities. Journal of Open Innovation: Technology, Market, and Complexity, 4(4), 59.
+22. Grosse, M., Pohlisch, J., & Korbel, J. J. (2018). Triggers of collaborative innovation in online user communities. Journal of Open Innovation: Technology, Market, and Complexity, 4(4), 59.
 
 [^23]: 
-Deichmann, D., & Ende, J. V. D. (2014). Rising from failure and learning from success: The role of past experience in radical initiative taking. Organization Science, 25(3), 670-690.
+23. Deichmann, D., & Ende, J. V. D. (2014). Rising from failure and learning from success: The role of past experience in radical initiative taking. Organization Science, 25(3), 670-690.
 
 [^24]: 
-Ma, J., Lu, Y., & Gupta, S. (2019). User innovation evaluation: Empirical evidence from an online game community. Decision Support Systems, 117, 113-123.
+24. Ma, J., Lu, Y., & Gupta, S. (2019). User innovation evaluation: Empirical evidence from an online game community. Decision Support Systems, 117, 113-123.
 
 [^25]: 
-Dahl, D. W., & Moreau, P. (2002). The influence and value of analogical thinking during new product ideation. Journal of marketing research, 39(1), 47-60.
+25. Dahl, D. W., & Moreau, P. (2002). The influence and value of analogical thinking during new product ideation. Journal of marketing research, 39(1), 47-60.
 
 [^26]: 
-Ortu, M., Destefanis, G., Counsell, S., Swift, S., Tonelli, R., & Marchesi, M. (2017). How diverse is your team? Investigating gender and nationality diversity in GitHub teams. Journal of Software Engineering Research and Development, 5(1), 1-18.
+26. Ortu, M., Destefanis, G., Counsell, S., Swift, S., Tonelli, R., & Marchesi, M. (2017). How diverse is your team? Investigating gender and nationality diversity in GitHub teams. Journal of Software Engineering Research and Development, 5(1), 1-18.
 
 [^27]: 
-Shin, S. J., Kim, T. Y., Lee, J. Y., & Bian, L. (2012). Cognitive team diversity and individual team member creativity: A cross-level interaction. Academy of management journal, 55(1), 197-212.
+27. Shin, S. J., Kim, T. Y., Lee, J. Y., & Bian, L. (2012). Cognitive team diversity and individual team member creativity: A cross-level interaction. Academy of management journal, 55(1), 197-212.
 
 [^28]: 
-McDonough III, E. F., Kahnb, K. B., & Barczaka, G. (2001). An investigation of the use of global, virtual, and colocated new product development teams. Journal of Product Innovation Management: An international publication of the product development & management association, 18(2), 110-120.
+28. McDonough III, E. F., Kahnb, K. B., & Barczaka, G. (2001). An investigation of the use of global, virtual, and colocated new product development teams. Journal of Product Innovation Management: An international publication of the product development & management association, 18(2), 110-120.
 
 [^29]: 
-Blau, P. M. (1977). A macrosociological theory of social structure. American journal of sociology, 83(1), 26-54.
+29. Blau, P. M. (1977). A macrosociological theory of social structure. American journal of sociology, 83(1), 26-54.
 
 [^30]: 
-Choi, J. N., Sung, S. Y., Lee, K., & Cho, D. S. (2011). Balancing cognition and emotion: Innovation implementation as a function of cognitive appraisal and emotional reactions toward innovation. Journal of Organizational Behavior, 32(1), 107-124.
+30. Choi, J. N., Sung, S. Y., Lee, K., & Cho, D. S. (2011). Balancing cognition and emotion: Innovation implementation as a function of cognitive appraisal and emotional reactions toward innovation. Journal of Organizational Behavior, 32(1), 107-124.
 
 [^31]: 
-Weiss, H. M., & Cropanzano, R. (1996). Affective events theory. Research in organizational behavior, 18(1), 1-74.
+31. Weiss, H. M., & Cropanzano, R. (1996). Affective events theory. Research in organizational behavior, 18(1), 1-74.
 
 [^32]: 
-Reitzig, M., & Sorenson, O. (2013). Biases in the selection stage of bottom‐up strategy formulation. Strategic Management Journal, 34(7), 782-799.
+32. Reitzig, M., & Sorenson, O. (2013). Biases in the selection stage of bottom‐up strategy formulation. Strategic Management Journal, 34(7), 782-799.
 
 [^33]: 
-Tsai, H. T., & Bagozzi, R. P. (2014). Contribution behavior in virtual communities: Cognitive, emotional, and social influences. Mis Quarterly, 38(1), 143-164.
+33. Tsai, H. T., & Bagozzi, R. P. (2014). Contribution behavior in virtual communities: Cognitive, emotional, and social influences. Mis Quarterly, 38(1), 143-164.
 
 [^34]: 
-Anderson, N. H. (1971). Integration theory and attitude change. Psychological review, 78(3), 171.
+34. Anderson, N. H. (1971). Integration theory and attitude change. Psychological review, 78(3), 171.
 
 [^35]: 
-Baccianella, S., Esuli, A., & Sebastiani, F. (2010, May). Sentiwordnet 3.0: An enhanced lexical resource for sentiment analysis and opinion mining. In Proceedings of the Seventh Interna-tional Conference on Language Resources and Evaluation (LREC'10).
+35. Baccianella, S., Esuli, A., & Sebastiani, F. (2010, May). Sentiwordnet 3.0: An enhanced lexical resource for sentiment analysis and opinion mining. In Proceedings of the Seventh Interna-tional Conference on Language Resources and Evaluation (LREC'10).
 
 [^36]: 
-Finke, R. A., Ward, T. B., & Smith, S. M. (1996). Creative cognition: Theory, research, and applications. MIT press.
+36. Finke, R. A., Ward, T. B., & Smith, S. M. (1996). Creative cognition: Theory, research, and applications. MIT press.
 
 [^37]: 
-Ouyang, J. R., & Stanley, N. (2014). Theories and research in educational technology and dis-tance learning instruction through Blackboard. Universal Journal of Educational Re-search, 2(2), 161-172.
+37. Ouyang, J. R., & Stanley, N. (2014). Theories and research in educational technology and dis-tance learning instruction through Blackboard. Universal Journal of Educational Re-search, 2(2), 161-172.
 
 [^38]: 
-Crossley, S. A., Kyle, K., & McNamara, D. S. (2016). The development and use of cohesive devices in L2 writing and their relations to judgments of essay quality. Journal of Second Language Writing, 32, 1-16.
+38. Crossley, S. A., Kyle, K., & McNamara, D. S. (2016). The development and use of cohesive devices in L2 writing and their relations to judgments of essay quality. Journal of Second Language Writing, 32, 1-16.
 
 [^39]: 
-Crossley, S. A., Roscoe, R., & McNamara, D. S. (2011, June). Predicting human scores of essay quality using computational indices of linguistic and textual features. In International conference on artificial intelligence in education (pp. 438-440). Springer, Berlin, Heidelberg.
+39. Crossley, S. A., Roscoe, R., & McNamara, D. S. (2011, June). Predicting human scores of essay quality using computational indices of linguistic and textual features. In International conference on artificial intelligence in education (pp. 438-440). Springer, Berlin, Heidelberg.
 
 [^40]: 
-Lee, H., Choi, K., Yoo, D., Suh, Y., Lee, S., & He, G. (2018). Recommending valuable ideas in an open innovation community: a text mining approach to information overload problem. Industrial Management & Data Systems.
+40. Lee, H., Choi, K., Yoo, D., Suh, Y., Lee, S., & He, G. (2018). Recommending valuable ideas in an open innovation community: a text mining approach to information overload problem. Industrial Management & Data Systems.
 
 [^41]: 
-Rhyn, M., & Blohm, I. (2017). A machine learning approach for classifying textual data in crowdsourcing.
+41. Rhyn, M., & Blohm, I. (2017). A machine learning approach for classifying textual data in crowdsourcing.
 
 [^42]: 
-Moehrle, M. G., Wustmans, M., & Gerken, J. M. (2018). How business methods accompany technological innovations–a case study using semantic patent analysis and a novel informetric measure. R&D Management, 48(3), 331-342.
+42. Moehrle, M. G., Wustmans, M., & Gerken, J. M. (2018). How business methods accompany technological innovations–a case study using semantic patent analysis and a novel informetric measure. R&D Management, 48(3), 331-342.
 
 [^43]: 
-Blei, D. M. (2012). Probabilistic topic models. Communications of the ACM, 55(4), 77-84.
+43. Blei, D. M. (2012). Probabilistic topic models. Communications of the ACM, 55(4), 77-84.
 
 [^44]: 
-Menichinelli, M., & Schmidt, A. G. S. (2019). First exploratory geographical and social maps of the maker movement. European Journal of Creative Practices in Cities and Landscapes, 2(2), 35-62.
+44. Menichinelli, M., & Schmidt, A. G. S. (2019). First exploratory geographical and social maps of the maker movement. European Journal of Creative Practices in Cities and Landscapes, 2(2), 35-62.
 
 [^45]: 
-De Filippi, P., & Hassan, S. (2015). Measuring value in commons-based ecosystem: bridging the gap between the commons and the market. The MoneyLab Reader. Institute of Network Cultures, University of Warwick.
+45. De Filippi, P., & Hassan, S. (2015). Measuring value in commons-based ecosystem: bridging the gap between the commons and the market. The MoneyLab Reader. Institute of Network Cultures, University of Warwick.
 
 [^46]: 
-Bonvoisin, J., Mies, R., Boujut, J. F., & Stark, R. (2017). What is the “source” of open source hardware?.
+46. Bonvoisin, J., Mies, R., Boujut, J. F., & Stark, R. (2017). What is the “source” of open source hardware?.
 
 [^47]: 
-Bonvoisin, J., & Mies, R. (2018). Measuring openness in open source hardware with the open-o-meter. Procedia CIRP, 78, 388-393.
+47. Bonvoisin, J., & Mies, R. (2018). Measuring openness in open source hardware with the open-o-meter. Procedia CIRP, 78, 388-393.
+
+
+
