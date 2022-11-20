@@ -257,8 +257,7 @@ A popular metric for the aggregation of individual characteristics at different 
  
 ## Sentiment
  
- <span class="label contribution">contribution</span> <span class="label initial-contribution">initial contribution</span> <span class="label thread">thread</span> 
- TO DO: <span class="label feedback">feedback</span>
+ <span class="label contribution">contribution</span> <span class="label initial-contribution">initial contribution</span> <span class="label thread">thread</span> <span class="label feedback">feedback</span>
  
 #### Concept
  
