@@ -24,6 +24,18 @@ Possible metrics indicating status and reputation are the In-degree centrality [
  
 - [``avg number of replies``](../reference/pici/metrics/basic/#pici.metrics.basic.replies_to_initial_post)
 
+[^1]: 
+1. Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
+
+[^2]: 
+2. Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
+
+[^3]: 
+3. Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
+
+[^4]: 
+4. Füller, J., Hutter, K., Hautz, J., & Matzler, K. (2014). User roles and contributions in innovation-contest communities. Journal of management information systems, 31(1), 273-308.
+
 
 ## Expertise
 
@@ -41,6 +53,21 @@ Measuring the existing product knowledge of contributors can be accomplished by 
  
 ### the number of times a topic of the uploaded idea appeared in the commented ideas 
 
+[^5]: 
+5. Lüthje, C. (2004). Characteristics of innovating users in a consumer goods field: An empirical study of sport-related product consumers. Technovation, 24(9), 683-695.
+
+[^6]: 
+6. Marchi, G., Giachetti, C., & De Gennaro, P. (2011). Extending lead-user theory to online brand communities: The case of the community Ducati. Technovation, 31(8), 350-361.
+
+[^7]: 
+7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
+
+[^8]: 
+Agichtein, E., Castillo, C., Donato, D., Gionis, A., & Mishne, G. (2008, February). Finding high-quality content in social media. In Proceedings of the 2008 international conference on web search and data mining (pp. 183-194).
+
+[^9]: 
+Zhang, J., Ackerman, M. S., & Adamic, L. (2007, May). Expertise networks in online communities: structure and algorithms. In Proceedings of the 16th international conference on World Wide Web (pp. 221-230).
+
 
 ## Experience
 
@@ -53,6 +80,10 @@ The contributors' experience evolves from continuous learning by observing the a
 #### Metrics
 
 The most common experience metrics are the number of contributions [^11][^14][^16][^5][^17][^18] and the amount of time spent in the community [^13][^14][^19]. More sophisticated metrics use network analysis to determine out-degree centrality [^5] and topic modelling to determine the number of times a topic appeared in a contributor's previous ideas [^7].
+[^10]: 
+Piezunka, H., & Dahlander, L. (2015). Distant search, narrow attention: How crowding alters organizations’ filtering of suggestions in crowdsourcing. Academy of Management Journal, 58(3), 856-880.
+[^7]: 
+7. Resch, C., & Kock, A. (2021). The influence of information depth and information breadth on brokers’ idea newness in online maker communities. Research Policy, 50(8), 104142. 
 
 ### Topic re-occurence
 
