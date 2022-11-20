@@ -1,5 +1,6 @@
 import numpy as np
 
+from pici.helpers import generate_indicator_results
 from pici.metrics.cached_metrics import _temporal_text_similarity_dict
 from pici.reporting import topics_metric
 
@@ -29,7 +30,7 @@ def initial_post_text_distance(community,
         try:
             text_sims = similarities[post['preprocessed_text__words_no_stop']]
         except KeyError:
-            print(f"post {post['id']} not found in similarity network")
+            print(f"post not found in similarity network")
         dist = np.nan
         if text_sims is not None:
             if agg_method == 'mean':
@@ -59,4 +60,22 @@ def initial_post_text_distance(community,
         f'initial posts ({similarity_metric})': results['_distance_mean'],
         f'distinctiveness: min text-distance of initial post to previous '
         f'initial posts ({similarity_metric})': results['_distance_min'],
+    }
+
+
+@topics_metric
+def basic_text_based_elaboration(community):
+    posts = community.posts.groupby(
+        by=community.topic_column)
+    initial_post = community.posts[community.posts['post_position_in_thread']
+                                   == 1].groupby(by=community.topic_column)
+    feedback = community.posts[community.posts['post_position_in_thread']
+                                   > 1].groupby(by=community.topic_column)
+
+    gen = lambda t, c: generate_indicator_results(posts, initial_post,
+                                                  feedback, t, c)
+
+    return {
+        **gen("distinctiveness: tfidf sum", 'preprocessed_text__tfidf_sum'),
+        **gen("distinctiveness: tfidf mean", 'preprocessed_text__tfidf_mean'),
     }

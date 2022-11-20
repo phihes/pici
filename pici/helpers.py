@@ -347,7 +347,8 @@ def where_all(conditions):
 
 def generate_indicator_results(posts, initial_post,
                                feedback, indicator_text,
-                               column):
+                               column,
+                               aggs=[np.sum, np.mean, np.min, np.max, np.std]):
     """
     Returns results from ``column`` in DataFrames ``posts``,
     ``initial_post``, and ``feedback`` as different aggregations
@@ -371,13 +372,13 @@ def generate_indicator_results(posts, initial_post,
     res.append(entry("initial post", initial_post[column].apply(np.sum)))
 
     # posts
-    for f in [np.sum, np.mean, np.min, np.max]:
+    for f in aggs:
         res.append(entry(
             f"thread ({f.__name__})", posts[column].apply(f)
         ))
 
     # feedback
-    for f in [np.sum, np.mean, np.min, np.max, np.std]:
+    for f in aggs:
         res.append(entry(
             f"feedback ({f.__name__})", feedback[column].apply(f)
         ))

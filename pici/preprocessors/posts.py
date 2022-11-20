@@ -3,6 +3,8 @@ import statistics
 
 import spacy
 from nltk import RegexpTokenizer
+from gensim import corpora, models
+
 
 import pici.community
 from pici.helpers import num_words
@@ -38,7 +40,7 @@ def number_of_words(community):
 
 
 @posts_preprocessor
-def rounded_date(community, round_dates_to='30D'):
+def rounded_date(community, round_dates_to='7D'):
     """
     Round the post dates according to specified frequency.
     If ``round_dates_to`` is None (default), this preprocessor does nothing.
@@ -59,7 +61,7 @@ def rounded_date(community, round_dates_to='30D'):
 
 
 @posts_preprocessor
-def preprocessed_text(community: pici.community.Community):
+def preprocessed_text(community, n_topics=10):
     """
     This preprocessor supplies cleaned text, text statistics (using Textacy)
     and sentiment statistics (TextBlob). The following columns are added to
@@ -97,6 +99,9 @@ def preprocessed_text(community: pici.community.Community):
     Returns:
 
     """
+
+    # preprocessing
+
     text = community.posts[community.text_column].apply(str)
     lower_text = text.str.lower()
     clean = preprocessing.make_pipeline(
@@ -104,18 +109,24 @@ def preprocessed_text(community: pici.community.Community):
         preprocessing.replace.urls,
         preprocessing.replace.user_handles,
         preprocessing.replace.numbers,
+        preprocessing.remove.accents,
         preprocessing.replace.currency_symbols,
         preprocessing.normalize.bullet_points,
-        #preprocessing.normalize.quotation_marks,
-        preprocessing.remove.brackets,
+        preprocessing.normalize.quotation_marks,
+        #preprocessing.remove.brackets,
         preprocessing.replace.hashtags,
         preprocessing.replace.emojis,
         preprocessing.normalize.unicode,
+    )
+    whitespace = preprocessing.make_pipeline(
         preprocessing.normalize.whitespace
     )
 
-    clean_text = lower_text.apply(clean)
+    clean_text = lower_text.apply(clean).apply(
+        lambda t: re.sub('[^A-Za-z0-9 ]+', ' ', t)).apply(whitespace)
     docs = clean_text.apply(nlp)
+
+    # text statistics
 
     def frac_uppercase_chars(t):
         n_chars = len(t)
@@ -160,8 +171,52 @@ def preprocessed_text(community: pici.community.Community):
             )
         return dict(res)
 
+    # tf-idf
+
+    dictionary = corpora.Dictionary(words_no_stop)
+    dictionary.filter_extremes(no_below=3)
+    # corpus = [dictionary.doc2bow(doc) for doc in words_no_stop]
+    corpus = words_no_stop.apply(dictionary.doc2bow)
+    tfidf = models.TfidfModel(corpus.tolist(), dictionary=dictionary)
+    corpus_tfidf = corpus.apply(lambda d: tfidf[d])
+
+    corpus_tfidf_values = corpus_tfidf.apply(
+        lambda v: tuple(e[1] for e in v))
+
+    # topic modeling
+
+    lda_model = models.ldamodel.LdaModel(
+        corpus=corpus,
+        id2word=dictionary,
+        num_topics=n_topics,
+        random_state=100,
+        update_every=1,
+        chunksize=100,
+        passes=10,
+        alpha='auto',
+        per_word_topics=True
+    )
+    corpus_lda = corpus.apply(lambda d: lda_model.get_document_topics(
+        bow=d,
+        per_word_topics=False
+    ))
+
+    corpus_lda_topic_ids = corpus_lda.apply(lambda l: tuple(t[0] for t in l))
+    corpus_lda_topic_ps = corpus_lda.apply(lambda l: tuple(t[1] for t in l))
+
+    # print(lda_model.print_topics())
+    # print('\nPerplexity: ', lda_model.log_perplexity(corpus))
+
     return {
         **{
+            'tfidf': corpus_tfidf,
+            'tfidf_sum': corpus_tfidf_values.apply(np.sum),
+            'tfidf_mean': corpus_tfidf_values.apply(np.mean),
+            'topics': corpus_lda,
+            'topic_ids': corpus_lda_topic_ids,
+            'n_topics': corpus_lda_topic_ids.apply(len),
+            'topic_ps': corpus_lda_topic_ps,
+            'mean_topic_p': corpus_lda_topic_ps.apply(np.mean),
             'clean': clean_text,
             'all_words': words_all,
             'words_no_stop': words_no_stop,

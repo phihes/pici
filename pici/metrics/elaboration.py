@@ -1,3 +1,5 @@
+import numpy as np
+
 from pici.helpers import generate_indicator_results
 from pici.reporting import topics_metric
 
@@ -59,3 +61,24 @@ def basic_text_based_elaboration(community,
     }
 
 
+@topics_metric
+def elaboration_based_on_topics(community):
+
+    posts = community.posts.groupby(
+        by=community.topic_column)
+    initial_post = community.posts[community.posts['post_position_in_thread']
+                                   == 1].groupby(by=community.topic_column)
+    feedback = community.posts[community.posts['post_position_in_thread']
+                                   > 1].groupby(by=community.topic_column)
+
+    gen = lambda t, c: generate_indicator_results(posts, initial_post,
+                                                  feedback, t, c)
+
+    # TODO count total number of topics talked about in posts
+    # TODO used total text to generate topic matrix
+
+    return {
+        **gen("elaboration: number of topics", 'preprocessed_text__n_topics'),
+        **gen("elaboration: topics probabilities",
+              'preprocessed_text__mean_topic_p')
+    }

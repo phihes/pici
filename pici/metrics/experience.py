@@ -10,7 +10,8 @@ from pici.reporting import topics_metric
 
 @topics_metric
 def initiator_experience_by_past_contributions(
-        community, ignore_temporal_dependency=True):
+        community, ignore_temporal_dependency=True,
+        use_rounded_date=False):
     """
 
     Args:
@@ -20,6 +21,10 @@ def initiator_experience_by_past_contributions(
     Returns:
 
     """
+    date_col = community.date_column
+    if use_rounded_date:
+        date_col = 'rounded_date'
+
     # select all posts at position 1 in thread (initial posts)
     initial_posts = community.posts[
         community.posts['post_position_in_thread'] == 1
@@ -29,8 +34,7 @@ def initiator_experience_by_past_contributions(
     initial_posts['num_initial_posts'] = initial_posts.apply(
         lambda p: len(_threads_by_contributor(
             community, p[community.contributor_column],
-            date_limit=None if ignore_temporal_dependency else p[
-                'rounded_date']
+            date_limit=None if ignore_temporal_dependency else p[date_col]
         )),
         axis=1
     )
@@ -39,8 +43,7 @@ def initiator_experience_by_past_contributions(
     initial_posts['num_comments'] = initial_posts.apply(
         lambda p: len(_comments_by_contributor(
             community, p[community.contributor_column],
-            date_limit=None if ignore_temporal_dependency else p[
-                'rounded_date']
+            date_limit=None if ignore_temporal_dependency else p[date_col]
         )),
         axis=1
     )
@@ -52,7 +55,7 @@ def initiator_experience_by_past_contributions(
             c, post[c.contributor_column])
         diff = np.nan
         if not pd.isna(d_fp):
-            diff = (post['rounded_date'] - d_fp).days
+            diff = (post[date_col] - d_fp).days
         return diff
 
     initial_posts['days_since_first_post'] = initial_posts.apply(

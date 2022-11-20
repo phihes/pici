@@ -174,6 +174,30 @@ class Pici:
             if name in select_func(*preprocessor_names)
         }
 
+    def get_topic_indicators(self, parameters={}, keep=[]):
+        pipe = self.pipelines.topics(
+            parameters=parameters, keep=keep
+        )
+        indicators = pipe.transform(self.communities)
+        indicators = indicators.rename_axis(['id','community_name'])
+
+        return indicators
+
+    def get_labelled_topic_indicators(self, indicators):
+        labels = self.labels.by_level(CommunityDataLevel.TOPICS)
+        label_names = labels.columns.tolist()
+        feature_names = indicators.columns.tolist()
+        labelled_features = pd.merge(
+            indicators,
+            labels,
+            how='inner',
+            on=['id', 'community_name']
+        )
+        return (
+            labelled_features[feature_names],
+            labelled_features[label_names]
+        )
+
     def get_topic_features(self, add_labels=True, communities=None,
                            parameters={}, keep=[]):
         pipe = self.pipelines.topics(
@@ -194,7 +218,8 @@ class Pici:
                 how='inner',
                 on=['id', 'community_name']
             )
-            return (labelled_features[feature_names],
+            return (
+                    labelled_features[feature_names],
                     labelled_features[label_names])
         else:
             return features, None
