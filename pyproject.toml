@@ -40,6 +40,9 @@ mkdocs-jupyter = "^0.21.0"
 jupyterthemes = "^0.20.0"
 textacy = "^0.12.0"
 textblob = "^0.17.1"
+gensim = "^4.2.0"
+xgboost = "^1.7.1"
+shap = "^0.41.0"
 
 
 [build-system]
