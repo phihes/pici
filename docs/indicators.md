@@ -583,11 +583,9 @@ To measure the degree of openness in open-source hardware projects, [2] develope
 - [``Use of collaborative tools``](../reference/pici/metrics/basic/#pici.metrics.basic.XY) # TO DO 
 
 
-[^1]: 
-1. Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
+[^1]: 1. Menon, T., & Blount, S. (2003). The messenger bias: A relational model of knowledge valuation. Research in Organizational Behavior, 25, 137-186.
 
-[^2]: 
-2. Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
+[^2]: 2. Bateman, P. J., Gray, P. H., & Butler, B. S. (2011). Research note—the impact of community commitment on participation in online communities. Information systems research, 22(4), 841-854.
 
 [^3]: 
 3. Yuan, X., Yang, S., & Wang, C. (2017, July). Lead user identification in online user innovation communities: A method based on random forest classification. In 2017 7th IEEE International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 157-160). IEEE.
