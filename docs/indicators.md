@@ -101,7 +101,7 @@ Number of contributions, number of initial contributions; normalized by time spe
 
 #### Concept
 
-Online communities are commonly divided into multiple sub-forums that allow the members to deal with different topics. By engaging in multiple topics, contributors can accumulate a more comprehensive and multifaceted compilation of knowledge enhancing their innovativeness [1]. 
+Online communities are commonly divided into multiple sub-forums that allow the members to deal with different topics. By engaging in multiple topics, contributors can accumulate a more comprehensive and multifaceted compilation of knowledge enhancing their innovativeness [^1]. 
 
 #### Metrics
 
