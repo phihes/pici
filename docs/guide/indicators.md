@@ -6,7 +6,7 @@ The toolbox provides a repository of [predefined indicators](../../indicators) a
  
 ### Structure
  
-By default, the central unit of observation is the forum **thread**, which can be part of one or multiple sub-forums. We propose that a thread is the *observable trace* of a sequence of interactions that can represent or display innovation activities. Each post in a thread is a **contribution** by a community member (the **contributor**). We single out the **initial contribution**, as we assume that XYZ. A **community** consists of a number of contributors and their contributions in threads, which are organized in sub-forums.
+By default, the central unit of observation is the forum **thread**, which can be part of one or multiple sub-forums. We propose that a thread is the *observable trace* of a sequence of interactions that can represent or display innovation activities. Each post in a thread is a **contribution** by a community member (the **contributor**). We single out the **initial contribution**, as we assume that the initiation of a thread most likely represents the presentation of an *idea*, *question*, or *problem* which is discussed upon in the course of the thread. This operationalization allows for a more generalizable differentiation of posts as discussion elements of a thread. These elements represent concepts from innovation literature to which the PI indicators refer differently based on the community type (see levels of observation). A **community** consists of a number of contributors and their contributions in threads, which are organized in sub-forums.
  
 ### Networks
  
@@ -28,9 +28,11 @@ Additional levels of observation are the **networks** formed by contributors. Th
  
 Each indicator is observed on either **contributor**, **contribution**, **thread**, or **community** level. Aggregations of indicators are provided for higher levels. For example, the *number of contributions made by a contributor* can be an indicator for their role in the community. This indicator would be provided on thread-level as, e.g., *average number of contributions per contributor*, measured for all contributors that have contributed to a specific thread. Common aggregations are mean, sum, concate, standard-deviation, min and max. Other aggregations (or *transformations*) could also pick out a single of multiple values. On thread-level, an example would be the *total number of contributions made by the contributor of the initial contribution*.
  
-The thread observation level can be subdivided into three further subsets of posts: the whole thread, only the **initial contribution**, or only the **feedback** (all posts that were not authored by the initial contributor). This helps to implement indicators that rely on more detailed concepts, such as *ideas* in *idea communities*, or *questions* in *question communities*, which can potentially be operationalized by *inital contribution*.
+The thread observation level can be subdivided into three further subsets of posts: the whole thread (**interaction**), only the **initial contribution**, or only the **feedback** (all posts that were not authored by the initial contributor). This helps to implement indicators that rely on more detailed concepts, such as *ideas* in *idea communities*, or *questions* in *question communities*, which can potentially be operationalized by *inital contribution*.
  
-[TODO: Grafik]
+<p align="center">
+    <img src="../../images/discussion_elements_observation_level_thread_new.png" width="700px" style="width: 75%; max-width:700px; min-width:300px;" />
+</p>
  
 ### Data
  
@@ -233,3 +235,5 @@ p.communities['PreciousPlastic'].metrics.my_metric()
 ```
 
 ## Evaluating indicators using labelled data
+
+With the aid of ML, using supervised classification and feature selection methods, the generated indicators can be evaluated in terms of their suitability for identifying peer innovation. The labelled presence or absence of innovation potential and activities per thread represent the target in the dataset for classification. Different parts of this data set are used to train the cross-validated classification model. The change in classification accuracy based on the inserted indicator metrics benchmarks their importance or explanatory power. Performing supervised feature selection, e.g., using recursive feature elimination methods such as boruta, returns a list of validated indicators suitable for classifying threads according to their degree of innovation.
